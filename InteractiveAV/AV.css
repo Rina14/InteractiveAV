@@ -1,0 +1,51 @@
+html, body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0px;
+  padding: 0px;
+  background-color: black;
+  overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  font-size: 2.3vmin;
+  color: rgb(240, 18, 103);
+}
+
+scene {
+  width: 1280px;
+  height: 720px;
+  display: inline-block;
+  position: absolute;
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+}
+
+speech {
+  position: absolute;
+  display: block;
+  background-image: url("./Board/BlackFadeRight.png");
+  background-size: cover;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 15%;
+}
+
+speech.Ryu name {
+  color: rgb(27, 51, 95);
+}
+
+speech.Ryu content {
+  color: rgb(180, 206, 255);
+}
+
+speech.Sue name {
+  color: aqua;
+}
+
+speech.Sue content {
+  color: rgb(159, 220, 255);
+}
