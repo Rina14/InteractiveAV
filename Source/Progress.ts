@@ -60,9 +60,30 @@ namespace FudgeStory {
 
     /**
      * Defines the object to track containing logical data like score, states, textual inputs given by the play etc.
-     */ 
+     */
     public static setData(_data: Object): void {
       Progress.data = _data;
+    }
+
+    /**
+     * Returns an object to use to track logical data like score, states, textual inputs given by the play etc.
+     */
+    public static setDataInterface<T>(_data: T, _dom: HTMLElement): T {
+      let hndProxy = {
+        set: function (_target: Object, _prop: PropertyKey, _value: Object): boolean {
+          console.log("ProgressData: " + _prop.toString() + " = " + _value);
+          Reflect.set(_target, _prop, _value);
+          Progress.updateInterface(_dom);
+          return true;
+        }
+        // get: function (_target: Object, _prop: PropertyKey): Object {
+        //   return "Hallo";
+        // }
+      };
+
+      let proxy: T = <T>new Proxy(Progress.data, hndProxy);
+      Progress.setData(proxy); // test if this is sufficient to support previous save/load functionality
+      return proxy;
     }
 
     /**
@@ -83,7 +104,7 @@ namespace FudgeStory {
       );
       console.log(saved);
     }
-    
+
     /**
      * Defines a [[Signal]] which is a bundle of promises waiting for a set of events to happen.
      * Example: 
@@ -147,6 +168,13 @@ namespace FudgeStory {
       console.log("Stored", Progress.serialization);
     }
 
+    private static updateInterface(_dom: HTMLElement): void {
+      for (let prop in Progress.data) {
+        let elements: NodeListOf<HTMLInputElement> = _dom.querySelectorAll("#" + prop);
+        for (let element of elements)
+          element.value = Reflect.get(Progress.data, prop).toString();
+      }
+    }
 
     private static async splash(_text: string): Promise<void> {
       console.log("Splash");
