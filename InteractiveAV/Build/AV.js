@@ -17,8 +17,8 @@ var AV;
             Protagonist: {
                 T0000: "Wie bitte?",
                 T0001: "Und das bedeutet?",
-                T0002: "Okay, und wann werde ich wieder gesund? Ich habe schließlich\
-                nichts großartiges gemacht, um das zu bekommen.",
+                T0002: "Das geht doch wieder weg, nicht wahr? Ich habe schließlich\
+                nichts Großartiges gemacht, dass das passieren könnte.",
                 T0003: "Koch- was?",
                 T0004: "",
                 T0005: "",
@@ -31,7 +31,7 @@ var AV;
                 T0002: "Nun, das ist nicht direkt 'heilbar', jedoch bis zu einem gewissen Grad kompensierbar.",
                 T0003: "Du wirst lernen müssen, mit dieser Schwerhörigkeit umzugehen.",
                 T0004: "Aber keine Sorge, dafür gibt es Hörgeräte und notfalls Cochlea-Implantate.\
-                Es wird eine Weile brauchen, bis du dich daran gewöhnt hast.",
+                Es wird eine Weile dauern, bis du dich daran gewöhnt hast.",
                 T0005: "Cochlea-Implantate. Die Cochlea ist die Hörschnecke, in der die feinen Haarzellen sitzen.\
                 Hier kann ein Implantat eingepflanzt werden, falls Hörgeräte nicht mehr die gewünschte Leistung erbringen.",
                 T0006: ""
@@ -60,11 +60,12 @@ var AV;
         await AV.ƒS.Speech.tell(null, text.Narrator.T0003);
         await AV.ƒS.Speech.tell(null, text.Narrator.T0004);
         await AV.ƒS.Speech.tell(null, text.Narrator.T0005);
+        await AV.ƒS.Speech.hide();
         await AV.ƒS.Location.show(AV.locations.hospital);
         await AV.ƒS.update(AV.transitions.flash.duration, AV.transitions.flash.alpha, AV.transitions.flash.edge);
         await AV.ƒS.Character.show(AV.characters.Doctor, AV.characters.Doctor.pose.normal, AV.ƒS.positions.bottomcenter);
         await AV.ƒS.update(0.5);
-        await AV.ƒS.Speech.tell(AV.characters.Doctor, text.Doctor.T0000);
+        await AV.ƒS.Speech.tell(AV.characters.Doctor, "Du hast eine Sc....empf....keit.");
         await AV.ƒS.Speech.tell(AV.characters.Protagonist, text.Protagonist.T0000);
         await AV.ƒS.Speech.tell(AV.characters.Doctor, text.Doctor.T0000);
         await AV.ƒS.Speech.tell(AV.characters.Protagonist, text.Protagonist.T0001);
