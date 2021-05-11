@@ -122,9 +122,6 @@ declare namespace AV {
         Narrator: {
             name: string;
         };
-        Protagonist: {
-            name: string;
-        };
         Aoi: {
             name: string;
             origin: ƒ.ORIGIN2D;
@@ -154,6 +151,12 @@ declare namespace AV {
             pose: {
                 normal: string;
             };
+        };
+    };
+    let dataForSave: {
+        score: number;
+        Protagonist: {
+            name: string;
         };
     };
 }

@@ -137,9 +137,9 @@ namespace AV {
     Narrator: {
       name: ""
     },
-    Protagonist: {
-      name: "Player"
-    },
+    // Protagonist: {
+    //   name: "Player"
+    // },
     Aoi: {
       name: "Aoi",
       origin: ƒS.ORIGIN.BOTTOMCENTER,
@@ -164,7 +164,7 @@ namespace AV {
       }
     },
     Doctor: {
-      name: "Doktor",
+      name: "Doktor Ryu",
       origin: ƒS.ORIGIN.BOTTOMCENTER,
       pose: {
         normal: "Images/Characters/Ryu_normal.png"
@@ -172,11 +172,37 @@ namespace AV {
     }
   };
 
+  // data I want to save
+  export let dataForSave = {
+    score: 0,
+    Protagonist: {
+      name: "Player"
+    }
+  };
 
-  //pc kann nicht wissen, wann und ob eine Rückmeldung kommt, diese könnte auch ausbleiben, weshalb er asynchron weitermacht
-  // solange warten, bis speichern/laden erfolgreich war
-  //cpu kann halt nicht alleine weiterarbeiten, weil sie auf externe Daten angewiesen ist und man nicht weiß, wann diese ankommen
-  // kann auch sein, dass nix ankommt
+
+  // let gameMenuOptions = {
+  //   save: "Save",
+  //   load: "Load"
+    // close: "Aus"
+  // };
+
+  // let gameMenu = ƒS.Menu.create(gameMenuOptions, saveNload, "gameMenu");
+  // async function saveNload(_option: string): Promise<void> {
+  //   console.log(_option);
+  //   if (_option == gameMenuOptions.load) {
+  //     await ƒS.Progress.load();
+  //   }
+  //   else if (_option == gameMenuOptions.save) {
+  //     await ƒS.Progress.save();
+  //   }
+
+    // if (_option == gameMenuOptions.close)
+    //   gameMenu.close();
+  // }
+
+
+  // SAVE N LOAD function
   document.addEventListener("keydown", hndKeypress);
   async function hndKeypress(_event: KeyboardEvent): Promise<void> {
     switch (_event.code) {
@@ -187,6 +213,7 @@ namespace AV {
       case ƒ.KEYBOARD_CODE.F9:
         console.log("Load");
         await ƒS.Progress.load();
+        // dataForSave.Protagonist.name = dataForSave.namePlayer;
         break;
     }
   }
@@ -195,12 +222,16 @@ namespace AV {
   function start(_event: Event): void {
     // define the sequence of scenes, each scene as an object with a reference to the scene-function, a name and optionally an id and an id to continue the story with
     let scenes: ƒS.Scenes = [
-      { scene: HearingLoss, name: "Welcome to an almost muted world" }
-      // { scene: Friendship, name: "Am I worth it?" }
-      
+      { scene: HearingLoss, name: "Welcome to an almost muted world" },
+      { scene: Friendship, name: "Estimate your value" }
+
     ];
 
+
     // start the sequence
+    ƒS.Progress.setData(dataForSave);
     ƒS.Progress.go(scenes);
+
+
   }
 }
