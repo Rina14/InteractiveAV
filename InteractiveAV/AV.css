@@ -248,7 +248,7 @@ dialog[class="start"] {
 }
 
 dialog[class="meetingAdelinde"] {
-  top: 40%;
+  /* top: 40%; */
   display: flex;
   flex-direction: column;
   width: 40%;

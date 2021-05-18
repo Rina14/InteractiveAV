@@ -173,7 +173,16 @@ var AV;
 (function (AV) {
     async function Friendship() {
         console.log("Start Friendship");
-        let text;
+        let text = {
+            Narrator: {
+                T0000: "<i></i>",
+                T0001: "<i></i>",
+                T0002: "<i> </i>"
+            },
+            Adelinde: {
+                T0000: "Hey, "
+            }
+        };
         // let animation: ƒS.AnimationDefinition = {
         //   start: { translation: ƒS.positions.bottomleft, rotation: -20, scaling: new ƒS.Position(0.5, 1.5), color: ƒS.Color.CSS("blue", 0) },
         //   end: { translation: ƒS.positions.bottomright, rotation: 20, scaling: new ƒS.Position(1.5, 0.5), color: ƒS.Color.CSS("red") },
@@ -191,7 +200,8 @@ var AV;
         // await ƒS.update(2);
         // await ƒS.Speech.tell(characters.Aoi, "Welcome, welcome to FUDGE-Story~~");
         // await ƒS.Speech.tell(characters.Aoi, "Hello " + dataForSave.Protagonist.name);
-        await AV.ƒS.Character.show(AV.characters.Adelinde, AV.characters.Adelinde.pose.shytalk, AV.ƒS.positionPercent(60, 30));
+        await AV.ƒS.Character.show(AV.characters.Adelinde, AV.characters.Adelinde.pose.shytalk, AV.ƒS.positionPercent(60, 100));
+        await AV.ƒS.update(1);
         await AV.ƒS.Speech.tell(AV.characters.Adelinde, text.Adelinde.T0000 + AV.dataForSave.Protagonist.name + "!");
         await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, "Hey, Ade! So ein Zufall dich hier zu treffen.");
         // await ƒS.Character.hide(characters.Aoi);
@@ -202,6 +212,95 @@ var AV;
         AV.ƒS.Sound.fade(AV.sound.again, 0, 1);
     }
     AV.Friendship = Friendship;
+})(AV || (AV = {}));
+var AV;
+(function (AV) {
+    async function AudioTest() {
+        console.log("Start Audio Test");
+        let cmpAudio;
+        let distortion = AV.ƒ.AudioManager.default.createWaveShaper();
+        let audioBeep;
+        let audioUfo;
+        let text = {
+            // Narrator: {
+            //   T0000: "<i></i>",
+            //   T0001: "<i></i>",
+            //   T0002: "<i> </i>"
+            // },
+            Adelinde: {
+                T0000: "Test undso "
+            }
+        };
+        // ƒS.Sound.fade(sound.again, 0, 1);
+        await AV.ƒS.Location.show(AV.locations.city);
+        await AV.ƒS.Character.show(AV.characters.Adelinde, AV.characters.Adelinde.pose.shytalk, AV.ƒS.positionPercent(60, 100));
+        await AV.ƒS.update(1);
+        await AV.ƒS.Speech.tell(AV.characters.Adelinde, text.Adelinde.T0000);
+        enableAudioTest();
+        await AV.ƒS.Speech.tell(AV.characters.Adelinde, "1");
+        await AV.ƒS.Speech.tell(AV.characters.Adelinde, "2");
+        await AV.ƒS.Speech.tell(AV.characters.Adelinde, "3");
+        await AV.ƒS.Speech.tell(AV.characters.Adelinde, "4");
+        disableAudioTest();
+        // await ƒS.Character.hide(characters.Aoi);
+        // let pose: ƒ.Node = await ƒS.Character.get(characters.Aoi).getPose("Images/Characters/placeholder_girl.png");
+        // pose.removeComponent(pose.getComponent(ƒ.ComponentAnimator));
+        // await ƒS.Character.animate(characters.Aoi, characters.Aoi.pose.normal, animation1);
+        // await ƒS.update(2);
+        async function enableAudioTest() {
+            window.addEventListener("keydown", handleKeydownForAudio);
+            audioBeep = new AV.ƒ.Audio(AV.sound.Beep);
+            // await audioBeep.asyncLoad("Sound/Beep.mp3")
+            audioUfo = new AV.ƒ.Audio(AV.sound.Ufo);
+            // await audioUfo.asyncLoad("Sound/Beat.mp3")
+            cmpAudio = new AV.ƒ.ComponentAudio(audioBeep, false, false);
+            cmpAudio.connect(true);
+            cmpAudio.volume = 30;
+            function makeDistortionCurve(amount = 50) {
+                let samples = 44100;
+                let curve = new Float32Array(samples);
+                let deg = Math.PI / 180;
+                let x;
+                for (let i = 0; i < samples; ++i) {
+                    x = i * 2 / samples - 1;
+                    curve[i] = (3 + amount) * x * 20 * deg / (Math.PI + amount * Math.abs(x));
+                }
+                return curve;
+            }
+            distortion.curve = makeDistortionCurve(400);
+            distortion.oversample = "4x";
+        }
+        // document.addEventListener("keydown", handleKeydownForAudio);
+        function handleKeydownForAudio(_event) {
+            switch (_event.code) {
+                case AV.ƒ.KEYBOARD_CODE.ENTER:
+                    AV.ƒ.Debug.log("Play");
+                    cmpAudio.play(true);
+                    break;
+                case AV.ƒ.KEYBOARD_CODE.ARROW_UP:
+                    AV.ƒ.Debug.log("Insert");
+                    cmpAudio.insertAudioNodes(distortion, distortion);
+                    break;
+                case AV.ƒ.KEYBOARD_CODE.ARROW_DOWN:
+                    AV.ƒ.Debug.log("Remove");
+                    cmpAudio.insertAudioNodes(null, null);
+                    break;
+                case AV.ƒ.KEYBOARD_CODE.ARROW_LEFT:
+                    AV.ƒ.Debug.log("Beep");
+                    cmpAudio.setAudio(audioBeep);
+                    break;
+                case AV.ƒ.KEYBOARD_CODE.ARROW_RIGHT:
+                    AV.ƒ.Debug.log("Ufo");
+                    cmpAudio.setAudio(audioUfo);
+                    break;
+            }
+        }
+        function disableAudioTest() {
+            window.removeEventListener("keydown", handleKeydownForAudio);
+            console.log("Audio Test disabled");
+        }
+    }
+    AV.AudioTest = AudioTest;
 })(AV || (AV = {}));
 var AV;
 (function (AV) {
@@ -251,6 +350,10 @@ var AV;
         vengeance: "Audio/Themes/Vengeance.mp3",
         // Sound
         click: "Audio/Sound/click.mp3",
+        Beep: "./Audio/Sound/Beep.mp3",
+        Beat: "./Audio/Sound/Beat.mp3",
+        hypnotic: "Audio/Sound/hypnotic.mp3",
+        Ufo: "Audio/Sound/Ufo.mp3",
         // Voice
         hahaha: "Audio/Voice/Ha_ha_ha.wav",
         ha_haa: "Audio/Voice/Ha_haa!.wav",
@@ -374,23 +477,24 @@ var AV;
             name: "Player"
         }
     };
-    // let gameMenuOptions = {
-    //   save: "Save",
-    //   load: "Load"
-    // close: "Aus"
-    // };
-    // let gameMenu = ƒS.Menu.create(gameMenuOptions, saveNload, "gameMenu");
-    // async function saveNload(_option: string): Promise<void> {
-    //   console.log(_option);
-    //   if (_option == gameMenuOptions.load) {
-    //     await ƒS.Progress.load();
-    //   }
-    //   else if (_option == gameMenuOptions.save) {
-    //     await ƒS.Progress.save();
-    //   }
-    // if (_option == gameMenuOptions.close)
-    //   gameMenu.close();
-    // }
+    let gameMenuOptions = {
+        save: "Save",
+        load: "Load"
+        // close: "Aus"
+    };
+    // Variable nur zum Löschen für GameMenu
+    // let gameMenu: ƒS.Menu;
+    async function saveNload(_option) {
+        console.log(_option);
+        if (_option == gameMenuOptions.load) {
+            await AV.ƒS.Progress.load();
+        }
+        else if (_option == gameMenuOptions.save) {
+            await AV.ƒS.Progress.save();
+        }
+        // if (_option == gameMenuOptions.close)
+        //   gameMenu.close();
+    }
     // SAVE N LOAD function
     document.addEventListener("keydown", hndKeypress);
     async function hndKeypress(_event) {
@@ -406,12 +510,17 @@ var AV;
                 break;
         }
     }
+    // Audio Test
     window.addEventListener("load", start);
     function start(_event) {
+        // to close menu
+        // let gameMenu = 
+        AV.ƒS.Menu.create(gameMenuOptions, saveNload, "gameMenu");
         // define the sequence of scenes, each scene as an object with a reference to the scene-function, a name and optionally an id and an id to continue the story with
         let scenes = [
             { scene: AV.HearingLoss, name: "Welcome to an almost muted world" },
-            { scene: AV.Friendship, name: "Estimate your value" }
+            { scene: AV.Friendship, name: "Estimate your value" },
+            { scene: AV.AudioTest, name: "Audio test" }
         ];
         // start the sequence
         AV.ƒS.Progress.setData(AV.dataForSave);

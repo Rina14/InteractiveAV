@@ -5,6 +5,9 @@ declare namespace AV {
     function Friendship(): ƒS.SceneReturn;
 }
 declare namespace AV {
+    function AudioTest(): ƒS.SceneReturn;
+}
+declare namespace AV {
     export import ƒ = FudgeCore;
     export import ƒS = FudgeStory;
     let transitions: {
@@ -43,6 +46,10 @@ declare namespace AV {
         truth: string;
         vengeance: string;
         click: string;
+        Beep: string;
+        Beat: string;
+        hypnotic: string;
+        Ufo: string;
         hahaha: string;
         ha_haa: string;
         hmmOne: string;

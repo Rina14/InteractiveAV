@@ -49,6 +49,10 @@ namespace AV {
 
     // Sound
     click: "Audio/Sound/click.mp3",
+    Beep: "./Audio/Sound/Beep.mp3",
+    Beat: "./Audio/Sound/Beat.mp3",
+    hypnotic: "Audio/Sound/hypnotic.mp3",
+    Ufo: "Audio/Sound/Ufo.mp3",
 
     // Voice
     hahaha: "Audio/Voice/Ha_ha_ha.wav",
@@ -181,26 +185,28 @@ namespace AV {
   };
 
 
-  // let gameMenuOptions = {
-  //   save: "Save",
-  //   load: "Load"
+  let gameMenuOptions = {
+    save: "Save",
+    load: "Load"
     // close: "Aus"
-  // };
+  };
 
-  // let gameMenu = ƒS.Menu.create(gameMenuOptions, saveNload, "gameMenu");
-  // async function saveNload(_option: string): Promise<void> {
-  //   console.log(_option);
-  //   if (_option == gameMenuOptions.load) {
-  //     await ƒS.Progress.load();
-  //   }
-  //   else if (_option == gameMenuOptions.save) {
-  //     await ƒS.Progress.save();
-  //   }
+
+  // Variable nur zum Löschen für GameMenu
+  // let gameMenu: ƒS.Menu;
+
+  async function saveNload(_option: string): Promise<void> {
+    console.log(_option);
+    if (_option == gameMenuOptions.load) {
+      await ƒS.Progress.load();
+    }
+    else if (_option == gameMenuOptions.save) {
+      await ƒS.Progress.save();
+    }
 
     // if (_option == gameMenuOptions.close)
     //   gameMenu.close();
-  // }
-
+  }
 
   // SAVE N LOAD function
   document.addEventListener("keydown", hndKeypress);
@@ -218,13 +224,18 @@ namespace AV {
     }
   }
 
+  // Audio Test
   window.addEventListener("load", start);
   function start(_event: Event): void {
+    // to close menu
+    // let gameMenu = 
+    ƒS.Menu.create(gameMenuOptions, saveNload, "gameMenu");
+    
     // define the sequence of scenes, each scene as an object with a reference to the scene-function, a name and optionally an id and an id to continue the story with
     let scenes: ƒS.Scenes = [
       { scene: HearingLoss, name: "Welcome to an almost muted world" },
-      { scene: Friendship, name: "Estimate your value" }
-
+      { scene: Friendship, name: "Estimate your value" },
+      { scene: AudioTest, name: "Audio test" }
     ];
 
 

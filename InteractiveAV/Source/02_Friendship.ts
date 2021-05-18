@@ -2,12 +2,12 @@ namespace AV {
   export async function Friendship(): ƒS.SceneReturn {
     console.log("Start Friendship");
 
-    let text: {
+    let text = {
       Narrator: {
         T0000: "<i></i>",
         T0001: "<i></i>",
         T0002: "<i> </i>"
-      }
+      },
       Adelinde: {
         T0000: "Hey, "
       }
@@ -38,12 +38,13 @@ namespace AV {
     // await ƒS.Speech.tell(characters.Aoi, "Welcome, welcome to FUDGE-Story~~");
     // await ƒS.Speech.tell(characters.Aoi, "Hello " + dataForSave.Protagonist.name);
 
-    await ƒS.Character.show(characters.Adelinde, characters.Adelinde.pose.shytalk, ƒS.positionPercent(60, 30));
+    await ƒS.Character.show(characters.Adelinde, characters.Adelinde.pose.shytalk, ƒS.positionPercent(60, 100));
+    await ƒS.update(1);
     await ƒS.Speech.tell(characters.Adelinde, text.Adelinde.T0000 + dataForSave.Protagonist.name + "!");
     await ƒS.Speech.tell(dataForSave.Protagonist, "Hey, Ade! So ein Zufall dich hier zu treffen.");
 
 
-
+    
 
 
 
