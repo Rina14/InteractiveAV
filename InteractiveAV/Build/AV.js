@@ -241,12 +241,8 @@ var AV;
         await AV.ƒS.Speech.tell(AV.characters.Adelinde, "2");
         await AV.ƒS.Speech.tell(AV.characters.Adelinde, "3");
         await AV.ƒS.Speech.tell(AV.characters.Adelinde, "4");
-        disableAudioTest();
-        // await ƒS.Character.hide(characters.Aoi);
-        // let pose: ƒ.Node = await ƒS.Character.get(characters.Aoi).getPose("Images/Characters/placeholder_girl.png");
-        // pose.removeComponent(pose.getComponent(ƒ.ComponentAnimator));
-        // await ƒS.Character.animate(characters.Aoi, characters.Aoi.pose.normal, animation1);
-        // await ƒS.update(2);
+        // disableAudioTest();
+        // Audio test function
         async function enableAudioTest() {
             window.addEventListener("keydown", handleKeydownForAudio);
             audioBeep = new AV.ƒ.Audio(AV.sound.Beep);
@@ -518,8 +514,8 @@ var AV;
         AV.ƒS.Menu.create(gameMenuOptions, saveNload, "gameMenu");
         // define the sequence of scenes, each scene as an object with a reference to the scene-function, a name and optionally an id and an id to continue the story with
         let scenes = [
-            { scene: AV.HearingLoss, name: "Welcome to an almost muted world" },
-            { scene: AV.Friendship, name: "Estimate your value" },
+            // { scene: HearingLoss, name: "Welcome to an almost muted world" },
+            // { scene: Friendship, name: "Estimate your value" },
             { scene: AV.AudioTest, name: "Audio test" }
         ];
         // start the sequence

@@ -32,22 +32,14 @@ namespace AV {
     await ƒS.Speech.tell(characters.Adelinde, "2");
     await ƒS.Speech.tell(characters.Adelinde, "3");
     await ƒS.Speech.tell(characters.Adelinde, "4");
-    disableAudioTest();
+    // disableAudioTest();
 
 
 
 
 
-    // await ƒS.Character.hide(characters.Aoi);
-    // let pose: ƒ.Node = await ƒS.Character.get(characters.Aoi).getPose("Images/Characters/placeholder_girl.png");
-    // pose.removeComponent(pose.getComponent(ƒ.ComponentAnimator));
 
-    // await ƒS.Character.animate(characters.Aoi, characters.Aoi.pose.normal, animation1);
-    // await ƒS.update(2);
-
-
-
-
+    // Audio test function
 
     async function enableAudioTest(): Promise<void> {
       window.addEventListener("keydown", handleKeydownForAudio);
