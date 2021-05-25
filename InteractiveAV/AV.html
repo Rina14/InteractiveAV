@@ -9,20 +9,24 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap" rel="stylesheet">
   <!--  <link rel="stylesheet" href="../AudioWebAPITest/TestInstructions.css"> -->
   <script src="../Fudge/FudgeCore.js"></script>
   <script src="./../Build/FudgeStory.js"></script>
   <script src="./Build/AV.js"></script>
   <!-- Audio Test Stuff -->
+
+  <!-- For Graph Insertion -->
   <script src="../AudioWebAPITest/dialog-polyfill.min.js"></script>
   <script src="../AudioWebAPITest/TestInstructions.js"></script>
+  <!-- For Spatial Sound -->
+  <script src="../Aid/Build/FudgeAid.js"></script>
   <title>AV Project</title>
 </head>
 
 <body>
   <scene>
     <canvas></canvas>
+    <canvas id="canvasSpatialSound"></canvas>
 
     <speech>
       <name>

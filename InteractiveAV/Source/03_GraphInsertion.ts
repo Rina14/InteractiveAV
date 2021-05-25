@@ -1,6 +1,6 @@
 namespace AV {
-  export async function AudioTest(): ƒS.SceneReturn {
-    console.log("Start Audio Test");
+  export async function GraphInsertion(): ƒS.SceneReturn {
+    console.log("Start Graph Insertion");
 
     let cmpAudio: ƒ.ComponentAudio;
     let distortion: WaveShaperNode = ƒ.AudioManager.default.createWaveShaper();
@@ -19,6 +19,7 @@ namespace AV {
     };
 
 
+    // Audio in 2D-Welt, Knoten hinter der 2D-Welt platzieren
 
     // ƒS.Sound.fade(sound.again, 0, 1);
 
@@ -32,7 +33,7 @@ namespace AV {
     await ƒS.Speech.tell(characters.Adelinde, "2");
     await ƒS.Speech.tell(characters.Adelinde, "3");
     await ƒS.Speech.tell(characters.Adelinde, "4");
-    // disableAudioTest();
+    disableAudioTest();
 
 
 

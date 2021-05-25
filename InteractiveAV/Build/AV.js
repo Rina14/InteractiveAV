@@ -215,8 +215,8 @@ var AV;
 })(AV || (AV = {}));
 var AV;
 (function (AV) {
-    async function AudioTest() {
-        console.log("Start Audio Test");
+    async function GraphInsertion() {
+        console.log("Start Graph Insertion");
         let cmpAudio;
         let distortion = AV.ƒ.AudioManager.default.createWaveShaper();
         let audioBeep;
@@ -231,6 +231,7 @@ var AV;
                 T0000: "Test undso "
             }
         };
+        // Audio in 2D-Welt, Knoten hinter der 2D-Welt platzieren
         // ƒS.Sound.fade(sound.again, 0, 1);
         await AV.ƒS.Location.show(AV.locations.city);
         await AV.ƒS.Character.show(AV.characters.Adelinde, AV.characters.Adelinde.pose.shytalk, AV.ƒS.positionPercent(60, 100));
@@ -241,7 +242,7 @@ var AV;
         await AV.ƒS.Speech.tell(AV.characters.Adelinde, "2");
         await AV.ƒS.Speech.tell(AV.characters.Adelinde, "3");
         await AV.ƒS.Speech.tell(AV.characters.Adelinde, "4");
-        // disableAudioTest();
+        disableAudioTest();
         // Audio test function
         async function enableAudioTest() {
             window.addEventListener("keydown", handleKeydownForAudio);
@@ -296,13 +297,243 @@ var AV;
             console.log("Audio Test disabled");
         }
     }
-    AV.AudioTest = AudioTest;
+    AV.GraphInsertion = GraphInsertion;
+})(AV || (AV = {}));
+/// <reference types="../../Aid/Build/FudgeAid"/>
+var AV;
+/// <reference types="../../Aid/Build/FudgeAid"/>
+(function (AV) {
+    async function SpatialSoundScene() {
+        console.log("Start Spatial Scene");
+        let text = {
+            // Narrator: {
+            //   T0000: "<i></i>",
+            //   T0001: "<i></i>",
+            //   T0002: "<i> </i>"
+            // },
+            Adelinde: {
+                T0000: "Test undso "
+            }
+        };
+        // let canvas2 = document.getElementById("canvasSpatialSound");
+        // canvas2.style.display = "none";
+        let spatialSound = new AV.SpatialSound();
+        spatialSound.start();
+        // Audio in 2D-Welt, Knoten hinter der 2D-Welt platzieren
+        // ƒS.Sound.fade(sound.again, 0, 1);
+        await AV.ƒS.Location.show(AV.locations.city);
+        await AV.ƒS.Character.show(AV.characters.Adelinde, AV.characters.Adelinde.pose.shytalk, AV.ƒS.positionPercent(60, 100));
+        await AV.ƒS.update(1);
+        await AV.ƒS.Speech.tell(AV.characters.Adelinde, text.Adelinde.T0000);
+        // enableSpatialSound();
+        await AV.ƒS.Speech.tell(AV.characters.Adelinde, "1");
+        await AV.ƒS.Speech.tell(AV.characters.Adelinde, "2");
+        await AV.ƒS.Speech.tell(AV.characters.Adelinde, "3");
+        await AV.ƒS.Speech.tell(AV.characters.Adelinde, "4");
+        // ƒ.Loop.stop();
+    }
+    AV.SpatialSoundScene = SpatialSoundScene;
+    // Aktuell nur hier verfügbar, scope beachten
+    // async function init(): Promise<void> {
+    //   let out: HTMLOutputElement;
+    //   let camera: ƒAid.CameraOrbit;
+    //   let speedCameraRotation: number = 0.2;
+    //   let speedCameraTranslation: number = 0.01;
+    //   let cmpAudio: ƒ.ComponentAudio;
+    //   let mtxRotatorX: ƒ.Matrix4x4;
+    //   let mtxRotatorY: ƒ.Matrix4x4;
+    //   let mtxTranslator: ƒ.Matrix4x4;
+    //   let mtxInner: ƒ.Matrix4x4;
+    //   let mtxOuter: ƒ.Matrix4x4;
+    //   let cntMouseX: ƒ.Control = new ƒ.Control("MouseX", speedCameraRotation);
+    //   let cntMouseY: ƒ.Control = new ƒ.Control("MouseY", speedCameraRotation);
+    //   // tslint:disable-next-line: typedef
+    //   let parameter = {
+    //     xAmplitude: 0,
+    //     zAmplitude: 0,
+    //     frequency: 1,
+    //     cameraPosition: new ƒ.Vector3(0, 0, 5)
+    //   };
+    //   out = document.querySelector("output");
+    //   const mtrWhite: ƒ.Material = new ƒ.Material("White", ƒ.ShaderUniColor, new ƒ.CoatColored(ƒ.Color.CSS("white")));
+    //   const mtrGrey: ƒ.Material = new ƒ.Material("White", ƒ.ShaderUniColor, new ƒ.CoatColored(ƒ.Color.CSS("slategrey")));
+    //   const inner: ƒAid.Node = new ƒAid.Node("Inner", ƒ.Matrix4x4.IDENTITY(), mtrWhite, new ƒ.MeshPyramid());
+    //   const outer: ƒAid.Node = new ƒAid.Node("Outer", ƒ.Matrix4x4.IDENTITY(), mtrGrey, new ƒ.MeshPyramid());
+    //   const mtxMesh: ƒ.Matrix4x4 = inner.mtxMeshPivot;
+    //   mtxMesh.rotateX(-90);
+    //   mtxMesh.translateZ(1, false);
+    //   outer.mtxMeshPivot.set(inner.mtxMeshPivot);
+    //   const speaker: ƒAid.Node = new ƒAid.Node("Speaker", ƒ.Matrix4x4.IDENTITY());
+    //   // speaker.addChild(inner);
+    //   // speaker.addChild(outer);
+    //   // speaker.addChild(new ƒAid.NodeCoordinateSystem("SpeakerSystem", ƒ.Matrix4x4.SCALING(ƒ.Vector3.ONE(2))));
+    //   const rotator: ƒAid.Node = new ƒAid.Node("Rotator", ƒ.Matrix4x4.IDENTITY());
+    //   const translator: ƒAid.Node = new ƒAid.Node("Translator", ƒ.Matrix4x4.IDENTITY());
+    //   rotator.addChild(speaker);
+    //   translator.addChild(rotator);
+    //   mtxRotatorX = speaker.mtxLocal;
+    //   mtxRotatorY = rotator.mtxLocal;
+    //   mtxTranslator = translator.mtxLocal;
+    //   mtxInner = inner.mtxLocal;
+    //   mtxOuter = outer.mtxLocal;
+    //   // audio setup
+    //   const audio: ƒ.Audio = new ƒ.Audio(sound.hypnotic);
+    //   cmpAudio = new ƒ.ComponentAudio(audio, true);
+    //   speaker.addComponent(cmpAudio);
+    //   cmpAudio.setPanner(ƒ.AUDIO_PANNER.CONE_OUTER_ANGLE, 180);
+    //   cmpAudio.setPanner(ƒ.AUDIO_PANNER.CONE_INNER_ANGLE, 30);
+    //   ƒ.Debug.log(cmpAudio.getMutatorOfNode(ƒ.AUDIO_NODE_TYPE.SOURCE));
+    //   ƒ.Debug.log(cmpAudio.getMutatorOfNode(ƒ.AUDIO_NODE_TYPE.PANNER));
+    //   ƒ.Debug.log(cmpAudio.getMutatorOfNode(ƒ.AUDIO_NODE_TYPE.GAIN));
+    //   // camera setup
+    //   const cmpCamera: ƒ.ComponentCamera = new ƒ.ComponentCamera();
+    //   camera = new ƒAid.CameraOrbit(cmpCamera, 3, 80, 0.1, 20);
+    //   camera.nodeCamera.addComponent(new ƒ.ComponentAudioListener());
+    //   camera.axisRotateX.addControl(cntMouseY);
+    //   camera.axisRotateY.addControl(cntMouseX);
+    //   // scene setup
+    //   const graph: ƒ.Node = new ƒ.Node("Graph");
+    //   // graph.addChild(new ƒAid.NodeCoordinateSystem());
+    //   graph.addChild(translator);
+    //   graph.addChild(camera);
+    //   const viewport: ƒ.Viewport = new ƒ.Viewport();
+    //   const canvas: HTMLCanvasElement = document.querySelector("canvas");
+    //   viewport.initialize("Viewport", graph, cmpCamera, canvas);
+    //   ƒ.AudioManager.default.listenTo(graph);
+    //   ƒ.AudioManager.default.listenWith(camera.nodeCamera.getComponent(ƒ.ComponentAudioListener));
+    //   // setup event handling
+    //   viewport.setFocus(true);
+    //   viewport.activatePointerEvent(ƒ.EVENT_POINTER.MOVE, false);
+    //   viewport.activateWheelEvent(ƒ.EVENT_WHEEL.WHEEL, false);
+    //   viewport.addEventListener(ƒ.EVENT_POINTER.MOVE, hndPointerMove);
+    //   viewport.addEventListener(ƒ.EVENT_WHEEL.WHEEL, hndWheelMove);
+    //   canvas.addEventListener("mousedown", canvas.requestPointerLock);
+    //   canvas.addEventListener("mouseup", () => document.exitPointerLock());
+    //   startInteraction(viewport);
+    //   ƒ.Loop.addEventListener(ƒ.EVENT.LOOP_FRAME, update);
+    //   ƒ.Loop.start();
+    //   function update(_event: Event): void {
+    //     // let time: number = performance.now() / 1000;
+    //     // let position: ƒ.Vector3 = mtxTranslator.translation;
+    //     // if (parameter.xAmplitude)
+    //     //   position.x = parameter.xAmplitude * Math.sin(parameter.frequency * time);
+    //     // if (parameter.zAmplitude)
+    //     //   position.z = parameter.zAmplitude * Math.cos(parameter.frequency * time);
+    //     let panner: ƒ.Mutator = cmpAudio.getMutatorOfNode(ƒ.AUDIO_NODE_TYPE.PANNER);
+    //     {
+    //       let sin: number = Math.sin(Math.PI * <number>panner["coneInnerAngle"] / 360);
+    //       let cos: number = Math.cos(Math.PI * <number>panner["coneInnerAngle"] / 360);
+    //       mtxInner.set(ƒ.Matrix4x4.IDENTITY());
+    //       mtxInner.scaling = new ƒ.Vector3(2 * sin, 2 * sin, cos);
+    //     }
+    //     {
+    //       let sin: number = Math.sin(Math.PI * <number>panner["coneOuterAngle"] / 360);
+    //       let cos: number = Math.cos(Math.PI * <number>panner["coneOuterAngle"] / 360);
+    //       mtxOuter.set(ƒ.Matrix4x4.IDENTITY());
+    //       mtxOuter.scaling = new ƒ.Vector3(2 * sin, 2 * sin, cos);
+    //     }
+    //     // mtxTranslator.translation = position;
+    //     ƒ.AudioManager.default.update();
+    //     viewport.draw();
+    //     // printInfo(mtxBody, mtxCamera);
+    //   }
+    //   function hndPointerMove(_event: ƒ.EventPointer): void {
+    //     if (!_event.buttons)
+    //       return;
+    //     // camera.rotateY(_event.movementX * speedCameraRotation);
+    //     // camera.rotateX(_event.movementY * speedCameraRotation);
+    //     cntMouseX.setInput(_event.movementX);
+    //     cntMouseY.setInput(_event.movementY);
+    //   }
+    //   function hndWheelMove(_event: WheelEvent): void {
+    //     let panner: ƒ.Mutator = cmpAudio.getMutatorOfNode(ƒ.AUDIO_NODE_TYPE.PANNER);
+    //     if (_event.shiftKey || _event.altKey) {
+    //       let inner: number = <number>panner["coneInnerAngle"] - (_event.altKey ? _event.deltaY / 10 : 0);
+    //       inner = Math.min(360, Math.max(inner, 0));
+    //       cmpAudio.setPanner(ƒ.AUDIO_PANNER.CONE_INNER_ANGLE, inner);
+    //       let outer: number = <number>panner["coneOuterAngle"] - (_event.shiftKey ? _event.deltaY / 10 : 0);
+    //       outer = Math.min(360, Math.max(inner, outer));
+    //       cmpAudio.setPanner(ƒ.AUDIO_PANNER.CONE_OUTER_ANGLE, outer);
+    //     }
+    //     else
+    //       camera.distance += _event.deltaY * speedCameraTranslation;
+    //   }
+    //   function startInteraction(_viewport: ƒ.Viewport): void {
+    //     _viewport.activateKeyboardEvent(ƒ.EVENT_KEYBOARD.DOWN, true);
+    //     _viewport.addEventListener(ƒ.EVENT_KEYBOARD.DOWN, move);
+    //     function move(_event: ƒ.EventKeyboard): void {
+    //       mtxTranslator.translateZ(0.1 *
+    //         (_event.code == ƒ.KEYBOARD_CODE.W ? -1 :
+    //           _event.code == ƒ.KEYBOARD_CODE.S ? 1 :
+    //             0));
+    //       mtxTranslator.translateX(0.1 *
+    //         (_event.code == ƒ.KEYBOARD_CODE.A ? -1 :
+    //           _event.code == ƒ.KEYBOARD_CODE.D ? 1 :
+    //             0));
+    //       mtxTranslator.translateY(0.1 *
+    //         (_event.code == ƒ.KEYBOARD_CODE.X ? -1 :
+    //           _event.code == ƒ.KEYBOARD_CODE.E ? 1 :
+    //             0));
+    //       switch (_event.code) {
+    //         case ƒ.KEYBOARD_CODE.SPACE:
+    //           mtxRotatorX.set(ƒ.Matrix4x4.IDENTITY());
+    //           mtxRotatorY.set(ƒ.Matrix4x4.IDENTITY());
+    //           mtxTranslator.set(ƒ.Matrix4x4.IDENTITY());
+    //           // parameter.xAmplitude = parameter.zAmplitude = 0;
+    //           break;
+    //         // case ƒ.KEYBOARD_CODE.PLUS+:
+    //         //   if (parameter.xAmplitude)
+    //         //     parameter.xAmplitude = 0;
+    //         //   else {
+    //         //     parameter.xAmplitude = mtxRotatorX.translation.x;
+    //         //   }
+    //         //   break;
+    //         // case ƒ.KEYBOARD_CODE.Y:
+    //         //   if (parameter.zAmplitude)
+    //         //     parameter.zAmplitude = 0;
+    //         //   else {
+    //         //     parameter.zAmplitude = mtxRotatorX.translation.z;
+    //         //   }
+    //         //   break;
+    //         case ƒ.KEYBOARD_CODE.ARROW_RIGHT:
+    //           mtxRotatorY.rotateY(5);
+    //           break;
+    //         case ƒ.KEYBOARD_CODE.ARROW_LEFT:
+    //           mtxRotatorY.rotateY(-5);
+    //           break;
+    //         case ƒ.KEYBOARD_CODE.ARROW_UP:
+    //           mtxRotatorX.rotateX(-5);
+    //           break;
+    //         case ƒ.KEYBOARD_CODE.ARROW_DOWN:
+    //           mtxRotatorX.rotateX(5);
+    //           break;
+    //         // case ƒ.KEYBOARD_CODE.Q:
+    //         //   // parameter.frequency *= 0.8;
+    //         //   break;
+    //         // case ƒ.KEYBOARD_CODE.E:
+    //         //   // parameter.frequency *= 1 / 0.8;
+    //         //   break;
+    //         // case ƒ.KEYBOARD_CODE.P:
+    //         //   break;
+    //         case ƒ.KEYBOARD_CODE.ENTER:
+    //           //play Sound
+    //           console.log("Play Audio");
+    //           if (cmpAudio.isPlaying)
+    //             cmpAudio.play(false);
+    //           else
+    //             cmpAudio.play(true);
+    //           break;
+    //       }
+    //     }
+    //   }
+    // }
 })(AV || (AV = {}));
 var AV;
 (function (AV) {
     //zugriff auch innerhalb anderer dateien durch export; fudgecore ist extern nicht teil des programms deshalb muss es erst importiert werden
     AV.ƒ = FudgeCore;
     AV.ƒS = FudgeStory;
+    AV.ƒAid = FudgeAid;
     //damit man weiß, dass das Programm läuft
     console.log("Start");
     //Objekte, man kann auf die entsprechenden Daten zugreifen
@@ -516,11 +747,206 @@ var AV;
         let scenes = [
             // { scene: HearingLoss, name: "Welcome to an almost muted world" },
             // { scene: Friendship, name: "Estimate your value" },
-            { scene: AV.AudioTest, name: "Audio test" }
+            // { scene: GraphInsertion, name: "Graph Insertion" },
+            { scene: AV.SpatialSoundScene, name: "Spatial Sound" }
         ];
         // start the sequence
         AV.ƒS.Progress.setData(AV.dataForSave);
         AV.ƒS.Progress.go(scenes);
     }
+})(AV || (AV = {}));
+var AV;
+(function (AV) {
+    class SpatialSound {
+        constructor() {
+            this.speedCameraRotation = 0.2;
+            this.speedCameraTranslation = 0.01;
+            this.cntMouseX = new AV.ƒ.Control("MouseX", this.speedCameraRotation);
+            this.cntMouseY = new AV.ƒ.Control("MouseY", this.speedCameraRotation);
+            // tslint:disable-next-line: typedef
+            // private parameter = {
+            //   xAmplitude: 0,
+            //   zAmplitude: 0,
+            //   frequency: 1,
+            //   cameraPosition: new ƒ.Vector3(0, 0, 5)
+            // };
+            this.viewport = new AV.ƒ.Viewport();
+            this.update = (_event) => {
+                // let time: number = performance.now() / 1000;
+                // let position: ƒ.Vector3 = mtxTranslator.translation;
+                // if (parameter.xAmplitude)
+                //   position.x = parameter.xAmplitude * Math.sin(parameter.frequency * time);
+                // if (parameter.zAmplitude)
+                //   position.z = parameter.zAmplitude * Math.cos(parameter.frequency * time);
+                let panner = this.cmpAudio.getMutatorOfNode(AV.ƒ.AUDIO_NODE_TYPE.PANNER);
+                {
+                    let sin = Math.sin(Math.PI * panner["coneInnerAngle"] / 360);
+                    let cos = Math.cos(Math.PI * panner["coneInnerAngle"] / 360);
+                    this.mtxInner.set(AV.ƒ.Matrix4x4.IDENTITY());
+                    this.mtxInner.scaling = new AV.ƒ.Vector3(2 * sin, 2 * sin, cos);
+                }
+                {
+                    let sin = Math.sin(Math.PI * panner["coneOuterAngle"] / 360);
+                    let cos = Math.cos(Math.PI * panner["coneOuterAngle"] / 360);
+                    this.mtxOuter.set(AV.ƒ.Matrix4x4.IDENTITY());
+                    this.mtxOuter.scaling = new AV.ƒ.Vector3(2 * sin, 2 * sin, cos);
+                }
+                // mtxTranslator.translation = position;
+                AV.ƒ.AudioManager.default.update();
+                this.viewport.draw();
+                // printInfo(mtxBody, mtxCamera);
+            };
+            this.hndPointerMove = (_event) => {
+                if (!_event.buttons)
+                    return;
+                // camera.rotateY(_event.movementX * speedCameraRotation);
+                // camera.rotateX(_event.movementY * speedCameraRotation);
+                this.cntMouseX.setInput(_event.movementX);
+                this.cntMouseY.setInput(_event.movementY);
+            };
+            this.hndWheelMove = (_event) => {
+                let panner = this.cmpAudio.getMutatorOfNode(AV.ƒ.AUDIO_NODE_TYPE.PANNER);
+                if (_event.shiftKey || _event.altKey) {
+                    let inner = panner["coneInnerAngle"] - (_event.altKey ? _event.deltaY / 10 : 0);
+                    inner = Math.min(360, Math.max(inner, 0));
+                    this.cmpAudio.setPanner(AV.ƒ.AUDIO_PANNER.CONE_INNER_ANGLE, inner);
+                    let outer = panner["coneOuterAngle"] - (_event.shiftKey ? _event.deltaY / 10 : 0);
+                    outer = Math.min(360, Math.max(inner, outer));
+                    this.cmpAudio.setPanner(AV.ƒ.AUDIO_PANNER.CONE_OUTER_ANGLE, outer);
+                }
+                else
+                    this.camera.distance += _event.deltaY * this.speedCameraTranslation;
+            };
+            this.move = (_event) => {
+                this.mtxTranslator.translateZ(0.1 *
+                    (_event.code == AV.ƒ.KEYBOARD_CODE.W ? -1 :
+                        _event.code == AV.ƒ.KEYBOARD_CODE.S ? 1 :
+                            0));
+                this.mtxTranslator.translateX(0.1 *
+                    (_event.code == AV.ƒ.KEYBOARD_CODE.A ? -1 :
+                        _event.code == AV.ƒ.KEYBOARD_CODE.D ? 1 :
+                            0));
+                this.mtxTranslator.translateY(0.1 *
+                    (_event.code == AV.ƒ.KEYBOARD_CODE.X ? -1 :
+                        _event.code == AV.ƒ.KEYBOARD_CODE.E ? 1 :
+                            0));
+                switch (_event.code) {
+                    case AV.ƒ.KEYBOARD_CODE.SPACE:
+                        this.mtxRotatorX.set(AV.ƒ.Matrix4x4.IDENTITY());
+                        this.mtxRotatorY.set(AV.ƒ.Matrix4x4.IDENTITY());
+                        this.mtxTranslator.set(AV.ƒ.Matrix4x4.IDENTITY());
+                        // parameter.xAmplitude = parameter.zAmplitude = 0;
+                        break;
+                    // case ƒ.KEYBOARD_CODE.PLUS+:
+                    //   if (parameter.xAmplitude)
+                    //     parameter.xAmplitude = 0;
+                    //   else {
+                    //     parameter.xAmplitude = mtxRotatorX.translation.x;
+                    //   }
+                    //   break;
+                    // case ƒ.KEYBOARD_CODE.Y:
+                    //   if (parameter.zAmplitude)
+                    //     parameter.zAmplitude = 0;
+                    //   else {
+                    //     parameter.zAmplitude = mtxRotatorX.translation.z;
+                    //   }
+                    //   break;
+                    case AV.ƒ.KEYBOARD_CODE.ARROW_RIGHT:
+                        this.mtxRotatorY.rotateY(5);
+                        break;
+                    case AV.ƒ.KEYBOARD_CODE.ARROW_LEFT:
+                        this.mtxRotatorY.rotateY(-5);
+                        break;
+                    case AV.ƒ.KEYBOARD_CODE.ARROW_UP:
+                        this.mtxRotatorX.rotateX(-5);
+                        break;
+                    case AV.ƒ.KEYBOARD_CODE.ARROW_DOWN:
+                        this.mtxRotatorX.rotateX(5);
+                        break;
+                    // case ƒ.KEYBOARD_CODE.Q:
+                    //   // parameter.frequency *= 0.8;
+                    //   break;
+                    // case ƒ.KEYBOARD_CODE.E:
+                    //   // parameter.frequency *= 1 / 0.8;
+                    //   break;
+                    // case ƒ.KEYBOARD_CODE.P:
+                    //   break;
+                    case AV.ƒ.KEYBOARD_CODE.ENTER:
+                        //play Sound
+                        console.log("Play Audio");
+                        if (this.cmpAudio.isPlaying)
+                            this.cmpAudio.play(false);
+                        else
+                            this.cmpAudio.play(true);
+                        break;
+                }
+            };
+        }
+        start() {
+            this.out = document.querySelector("output");
+            const mtrWhite = new AV.ƒ.Material("White", AV.ƒ.ShaderUniColor, new AV.ƒ.CoatColored(AV.ƒ.Color.CSS("white")));
+            const mtrGrey = new AV.ƒ.Material("White", AV.ƒ.ShaderUniColor, new AV.ƒ.CoatColored(AV.ƒ.Color.CSS("slategrey")));
+            const inner = new AV.ƒAid.Node("Inner", AV.ƒ.Matrix4x4.IDENTITY(), mtrWhite, new AV.ƒ.MeshPyramid());
+            const outer = new AV.ƒAid.Node("Outer", AV.ƒ.Matrix4x4.IDENTITY(), mtrGrey, new AV.ƒ.MeshPyramid());
+            const mtxMesh = inner.mtxMeshPivot;
+            mtxMesh.rotateX(-90);
+            mtxMesh.translateZ(1, false);
+            outer.mtxMeshPivot.set(inner.mtxMeshPivot);
+            const speaker = new AV.ƒAid.Node("Speaker", AV.ƒ.Matrix4x4.IDENTITY());
+            // speaker.addChild(inner);
+            // speaker.addChild(outer);
+            // speaker.addChild(new ƒAid.NodeCoordinateSystem("SpeakerSystem", ƒ.Matrix4x4.SCALING(ƒ.Vector3.ONE(2))));
+            const rotator = new AV.ƒAid.Node("Rotator", AV.ƒ.Matrix4x4.IDENTITY());
+            const translator = new AV.ƒAid.Node("Translator", AV.ƒ.Matrix4x4.IDENTITY());
+            rotator.addChild(speaker);
+            translator.addChild(rotator);
+            this.mtxRotatorX = speaker.mtxLocal;
+            this.mtxRotatorY = rotator.mtxLocal;
+            this.mtxTranslator = translator.mtxLocal;
+            this.mtxInner = inner.mtxLocal;
+            this.mtxOuter = outer.mtxLocal;
+            // audio setup
+            const audio = new AV.ƒ.Audio(AV.sound.nightclub);
+            this.cmpAudio = new AV.ƒ.ComponentAudio(audio, true);
+            speaker.addComponent(this.cmpAudio);
+            this.cmpAudio.setPanner(AV.ƒ.AUDIO_PANNER.CONE_OUTER_ANGLE, 180);
+            this.cmpAudio.setPanner(AV.ƒ.AUDIO_PANNER.CONE_INNER_ANGLE, 30);
+            AV.ƒ.Debug.log(this.cmpAudio.getMutatorOfNode(AV.ƒ.AUDIO_NODE_TYPE.SOURCE));
+            AV.ƒ.Debug.log(this.cmpAudio.getMutatorOfNode(AV.ƒ.AUDIO_NODE_TYPE.PANNER));
+            AV.ƒ.Debug.log(this.cmpAudio.getMutatorOfNode(AV.ƒ.AUDIO_NODE_TYPE.GAIN));
+            // camera setup
+            const cmpCamera = new AV.ƒ.ComponentCamera();
+            this.camera = new AV.ƒAid.CameraOrbit(cmpCamera, 3, 80, 0.1, 20);
+            this.camera.nodeCamera.addComponent(new AV.ƒ.ComponentAudioListener());
+            this.camera.axisRotateX.addControl(this.cntMouseY);
+            this.camera.axisRotateY.addControl(this.cntMouseX);
+            // scene setup
+            const graph = new AV.ƒ.Node("Graph");
+            // graph.addChild(new ƒAid.NodeCoordinateSystem());
+            graph.addChild(translator);
+            graph.addChild(this.camera);
+            // const viewport: ƒ.Viewport = new ƒ.Viewport();
+            const canvas = document.querySelector("#canvasSpatialSound");
+            this.viewport.initialize("Viewport", graph, cmpCamera, canvas);
+            AV.ƒ.AudioManager.default.listenTo(graph);
+            AV.ƒ.AudioManager.default.listenWith(this.camera.nodeCamera.getComponent(AV.ƒ.ComponentAudioListener));
+            // setup event handling
+            this.viewport.setFocus(true);
+            this.viewport.activatePointerEvent("\u0192pointermove" /* MOVE */, false);
+            this.viewport.activateWheelEvent("\u0192wheel" /* WHEEL */, false);
+            this.viewport.addEventListener("\u0192pointermove" /* MOVE */, this.hndPointerMove);
+            this.viewport.addEventListener("\u0192wheel" /* WHEEL */, this.hndWheelMove);
+            canvas.addEventListener("mousedown", canvas.requestPointerLock);
+            canvas.addEventListener("mouseup", () => document.exitPointerLock());
+            this.startInteraction(this.viewport);
+            AV.ƒ.Loop.addEventListener("loopFrame" /* LOOP_FRAME */, this.update);
+            AV.ƒ.Loop.start();
+        }
+        startInteraction(_viewport) {
+            _viewport.activateKeyboardEvent("\u0192keydown" /* DOWN */, true);
+            _viewport.addEventListener("\u0192keydown" /* DOWN */, this.move);
+        }
+    }
+    AV.SpatialSound = SpatialSound;
 })(AV || (AV = {}));
 //# sourceMappingURL=AV.js.map

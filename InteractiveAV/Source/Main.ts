@@ -2,6 +2,8 @@ namespace AV {
   //zugriff auch innerhalb anderer dateien durch export; fudgecore ist extern nicht teil des programms deshalb muss es erst importiert werden
   export import ƒ = FudgeCore;
   export import ƒS = FudgeStory;
+  export import ƒAid = FudgeAid;
+
 
   //damit man weiß, dass das Programm läuft
   console.log("Start");
@@ -230,12 +232,13 @@ namespace AV {
     // to close menu
     // let gameMenu = 
     ƒS.Menu.create(gameMenuOptions, saveNload, "gameMenu");
-    
+
     // define the sequence of scenes, each scene as an object with a reference to the scene-function, a name and optionally an id and an id to continue the story with
     let scenes: ƒS.Scenes = [
       // { scene: HearingLoss, name: "Welcome to an almost muted world" },
       // { scene: Friendship, name: "Estimate your value" },
-      { scene: AudioTest, name: "Audio test" }
+      // { scene: GraphInsertion, name: "Graph Insertion" },
+      { scene: SpatialSoundScene, name: "Spatial Sound" }
     ];
 
 

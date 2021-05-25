@@ -1,4 +1,78 @@
 "use strict";
+var FudgeAid;
+(function (FudgeAid) {
+    /**
+     * Abstract class supporting versious arithmetical helper functions
+     */
+    class Arith {
+        /**
+         * Returns one of the values passed in, either _value if within _min and _max or the boundary being exceeded by _value
+         */
+        static clamp(_value, _min, _max, _isSmaller = (_value1, _value2) => { return _value1 < _value2; }) {
+            if (_isSmaller(_value, _min))
+                return _min;
+            if (_isSmaller(_max, _value))
+                return _max;
+            return _value;
+        }
+    }
+    FudgeAid.Arith = Arith;
+})(FudgeAid || (FudgeAid = {}));
+var FudgeAid;
+(function (FudgeAid) {
+    /**
+     * Within a given precision, an object of this class finds the parameter value at which a given function
+     * switches its boolean return value using interval splitting (bisection).
+     * Pass the type of the parameter and the type the precision is measured in.
+     */
+    class ArithBisection {
+        /**
+         * Creates a new Solver
+         * @param _function A function that takes an argument of the generic type <Parameter> and returns a boolean value.
+         * @param _divide A function splitting the interval to find a parameter for the next iteration, may simply be the arithmetic mean
+         * @param _isSmaller A function that determines a difference between the borders of the current interval and compares this to the given precision
+         */
+        constructor(_function, _divide, _isSmaller) {
+            this.function = _function;
+            this.divide = _divide;
+            this.isSmaller = _isSmaller;
+        }
+        /**
+         * Finds a solution with the given precision in the given interval using the functions this Solver was constructed with.
+         * After the method returns, find the data in this objects properties.
+         * @param _left The parameter on one side of the interval.
+         * @param _right The parameter on the other side, may be "smaller" than [[_left]].
+         * @param _epsilon The desired precision of the solution.
+         * @param _leftValue The value on the left side of the interval, omit if yet unknown or pass in if known for better performance.
+         * @param _rightValue The value on the right side of the interval, omit if yet unknown or pass in if known for better performance.
+         * @throws Error if both sides of the interval return the same value.
+         */
+        solve(_left, _right, _epsilon, _leftValue = undefined, _rightValue = undefined) {
+            this.left = _left;
+            this.leftValue = _leftValue || this.function(_left);
+            this.right = _right;
+            this.rightValue = _rightValue || this.function(_right);
+            if (this.isSmaller(_left, _right, _epsilon))
+                return;
+            if (this.leftValue == this.rightValue)
+                throw (new Error("Interval solver can't operate with identical function values on both sides of the interval"));
+            let between = this.divide(_left, _right);
+            let betweenValue = this.function(between);
+            if (betweenValue == this.leftValue)
+                this.solve(between, this.right, _epsilon, betweenValue, this.rightValue);
+            else
+                this.solve(this.left, between, _epsilon, this.leftValue, betweenValue);
+        }
+        toString() {
+            let out = "";
+            out += `left: ${this.left.toString()} -> ${this.leftValue}`;
+            out += "\n";
+            out += `right: ${this.right.toString()} -> ${this.rightValue}`;
+            return out;
+        }
+    }
+    FudgeAid.ArithBisection = ArithBisection;
+})(FudgeAid || (FudgeAid = {}));
 var FudgeStory;
 (function (FudgeStory) {
     var ƒ = FudgeCore;
@@ -596,7 +670,6 @@ var FudgeStory;
          * Returns an object to use to track logical data like score, states, textual inputs given by the play etc.
          */
         static setDataInterface(_data, _dom) {
-            Progress.setData(_data); // test if this is sufficient to support previous save/load functionality
             let hndProxy = {
                 set: function (_target, _prop, _value) {
                     console.log("ProgressData: " + _prop.toString() + " = " + _value);
@@ -609,6 +682,7 @@ var FudgeStory;
                 // }
             };
             let proxy = new Proxy(Progress.data, hndProxy);
+            Progress.setData(proxy); // test if this is sufficient to support previous save/load functionality
             return proxy;
         }
         /**
@@ -682,7 +756,7 @@ var FudgeStory;
         }
         static updateInterface(_dom) {
             for (let prop in Progress.data) {
-                let elements = _dom.querySelectorAll("[name=" + prop + "]");
+                let elements = _dom.querySelectorAll("#" + prop);
                 for (let element of elements)
                     element.value = Reflect.get(Progress.data, prop).toString();
             }
@@ -694,10 +768,11 @@ var FudgeStory;
             splash.style.height = "100vh";
             splash.style.width = "100vw";
             splash.style.textAlign = "center";
-            splash.style.backgroundColor = "white";
+            splash.style.backgroundColor = "#1C1C1C";
+            // splash.style.color = "white";
             splash.style.cursor = "pointer";
-            // splash.innerHTML = "<img src='../../Images/Splash.png'/>";
-            splash.innerHTML = `<img src="data:image/gif;base64,${Progress.splashBlob()}"/>`;
+            splash.innerHTML = "<img src='../Images/Splash.png'/>";
+            // splash.innerHTML = `<img src="data:image/gif;base64,${Progress.splashBlob()}"/>`;
             splash.innerHTML += "<p>" + _text + "</p>";
             splash.showModal();
             return new Promise(_resolve => {

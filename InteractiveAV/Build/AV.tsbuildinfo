@@ -4,8 +4,10 @@
     "sourceFiles": [
       "../Source/01_HearingLoss.ts",
       "../Source/02_Friendship.ts",
-      "../Source/03_AudioTest.ts",
-      "../Source/Main.ts"
+      "../Source/03_GraphInsertion.ts",
+      "../Source/04_SpatialSoundTest.ts",
+      "../Source/Main.ts",
+      "../Source/SpatialSound.ts"
     ],
     "js": {
       "sections": [
@@ -17,7 +19,7 @@
         },
         {
           "pos": 15,
-          "end": 24731,
+          "end": 47053,
           "kind": "text"
         }
       ],
@@ -45,7 +47,7 @@
       "sections": [
         {
           "pos": 0,
-          "end": 4014,
+          "end": 4746,
           "kind": "text"
         }
       ]

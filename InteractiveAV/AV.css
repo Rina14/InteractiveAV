@@ -11,6 +11,16 @@ html, body {
   color: rgb(240, 18, 103);
 }
 
+
+/* try to hide canvasSpatialSound */
+canvas[id="canvasSpatialSound"] {
+  /* opacity: 100%; */
+  /* visibility: hidden; */
+  background-color: blue;
+  /* display: none; */
+}
+
+
 scene {
   width: 1280px;
   height: 720px;
@@ -235,6 +245,11 @@ speech.Aoi content {
   color: rgb(159, 220, 255);
 }
 
+
+/* Font color for Splashscreen */
+dialog > p {
+  color: white;
+}
 
 dialog[class="start"] {
   height: 30em;

@@ -5,11 +5,15 @@ declare namespace AV {
     function Friendship(): ƒS.SceneReturn;
 }
 declare namespace AV {
-    function AudioTest(): ƒS.SceneReturn;
+    function GraphInsertion(): ƒS.SceneReturn;
+}
+declare namespace AV {
+    function SpatialSoundScene(): ƒS.SceneReturn;
 }
 declare namespace AV {
     export import ƒ = FudgeCore;
     export import ƒS = FudgeStory;
+    export import ƒAid = FudgeAid;
     let transitions: {
         clock: {
             duration: number;
@@ -166,4 +170,27 @@ declare namespace AV {
             name: string;
         };
     };
+}
+declare namespace AV {
+    class SpatialSound {
+        private out;
+        private camera;
+        private speedCameraRotation;
+        private speedCameraTranslation;
+        private cmpAudio;
+        private mtxRotatorX;
+        private mtxRotatorY;
+        private mtxTranslator;
+        private mtxInner;
+        private mtxOuter;
+        private cntMouseX;
+        private cntMouseY;
+        private viewport;
+        start(): void;
+        private update;
+        private hndPointerMove;
+        private hndWheelMove;
+        private startInteraction;
+        private move;
+    }
 }
