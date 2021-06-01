@@ -55,6 +55,8 @@ namespace AV {
     Beat: "./Audio/Sound/Beat.mp3",
     hypnotic: "Audio/Sound/hypnotic.mp3",
     Ufo: "Audio/Sound/Ufo.mp3",
+    cutie: "Audio/Sound/cutie.mp3",
+    pinch: "Audio/Sound/pinch.flac",
 
     // Voice
     hahaha: "Audio/Voice/Ha_ha_ha.wav",
@@ -134,6 +136,10 @@ namespace AV {
     trainTunnel: {
       name: "TrainTunnel",
       background: "Images/Backgrounds/Train_Tunnel.png"
+    },
+    festivalC: {
+      name: "OldFestival",
+      background: "Images/Backgrounds/Old_FestivalC.png"
     }
   };
 
@@ -235,9 +241,9 @@ namespace AV {
 
     // define the sequence of scenes, each scene as an object with a reference to the scene-function, a name and optionally an id and an id to continue the story with
     let scenes: ƒS.Scenes = [
-      // { scene: HearingLoss, name: "Welcome to an almost muted world" },
-      // { scene: Friendship, name: "Estimate your value" },
-      // { scene: GraphInsertion, name: "Graph Insertion" },
+      { scene: HearingLoss, name: "Welcome to an almost muted world" },
+      { scene: Friendship, name: "Estimate your value" },
+      { scene: GraphInsertion, name: "Graph Insertion" },
       { scene: SpatialSoundScene, name: "Spatial Sound" }
     ];
 
@@ -245,7 +251,5 @@ namespace AV {
     // start the sequence
     ƒS.Progress.setData(dataForSave);
     ƒS.Progress.go(scenes);
-
-
   }
 }

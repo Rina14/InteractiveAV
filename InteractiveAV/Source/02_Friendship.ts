@@ -30,8 +30,9 @@ namespace AV {
 
 
 
+    ƒS.Speech.hide();
 
-    await ƒS.Location.show(locations.city);
+    await ƒS.Location.show(locations.festivalC);
 
     // await ƒS.Character.animate(characters.Aoi, characters.Aoi.pose.normal, animation);
     // await ƒS.update(2);

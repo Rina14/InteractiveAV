@@ -68,11 +68,13 @@ namespace AV {
     let signalDelay1: ƒS.Signal = ƒS.Progress.defineSignal([() => ƒS.Progress.delay(1)]);
 
     // Duration in seconds
-    ƒS.Sound.fade(sound.again, 0.3, 0.07, true);
+    ƒS.Sound.play(sound.again, 0.1);
+    ƒS.Sound.fade(sound.again, 1, 4, true);
 
 
     // Start the Scene!
-    await ƒS.Speech.hide();
+
+    ƒS.Speech.hide();
     await ƒS.Location.show(locations.trainOld);
     await ƒS.update(transitions.wet.duration, transitions.wet.alpha, transitions.wet.edge);
     await ƒS.Speech.tell(null, text.Narrator.T0000);
@@ -91,6 +93,7 @@ namespace AV {
     await ƒS.Speech.tell(null, "<i>Er hat wohl meinen Namen vergessen.</i>");
 
     // Name field - Player can type his name in here
+
     dataForSave.Protagonist.name = await ƒS.Speech.getInput();
     console.log(dataForSave.Protagonist.name);
 
@@ -139,16 +142,16 @@ namespace AV {
     };
 
 
-    let trainMeetingWithAdelinde = await ƒS.Menu.getInput(meetAdelinde, "meetingAdelinde");
+    let trainMeetingWithAdelinde = await ƒS.Menu.getInput(meetAdelinde, "choices");
 
     switch (trainMeetingWithAdelinde) {
       case meetAdelinde.iGreetBack:
         ƒS.Sound.play(sound.click, 1);
         //continue writing on this path here
-        await ƒS.Speech.tell(dataForSave.Protagonist, "Hi, Ade. Lange nicht gesehen, was?");
+        await ƒS.Speech.tell(dataForSave.Protagonist, "Hi, Ade. Lange nicht gesehen, was?", true, "Player");
         await ƒS.Speech.tell(characters.Adelinde, "Was?! Wirklich?? Ich dachte wir-... Ahh tut mir leid.");
         await ƒS.Speech.tell(null, "Typisch, Ade. Sie ist schon immer sehr leichtgläubig gewesen.");
-        await ƒS.Speech.tell(dataForSave.Protagonist, "Beruhige dich. Keine Sorge, ist nur eine Woche her, seit wir das letzte mal gesprochen haben.");
+        await ƒS.Speech.tell(dataForSave.Protagonist, "Beruhige dich. Keine Sorge, ist nur eine Woche her, seit wir das letzte mal gesprochen haben.", true, "Player");
         await ƒS.Speech.tell(characters.Adelinde, "Ohh, ich dachte schon mein Gedächtnis lässt mich im Stich. Dann ist ja gut.");
         ƒS.Speech.clear();
         await ƒS.update(1);
@@ -158,15 +161,15 @@ namespace AV {
         await ƒS.Speech.tell(characters.Adelinde, "Hallo?");
         await ƒS.Speech.tell(null, "<i>Vielleicht sollte ich doch-</i>");
         await ƒS.Speech.tell(characters.Adelinde, "Ignorierst du mich etwa?");
-        await ƒS.Speech.tell(dataForSave.Protagonist, "Was? Nein ich-");
+        await ƒS.Speech.tell(dataForSave.Protagonist, "Was? Nein ich-", true, "Player");
         ƒS.Character.hide(characters.Adelinde);
         await ƒS.Character.show(characters.Adelinde, characters.Adelinde.pose.smile, ƒS.positions.bottomcenter);
-        await ƒS.update(0.1);    
+        await ƒS.update(0.1);
         await ƒS.Speech.tell(characters.Adelinde, "Ich mache doch nur Witze, " + dataForSave.Protagonist.name + ".");
         await ƒS.Speech.tell(characters.Adelinde, "Du kennst mich doch.");
         ƒS.Character.hide(characters.Adelinde);
         await ƒS.Character.show(characters.Adelinde, characters.Adelinde.pose.shytalk, ƒS.positions.bottomcenter);
-        await ƒS.update(0.1);    
+        await ƒS.update(0.1);
         ƒS.Speech.clear();
         await ƒS.update(1);
         break;
@@ -174,9 +177,9 @@ namespace AV {
         ƒS.Sound.play(sound.click, 1);
         await ƒS.Speech.tell(characters.Adelinde, "Haaa-lloooo.");
         await ƒS.Speech.tell(characters.Adelinde, "Erdeee an " + dataForSave.Protagonist.name + "!");
-        await ƒS.Speech.tell(dataForSave.Protagonist, "Angekommen.");
+        await ƒS.Speech.tell(dataForSave.Protagonist, "Angekommen.", true, "Player");
         await ƒS.Speech.tell(characters.Adelinde, "Gut, ich dachte ich verliere dich schon an die Aliens.");
-        await ƒS.Speech.tell(dataForSave.Protagonist, "Keine Sorge, so schnell bist du mich nicht los.");
+        await ƒS.Speech.tell(dataForSave.Protagonist, "Keine Sorge, so schnell bist du mich nicht los.", true, "Player");
         await ƒS.Speech.tell(characters.Adelinde, "Schad-.. Ich meine puh, ein Glück.");
         await ƒS.Speech.tell(null, "<i>Adelinde, wie sie lebt und leibt.</i>");
         ƒS.Speech.clear();

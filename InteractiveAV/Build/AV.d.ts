@@ -1,3 +1,4 @@
+/// <reference types="../../aid/build/fudgeaid" />
 declare namespace AV {
     function HearingLoss(): ƒS.SceneReturn;
 }
@@ -54,6 +55,8 @@ declare namespace AV {
         Beat: string;
         hypnotic: string;
         Ufo: string;
+        cutie: string;
+        pinch: string;
         hahaha: string;
         ha_haa: string;
         hmmOne: string;
@@ -125,6 +128,10 @@ declare namespace AV {
             background: string;
         };
         trainTunnel: {
+            name: string;
+            background: string;
+        };
+        festivalC: {
             name: string;
             background: string;
         };

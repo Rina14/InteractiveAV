@@ -23,8 +23,8 @@ namespace AV {
 
     // ƒS.Sound.fade(sound.again, 0, 1);
 
-
-    await ƒS.Location.show(locations.city);
+    ƒS.Speech.hide();
+    await ƒS.Location.show(locations.festivalC);
     await ƒS.Character.show(characters.Adelinde, characters.Adelinde.pose.shytalk, ƒS.positionPercent(60, 100));
     await ƒS.update(1);
     await ƒS.Speech.tell(characters.Adelinde, text.Adelinde.T0000);
@@ -44,9 +44,9 @@ namespace AV {
 
     async function enableAudioTest(): Promise<void> {
       window.addEventListener("keydown", handleKeydownForAudio);
-      audioBeep = new ƒ.Audio(sound.Beep);
+      audioBeep = new ƒ.Audio(sound.cutie);
       // await audioBeep.asyncLoad("Sound/Beep.mp3")
-      audioUfo = new ƒ.Audio(sound.Ufo);
+      audioUfo = new ƒ.Audio(sound.pinch);
       // await audioUfo.asyncLoad("Sound/Beat.mp3")
       cmpAudio = new ƒ.ComponentAudio(audioBeep, false, false);
       cmpAudio.connect(true);

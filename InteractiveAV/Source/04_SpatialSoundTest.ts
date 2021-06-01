@@ -16,8 +16,6 @@ namespace AV {
       }
     };
 
-    // let canvas2 = document.getElementById("canvasSpatialSound");
-    // canvas2.style.display = "none";
 
 
     let spatialSound: SpatialSound = new SpatialSound();
@@ -31,7 +29,8 @@ namespace AV {
 
 
 
-    await ƒS.Location.show(locations.city);
+    ƒS.Speech.hide();
+    await ƒS.Location.show(locations.festivalC);
     await ƒS.Character.show(characters.Adelinde, characters.Adelinde.pose.shytalk, ƒS.positionPercent(60, 100));
     await ƒS.update(1);
     await ƒS.Speech.tell(characters.Adelinde, text.Adelinde.T0000);

@@ -19,7 +19,7 @@
         },
         {
           "pos": 15,
-          "end": 47053,
+          "end": 47425,
           "kind": "text"
         }
       ],
@@ -47,7 +47,13 @@
       "sections": [
         {
           "pos": 0,
-          "end": 4746,
+          "end": 50,
+          "kind": "type",
+          "data": "../../aid/build/fudgeaid"
+        },
+        {
+          "pos": 52,
+          "end": 4940,
           "kind": "text"
         }
       ]

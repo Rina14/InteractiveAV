@@ -132,7 +132,8 @@ namespace AV {
 
       // mtxTranslator.translation = position;
       ƒ.AudioManager.default.update();
-      this.viewport.draw();
+      // this.viewport.draw();
+      this.viewport.calculateTransforms();
       // printInfo(mtxBody, mtxCamera);
     }
 

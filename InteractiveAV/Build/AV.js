@@ -63,9 +63,10 @@ var AV;
         let signalDelay2 = AV.ƒS.Progress.defineSignal([() => AV.ƒS.Progress.delay(2)]);
         let signalDelay1 = AV.ƒS.Progress.defineSignal([() => AV.ƒS.Progress.delay(1)]);
         // Duration in seconds
-        AV.ƒS.Sound.fade(AV.sound.again, 0.3, 0.07, true);
+        AV.ƒS.Sound.play(AV.sound.again, 0.1);
+        AV.ƒS.Sound.fade(AV.sound.again, 1, 4, true);
         // Start the Scene!
-        await AV.ƒS.Speech.hide();
+        AV.ƒS.Speech.hide();
         await AV.ƒS.Location.show(AV.locations.trainOld);
         await AV.ƒS.update(AV.transitions.wet.duration, AV.transitions.wet.alpha, AV.transitions.wet.edge);
         await AV.ƒS.Speech.tell(null, text.Narrator.T0000);
@@ -118,15 +119,15 @@ var AV;
             iIgnoreHer: "Adelinde ignorieren",
             iJustLookAtHer: "Sie stumm anstarren"
         };
-        let trainMeetingWithAdelinde = await AV.ƒS.Menu.getInput(meetAdelinde, "meetingAdelinde");
+        let trainMeetingWithAdelinde = await AV.ƒS.Menu.getInput(meetAdelinde, "choices");
         switch (trainMeetingWithAdelinde) {
             case meetAdelinde.iGreetBack:
                 AV.ƒS.Sound.play(AV.sound.click, 1);
                 //continue writing on this path here
-                await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, "Hi, Ade. Lange nicht gesehen, was?");
+                await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, "Hi, Ade. Lange nicht gesehen, was?", true, "Player");
                 await AV.ƒS.Speech.tell(AV.characters.Adelinde, "Was?! Wirklich?? Ich dachte wir-... Ahh tut mir leid.");
                 await AV.ƒS.Speech.tell(null, "Typisch, Ade. Sie ist schon immer sehr leichtgläubig gewesen.");
-                await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, "Beruhige dich. Keine Sorge, ist nur eine Woche her, seit wir das letzte mal gesprochen haben.");
+                await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, "Beruhige dich. Keine Sorge, ist nur eine Woche her, seit wir das letzte mal gesprochen haben.", true, "Player");
                 await AV.ƒS.Speech.tell(AV.characters.Adelinde, "Ohh, ich dachte schon mein Gedächtnis lässt mich im Stich. Dann ist ja gut.");
                 AV.ƒS.Speech.clear();
                 await AV.ƒS.update(1);
@@ -136,7 +137,7 @@ var AV;
                 await AV.ƒS.Speech.tell(AV.characters.Adelinde, "Hallo?");
                 await AV.ƒS.Speech.tell(null, "<i>Vielleicht sollte ich doch-</i>");
                 await AV.ƒS.Speech.tell(AV.characters.Adelinde, "Ignorierst du mich etwa?");
-                await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, "Was? Nein ich-");
+                await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, "Was? Nein ich-", true, "Player");
                 AV.ƒS.Character.hide(AV.characters.Adelinde);
                 await AV.ƒS.Character.show(AV.characters.Adelinde, AV.characters.Adelinde.pose.smile, AV.ƒS.positions.bottomcenter);
                 await AV.ƒS.update(0.1);
@@ -152,9 +153,9 @@ var AV;
                 AV.ƒS.Sound.play(AV.sound.click, 1);
                 await AV.ƒS.Speech.tell(AV.characters.Adelinde, "Haaa-lloooo.");
                 await AV.ƒS.Speech.tell(AV.characters.Adelinde, "Erdeee an " + AV.dataForSave.Protagonist.name + "!");
-                await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, "Angekommen.");
+                await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, "Angekommen.", true, "Player");
                 await AV.ƒS.Speech.tell(AV.characters.Adelinde, "Gut, ich dachte ich verliere dich schon an die Aliens.");
-                await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, "Keine Sorge, so schnell bist du mich nicht los.");
+                await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, "Keine Sorge, so schnell bist du mich nicht los.", true, "Player");
                 await AV.ƒS.Speech.tell(AV.characters.Adelinde, "Schad-.. Ich meine puh, ein Glück.");
                 await AV.ƒS.Speech.tell(null, "<i>Adelinde, wie sie lebt und leibt.</i>");
                 AV.ƒS.Speech.clear();
@@ -195,7 +196,8 @@ var AV;
         //   duration: 1,
         //   playmode: ƒS.ANIMATION_PLAYMODE.PLAYONCESTOPAFTER
         // };
-        await AV.ƒS.Location.show(AV.locations.city);
+        AV.ƒS.Speech.hide();
+        await AV.ƒS.Location.show(AV.locations.festivalC);
         // await ƒS.Character.animate(characters.Aoi, characters.Aoi.pose.normal, animation);
         // await ƒS.update(2);
         // await ƒS.Speech.tell(characters.Aoi, "Welcome, welcome to FUDGE-Story~~");
@@ -233,7 +235,8 @@ var AV;
         };
         // Audio in 2D-Welt, Knoten hinter der 2D-Welt platzieren
         // ƒS.Sound.fade(sound.again, 0, 1);
-        await AV.ƒS.Location.show(AV.locations.city);
+        AV.ƒS.Speech.hide();
+        await AV.ƒS.Location.show(AV.locations.festivalC);
         await AV.ƒS.Character.show(AV.characters.Adelinde, AV.characters.Adelinde.pose.shytalk, AV.ƒS.positionPercent(60, 100));
         await AV.ƒS.update(1);
         await AV.ƒS.Speech.tell(AV.characters.Adelinde, text.Adelinde.T0000);
@@ -246,9 +249,9 @@ var AV;
         // Audio test function
         async function enableAudioTest() {
             window.addEventListener("keydown", handleKeydownForAudio);
-            audioBeep = new AV.ƒ.Audio(AV.sound.Beep);
+            audioBeep = new AV.ƒ.Audio(AV.sound.cutie);
             // await audioBeep.asyncLoad("Sound/Beep.mp3")
-            audioUfo = new AV.ƒ.Audio(AV.sound.Ufo);
+            audioUfo = new AV.ƒ.Audio(AV.sound.pinch);
             // await audioUfo.asyncLoad("Sound/Beat.mp3")
             cmpAudio = new AV.ƒ.ComponentAudio(audioBeep, false, false);
             cmpAudio.connect(true);
@@ -315,13 +318,12 @@ var AV;
                 T0000: "Test undso "
             }
         };
-        // let canvas2 = document.getElementById("canvasSpatialSound");
-        // canvas2.style.display = "none";
         let spatialSound = new AV.SpatialSound();
         spatialSound.start();
         // Audio in 2D-Welt, Knoten hinter der 2D-Welt platzieren
         // ƒS.Sound.fade(sound.again, 0, 1);
-        await AV.ƒS.Location.show(AV.locations.city);
+        AV.ƒS.Speech.hide();
+        await AV.ƒS.Location.show(AV.locations.festivalC);
         await AV.ƒS.Character.show(AV.characters.Adelinde, AV.characters.Adelinde.pose.shytalk, AV.ƒS.positionPercent(60, 100));
         await AV.ƒS.update(1);
         await AV.ƒS.Speech.tell(AV.characters.Adelinde, text.Adelinde.T0000);
@@ -581,6 +583,8 @@ var AV;
         Beat: "./Audio/Sound/Beat.mp3",
         hypnotic: "Audio/Sound/hypnotic.mp3",
         Ufo: "Audio/Sound/Ufo.mp3",
+        cutie: "Audio/Sound/cutie.mp3",
+        pinch: "Audio/Sound/pinch.flac",
         // Voice
         hahaha: "Audio/Voice/Ha_ha_ha.wav",
         ha_haa: "Audio/Voice/Ha_haa!.wav",
@@ -656,6 +660,10 @@ var AV;
         trainTunnel: {
             name: "TrainTunnel",
             background: "Images/Backgrounds/Train_Tunnel.png"
+        },
+        festivalC: {
+            name: "OldFestival",
+            background: "Images/Backgrounds/Old_FestivalC.png"
         }
     };
     // define characters as key-object-pairs, the objects with the properties name, origin and an array if poses, each again with a unique key
@@ -745,9 +753,9 @@ var AV;
         AV.ƒS.Menu.create(gameMenuOptions, saveNload, "gameMenu");
         // define the sequence of scenes, each scene as an object with a reference to the scene-function, a name and optionally an id and an id to continue the story with
         let scenes = [
-            // { scene: HearingLoss, name: "Welcome to an almost muted world" },
-            // { scene: Friendship, name: "Estimate your value" },
-            // { scene: GraphInsertion, name: "Graph Insertion" },
+            { scene: AV.HearingLoss, name: "Welcome to an almost muted world" },
+            { scene: AV.Friendship, name: "Estimate your value" },
+            { scene: AV.GraphInsertion, name: "Graph Insertion" },
             { scene: AV.SpatialSoundScene, name: "Spatial Sound" }
         ];
         // start the sequence
@@ -793,7 +801,8 @@ var AV;
                 }
                 // mtxTranslator.translation = position;
                 AV.ƒ.AudioManager.default.update();
-                this.viewport.draw();
+                // this.viewport.draw();
+                this.viewport.calculateTransforms();
                 // printInfo(mtxBody, mtxCamera);
             };
             this.hndPointerMove = (_event) => {
