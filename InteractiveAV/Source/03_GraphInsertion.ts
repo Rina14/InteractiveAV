@@ -33,6 +33,13 @@ namespace AV {
     await ƒS.Speech.tell(characters.Adelinde, "2");
     await ƒS.Speech.tell(characters.Adelinde, "3");
     await ƒS.Speech.tell(characters.Adelinde, "4");
+    await ƒS.Speech.tell(characters.Adelinde, "5");
+    await ƒS.Speech.tell(characters.Adelinde, "6");
+    await ƒS.Speech.tell(characters.Adelinde, "7");
+    await ƒS.Speech.tell(characters.Adelinde, "8");
+    await ƒS.Speech.tell(characters.Adelinde, "9");
+    await ƒS.Speech.tell(characters.Adelinde, "10");
+
     disableAudioTest();
 
 

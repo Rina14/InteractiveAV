@@ -245,6 +245,12 @@ var AV;
         await AV.ƒS.Speech.tell(AV.characters.Adelinde, "2");
         await AV.ƒS.Speech.tell(AV.characters.Adelinde, "3");
         await AV.ƒS.Speech.tell(AV.characters.Adelinde, "4");
+        await AV.ƒS.Speech.tell(AV.characters.Adelinde, "5");
+        await AV.ƒS.Speech.tell(AV.characters.Adelinde, "6");
+        await AV.ƒS.Speech.tell(AV.characters.Adelinde, "7");
+        await AV.ƒS.Speech.tell(AV.characters.Adelinde, "8");
+        await AV.ƒS.Speech.tell(AV.characters.Adelinde, "9");
+        await AV.ƒS.Speech.tell(AV.characters.Adelinde, "10");
         disableAudioTest();
         // Audio test function
         async function enableAudioTest() {
@@ -753,8 +759,8 @@ var AV;
         AV.ƒS.Menu.create(gameMenuOptions, saveNload, "gameMenu");
         // define the sequence of scenes, each scene as an object with a reference to the scene-function, a name and optionally an id and an id to continue the story with
         let scenes = [
-            { scene: AV.HearingLoss, name: "Welcome to an almost muted world" },
-            { scene: AV.Friendship, name: "Estimate your value" },
+            // { scene: HearingLoss, name: "Welcome to an almost muted world" },
+            // { scene: Friendship, name: "Estimate your value" },
             { scene: AV.GraphInsertion, name: "Graph Insertion" },
             { scene: AV.SpatialSoundScene, name: "Spatial Sound" }
         ];
