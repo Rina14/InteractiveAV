@@ -3,7 +3,7 @@ declare namespace AV {
     function HearingLoss(): ƒS.SceneReturn;
 }
 declare namespace AV {
-    function Friendship(): ƒS.SceneReturn;
+    function StrangerWoman(): ƒS.SceneReturn;
 }
 declare namespace AV {
     function GraphInsertion(): ƒS.SceneReturn;
@@ -12,10 +12,19 @@ declare namespace AV {
     function SpatialSoundScene(): ƒS.SceneReturn;
 }
 declare namespace AV {
+    function dezibelMeter(): void;
+}
+declare namespace AV {
+    function EndingOne(): ƒS.SceneReturn;
+}
+declare namespace AV {
+    function EndingTwo(): ƒS.SceneReturn;
+}
+declare namespace AV {
     export import ƒ = FudgeCore;
     export import ƒS = FudgeStory;
     export import ƒAid = FudgeAid;
-    let transitions: {
+    export let transitions: {
         clock: {
             duration: number;
             alpha: string;
@@ -37,7 +46,7 @@ declare namespace AV {
             edge: number;
         };
     };
-    let sound: {
+    export let sound: {
         energy: string;
         extremeaction: string;
         again: string;
@@ -70,7 +79,7 @@ declare namespace AV {
         uhHuhQuestionable: string;
         ummOne: string;
     };
-    let locations: {
+    export let locations: {
         city: {
             name: string;
             background: string;
@@ -80,6 +89,10 @@ declare namespace AV {
             background: string;
         };
         bathroomFoggy: {
+            name: string;
+            background: string;
+        };
+        black: {
             name: string;
             background: string;
         };
@@ -115,6 +128,10 @@ declare namespace AV {
             name: string;
             background: string;
         };
+        oldStreet: {
+            name: string;
+            background: string;
+        };
         smallApartmentKitchen: {
             name: string;
             background: string;
@@ -136,7 +153,7 @@ declare namespace AV {
             background: string;
         };
     };
-    let characters: {
+    export let characters: {
         Narrator: {
             name: string;
         };
@@ -170,13 +187,53 @@ declare namespace AV {
                 normal: string;
             };
         };
+        StrangerWoman: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                normal: string;
+                mad: string;
+                innocent: string;
+            };
+        };
+        Elaine: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                normal: string;
+                mad: string;
+                innocent: string;
+            };
+        };
     };
-    let dataForSave: {
+    export let items: {
+        Fudge: {
+            name: string;
+            description: string;
+            image: string;
+            static: boolean;
+            handler: typeof hndItem;
+        };
+    };
+    export let dataForSave: {
         score: number;
         Protagonist: {
             name: string;
         };
     };
+    export function incrementSound(): void;
+    export function decrementSound(): void;
+    export function showCredits(): void;
+    export function showAbout(): void;
+    export let gameMenu: ƒS.Menu;
+    export let menu: boolean;
+    export function leftToRight(): ƒS.AnimationDefinition;
+    export function rightToOutOfCanvas(): ƒS.AnimationDefinition;
+    export function midToOutOfCanvas(): ƒS.AnimationDefinition;
+    export function horizontalShake(): Promise<void>;
+    export function verticalShake(): Promise<void>;
+    function hndItem(_event: CustomEvent): void;
+    export {};
 }
 declare namespace AV {
     class SpatialSound {

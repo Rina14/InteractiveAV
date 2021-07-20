@@ -8,7 +8,9 @@
   <link rel="stylesheet" href="AV.css">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap" rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Loop&display=swap" rel="stylesheet">
   <!--  <link rel="stylesheet" href="../AudioWebAPITest/TestInstructions.css"> -->
   <script src="../Fudge/FudgeCore.js"></script>
   <script src="./../Build/FudgeStory.js"></script>
@@ -21,13 +23,14 @@
   <script src="../AudioWebAPITest/TestInstructions.js"></script>
   <!-- For Spatial Sound -->
   <title>AV Project</title>
+  <splash src="Images/Backgrounds/Old_FestivalC.png"></splash>
 </head>
 
 <body>
   <scene>
     <canvas></canvas>
     <canvas id="canvasSpatialSound"></canvas>
-    
+
     <speech>
       <name>
         <!-- The name of the character speaking -->
@@ -43,6 +46,10 @@
     <dialog id="menu">
       <!-- Options for the recipient to choose from -->
     </dialog>
+    <p id="dB">
+      <meter id="avg-level" min="0" max="120" value="-100"></meter>
+      <span id="avg-level-text">-</span> dB
+    </p>
   </scene>
 </body>
 

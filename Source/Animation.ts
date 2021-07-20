@@ -6,21 +6,56 @@ namespace FudgeStory {
   export let Color = ƒ.Color;
   export let ANIMATION_PLAYMODE = ƒ.ANIMATION_PLAYMODE;
 
+  /**
+   * ## Pattern for the definition of an animation
+   * Define the animation of the transformation or the color over time 
+   * ```text
+   * {
+   *    start: {
+   *      translation:  the position at the start of the animation, 
+   *      rotation:     the angle of rotation at the start of the animation, 
+   *      scaling:      the size at the start of the animation, 
+   *      color:        the color at the start of the animation,
+        end: {
+          same as above but for the end of the animation
+        },
+        duration: the duration of one animation-cylce in seconds,
+        playmode: the mode to play the animation in, see ANIMATION_PLAYMODE
+   * }
+   * ```
+   * ## Example
+   * ```typescript
+   * let animation: ƒS.AnimationDefinition = {
+      start: {translation: ƒS.positions.bottomleft, rotation: -20, scaling: new ƒS.Position(0.5, 1.5), color: ƒS.Color.CSS("white", 0)},
+      end: {translation: ƒS.positions.bottomright, rotation: 20, scaling: new ƒS.Position(1.5, 0.5), color: ƒS.Color.CSS("red")},
+      duration: 1,
+      playmode: ƒS.ANIMATION_PLAYMODE.REVERSELOOP
+    };
+   * ```
+   */
   export interface AnimationDefinition {
     start: { translation?: Position, rotation?: number, scaling?: Scaling, color?: Color };
     end: { translation?: Position, rotation?: number, scaling?: Scaling, color?: Color };
     duration: number;
     playmode: ƒ.ANIMATION_PLAYMODE;
-    // curvature: ƒ.Vector2;
   }
 
+  /**
+   * Handles animation
+   */
   export class Animation extends Base {
     private static activeComponents: ƒ.ComponentAnimator[] = [];
 
+    /**
+     * Returns true if an animation is being played
+     */
     public static get isPending(): boolean {
       return (Animation.activeComponents?.length > 0);
     }
 
+    /**
+     * Creates a FUDGE-Animation from an [[AnimationDefinition]]
+     */
     public static create(_animation: AnimationDefinition): ƒ.Animation {
       let mutator: ƒ.Mutator = {};
       let duration: number = _animation.duration * 1000;
@@ -58,18 +93,32 @@ namespace FudgeStory {
 
       // console.log(result);
       let animation: ƒ.Animation = new ƒ.Animation("Animation", result);
+      animation.setEvent("animationStart", 1);
+      animation.setEvent("animationEnd", duration - 1);
       return animation;
     }
 
-    public static attach(_pose: ƒ.Node, _animation: ƒ.Animation, _playmode: ƒ.ANIMATION_PLAYMODE): void {
+    /**
+     * Attaches the given FUDGE-Animation to the given node with the given mode
+     */
+    public static async attach(_pose: ƒ.Node, _animation: ƒ.Animation, _playmode: ƒ.ANIMATION_PLAYMODE): Promise<void> {
       // TODO: Mutate must not initiate drawing, implement render event at component to animate  
       // _pose.cmpTransform.addEventListener(ƒ.EVENT.MUTATE, () => Base.viewport.draw());
       // ƒ.Loop.addEventListener(ƒ.EVENT.LOOP_FRAME, () => Base.viewport.draw());
       let cmpAnimator: ƒ.ComponentAnimator = new ƒ.ComponentAnimator(_animation, _playmode);
+      for (let cmpOldAnimator of _pose.getComponents(ƒ.ComponentAnimator))
+        _pose.removeComponent(cmpOldAnimator);
       _pose.addComponent(cmpAnimator);
       cmpAnimator.addEventListener(ƒ.EVENT.COMPONENT_ACTIVATE, Animation.trackComponents);
       cmpAnimator.addEventListener(ƒ.EVENT.COMPONENT_DEACTIVATE, Animation.trackComponents);
       cmpAnimator.activate(true);
+
+      return new Promise((resolve) => {
+        cmpAnimator.addEventListener(
+          _playmode == ƒ.ANIMATION_PLAYMODE.REVERSELOOP ? "animationStart" : "animationEnd",
+          () => resolve()
+        );
+      });
     }
 
     private static trackComponents = (_event: Event): void => {

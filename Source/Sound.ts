@@ -25,12 +25,19 @@ namespace FudgeStory {
       let sound: Sound = Sound.sounds.get(_url);
       if (!sound || _loop != sound.loop)
         sound = new Sound(_url, _loop);
-        // to fix
+      
       sound.cmpAudio.volume = _volume;
       sound.cmpAudio.play(true);
       return sound;
     }
 
+    /**
+     * Set the overall volume for the sound mix
+     */
+    public static setMasterVolume(_volume: number): void {
+         ƒ.AudioManager.default.volume = _volume;
+    }
+    
     /**
      * Changes the volume of the sound defined by the url linearly of the given duration to the define volume.
      * If the sound is not currently playing, it starts it respecting the loop-flag.

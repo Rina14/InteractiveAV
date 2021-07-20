@@ -3,9 +3,14 @@
     "commonSourceDirectory": "..",
     "sourceFiles": [
       "../Source/01_HearingLoss.ts",
-      "../Source/02_Friendship.ts",
+      "../Source/02_StrangerWoman.ts",
       "../Source/03_GraphInsertion.ts",
-      "../Source/04_SpatialSoundTest.ts",
+      "../Source/04_SpatialSoundScene.ts",
+      "../Source/05_Meeting.ts",
+      "../Source/06_End.ts",
+      "../Source/Dezibel.ts",
+      "../Source/EndingOne.ts",
+      "../Source/EndingTwo.ts",
       "../Source/Main.ts",
       "../Source/SpatialSound.ts"
     ],
@@ -19,7 +24,7 @@
         },
         {
           "pos": 15,
-          "end": 47804,
+          "end": 70085,
           "kind": "text"
         }
       ],
@@ -53,7 +58,7 @@
         },
         {
           "pos": 52,
-          "end": 4940,
+          "end": 6648,
           "kind": "text"
         }
       ]

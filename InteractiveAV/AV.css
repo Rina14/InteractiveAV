@@ -5,10 +5,15 @@ html, body {
   padding: 0px;
   background-color: black;
   overflow: hidden;
-  font-family: 'New Tegomin', serif;
+  /* font-family: 'New Tegomin', serif; */
+  font-family: 'Lucida Sans';
   font-weight: normal;
   font-size: 2.3vmin;
   color: rgb(240, 18, 103);
+  -ms-user-select: None;
+  -moz-user-select: None;
+  -webkit-user-select: None;
+  user-select: None;
 }
 
 scene {
@@ -16,6 +21,7 @@ scene {
   height: 720px;
   display: inline-block;
   position: absolute;
+  /* transform: rotate(10deg); */
 }
 
 canvas {
@@ -24,19 +30,21 @@ canvas {
 }
 
 speech {
-  /*
-  display: block;
-  background-image: url("./Board/BlackFadeRight.png");
+  
+  /* display: block; */
+  background-image: url("./GUI/Textbox.png");
   background-size: cover;
-  height: 15%; */
+  background-repeat: no-repeat;
   position: absolute;
   bottom: 0px;
   left: 0px;
   color: beige;
-  background-color: rgba(11, 14, 19, 0.9);
+  /* background-color: rgba(11, 14, 19, 0.9); */
   width: 100%;
-  height: 20%;
+  height: 35%;
 }
+
+
 
 speech input {
   background-color: rgb(100, 100, 100);
@@ -48,6 +56,9 @@ speech input {
   /* box-shadow: 1px 1px 1px 1px gold; */
   /* background-blend-mode: color; */
 }
+
+
+/* For Dialog fancy buttons */
 
 speech input:hover::before {
   content: '';
@@ -93,6 +104,7 @@ speech input:active::after {
   100% { background-position: 0 0; }
 } 
 
+
 #canvasSpatialSound {
   display: none;
 }
@@ -101,33 +113,48 @@ name {
   font-weight: bold;
   /* font-variant: small-caps; */
   line-height: 100%;
-  font-size: 2.5vmin;
+  font-size: 3vmin;
   text-align: center;
   position: relative;
+  bottom: -13%;
   left: 45%;
-  font-family: 'New Tegomin', serif;
+  font-family: 'Zen Loop';
+  letter-spacing: 3px;
+  background-color: #f6f6f6cb;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px 5px rgba(255, 253, 251, 0.5);
   /* border-bottom: 1px solid rgb(80, 181, 228); */
   /* background-color: rgba(205, 231, 255, 0.5);
   border-radius: 10px 10px 10px 10px; */
 }
 
 content {
-  top: 30%;
+  top: 35%;
+  left: 14%;
   position: absolute;
 }
 
 speech[class=""] content {
-  left: 2%;
-  color: rgb(181, 222, 255);
+  /* left: 22%; */
+  color: rgb(219, 239, 255);
   /* font-family: 'Gill Sans', 'Gill Sans MT', sans-serif; */
 }
 
+/* Narrator */
+speech[class=""] name {
+  display: none;
+}
+
 speech[class="Doktor Ryu"] name {
-  color: rgb(52, 90, 160);
-  /* border-bottom: 1px solid rgb(80, 181, 228);
-  background-color: rgba(220, 241, 255, 0.8);
-  border-radius: 10px 10px 10px 10px;
-  background-image: linear-gradient(#f1f1f1, #81BEF7, #0431B4, #0B173B); */
+  color: rgb(233, 247, 255);
+  /* border-bottom: 1px solid rgb(80, 181, 228); */
+  background-color: rgba(51, 74, 138, 0.8);
+  box-shadow: 0px 0px 5px 5px rgba(57, 87, 121, 0.5);
+  /* border-radius: 10px 10px 10px 10px; */
+  /* background-image: linear-gradient(#f1f1f1, #81BEF7, #0431B4, #0B173B); */
 }
 
 speech[class="Player"] name {
@@ -159,12 +186,14 @@ speech[class="Player"] content {
   background-image: linear-gradient(#f1f1f1, #81BEF7, #0431B4, #0B173B); */
 /* } */
 
-speech.Doktor content {
+[class="Doktor Ryu"] content {
   color: rgb(180, 206, 255);
 }
 
 speech.Adelinde name {
   color: rgb(206, 71, 116);
+  background-color: rgba(255, 162, 224, 0.8);
+  box-shadow: 0px 0px 5px 5px rgba(255, 205, 236, 0.5);
 }
 
 speech.Adelinde content {
@@ -173,15 +202,38 @@ speech.Adelinde content {
 
 speech.Aoi name {
   color: aqua;
+  background-color: rgba(51, 74, 138, 0.8);
+  box-shadow: 0px 0px 5px 5px rgba(57, 87, 121, 0.5);
 }
 
 speech.Aoi content {
   color: rgb(159, 220, 255);
 }
 
+speech.Elaine name {
+  color: rgb(95, 23, 47);
+  background-color: rgba(138, 51, 63, 0.8);
+  box-shadow: 0px 0px 5px 5px rgba(255, 154, 176, 0.5);
+}
+
+speech.Elaine content {
+  color: rgb(255, 86, 114);
+}
+
+speech[class="Stranger Woman"] name {
+  color: rgb(95, 23, 47);
+  background-color: rgba(255, 157, 170, 0.8);
+  box-shadow: 0px 0px 5px 5px rgba(255, 154, 176, 0.5);
+}
+
+[class="Stranger Woman"] content {
+  color: rgb(255, 86, 114);
+}
+
 
 /* Splashscreen modifications */
 dialog > p {
+  /* font-family: 'Times New Roman', Times, serif; */
   color: white;
 }
 
@@ -207,7 +259,7 @@ dialog[class="choices"] {
   background-color: rgba(32, 32, 32, 0.7);
   box-shadow: 0px 0px 20px 10px rgba(0, 21, 31, 0.9);
   border-radius: 30px;
-  background-image: url("./Images/Backgrounds/bg_options_new4.png");
+  background-image: url("./Images/Backgrounds/bg_options_magentaDK.png");
 }
 
 dialog[class="choices"] button {
@@ -220,6 +272,19 @@ dialog[class="choices"] button {
   margin-top: 10px;
   margin-right: auto;
   margin-bottom: 10px;;
+}
+
+
+.trainStation {
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  /* transition: 1s; */
+  color: white;
+  border: none;
 }
 
 /* button {
@@ -317,7 +382,7 @@ dialog::backdrop {
 dialog.gameMenu {
   /* position: fixed; */
   left: 0%;
-  top: 0%;
+  bottom: 0%;
   cursor: pointer;
   text-align: center;
   border: none;
@@ -332,6 +397,11 @@ dialog.gameMenu {
   border-radius:  5px;
   background-color: rgba(39, 39, 39, 0.5);
   background-image: none;
+}
+
+/* for rest buttons of the game menu except save n load */
+dialog.gameMenu>button {
+  background-color: rgb(0, 217, 255);
 }
 
 dialog>button#load {
@@ -357,3 +427,6 @@ dialog>button#save {
 dialog>button#save:hover {
   background-color: rgba(89, 145, 214, 0.5);
  }
+
+
+ 

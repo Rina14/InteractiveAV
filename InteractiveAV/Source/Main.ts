@@ -89,6 +89,10 @@ namespace AV {
       name: "BathroomFoggy",
       background: "Images/Backgrounds/Bathroom_Foggy.png"
     },
+    black: {
+      name: "BlackBG",
+      background: "Images/Backgrounds/bg_black.png"
+    },
     apartment: {
       name: "ApartmentExterior",
       background: "Images/Backgrounds/Apartment_Exterior.png"
@@ -120,6 +124,10 @@ namespace AV {
     hospital: {
       name: "Hospital",
       background: "Images/Backgrounds/Old_School.png"
+    },
+    oldStreet: {
+      name: "OldStreet",
+      background: "Images/Backgrounds/Old_Street.png"
     },
     smallApartmentKitchen: {
       name: "SmallApartmentKitchen",
@@ -181,8 +189,37 @@ namespace AV {
       pose: {
         normal: "Images/Characters/Ryu_normal.png"
       }
+    },
+    StrangerWoman: {
+      name: "Stranger Woman",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        normal: "Images/Characters/Elaine_normal.png",
+        mad: "Images/Characters/Elaine_mad.png",
+        innocent: "Images/Characters/Elaine_innocent.png"
+      }
+    },
+    Elaine: {
+      name: "Elaine",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        normal: "Images/Characters/Elaine_normal.png",
+        mad: "Images/Characters/Elaine_mad.png",
+        innocent: "Images/Characters/Elaine_innocent.png"
+      }
     }
   };
+
+  export let items = {
+    Fudge: {
+      name: "Fudge Item",
+      description: "A delicious cube of fudge, adds 10 to your health",
+      image: "Images/Characters/Ryu_normal.png",
+      static: true,
+      handler: hndItem
+    }
+  };
+
 
   // data I want to save
   export let dataForSave = {
@@ -193,63 +230,222 @@ namespace AV {
   };
 
 
-  let gameMenuOptions = {
+  // MENU - AUDIO functions
+  let volume: number = 1.0;
+
+  export function incrementSound(): void {
+    if (volume >= 100)
+      return;
+    volume += 0.5;
+    ƒS.Sound.setMasterVolume(volume);
+  }
+
+  export function decrementSound(): void {
+    if (volume <= 0)
+      return;
+    volume -= 0.5;
+    ƒS.Sound.setMasterVolume(volume);
+  }
+
+
+  export function showCredits(): void {
+    ƒS.Text.addClass("credits");
+    ƒS.Text.print("Hello Test Test");
+  }
+
+  export function showAbout(): void {
+    ƒS.Text.addClass("about");
+    ƒS.Text.print("Save: F8,<br> Load: F9, <br>Close Game Menu: M");
+  }
+
+
+  // MENU - create Menu with Buttons
+
+  let inGameMenu = {
     save: "Save",
-    load: "Load"
-    // close: "Aus"
+    load: "Load",
+    // close: "Close",
+    turnUpVolume: "🔊",
+    turndownVolume: "🔈",
+    credits: "Credits",
+    about: "About",
+    // open: "Open"
   };
 
 
-  // Variable nur zum Löschen für GameMenu
-  // let gameMenu: ƒS.Menu;
 
-  async function saveNload(_option: string): Promise<void> {
+  // MENU - create Menu with buttons
+  export let gameMenu: ƒS.Menu;
+
+  async function buttonFunctionalities(_option: string): Promise<void> {
     console.log(_option);
-    if (_option == gameMenuOptions.load) {
-      await ƒS.Progress.load();
-    }
-    else if (_option == gameMenuOptions.save) {
+    if (_option == inGameMenu.save) {
       await ƒS.Progress.save();
     }
-
-    // if (_option == gameMenuOptions.close)
+    else if (_option == inGameMenu.load) {
+      await ƒS.Progress.load();
+    }
+    else if (_option == inGameMenu.turnUpVolume) {
+      incrementSound();
+    }
+    else if (_option == inGameMenu.turndownVolume) {
+      decrementSound();
+    }
+    // if (_option == inGameMenu.close) {
     //   gameMenu.close();
+    // }
+    // if (_option == inGameMenu.open) {
+    //   gameMenu.open();
+    // }
+    if (_option == inGameMenu.credits) {
+      showCredits();
+    }
+    if (_option == inGameMenu.about) {
+      showAbout();
+    }
   }
 
+
+  // true heißt hier offen und false geschlossen
+  export let menu: boolean = true;
+
   // SAVE N LOAD function
+  // shortcuts to save and load game progress
   document.addEventListener("keydown", hndKeypress);
   async function hndKeypress(_event: KeyboardEvent): Promise<void> {
     switch (_event.code) {
       case ƒ.KEYBOARD_CODE.F8:
-        console.log("Save");
+        console.log("Save Game Progress");
         await ƒS.Progress.save();
         break;
       case ƒ.KEYBOARD_CODE.F9:
-        console.log("Load");
+        console.log("Load Game Progress");
         await ƒS.Progress.load();
-        // dataForSave.Protagonist.name = dataForSave.namePlayer;
+        break;
+      // Englische Tastatur beachten, Öffnen und Schließen des Inventars mit derselben Taste
+      case ƒ.KEYBOARD_CODE.M:
+        if (menu) {
+          console.log("Close Game Menu");
+          gameMenu.close();
+          menu = false;
+        }
+        else {
+          console.log("Open Game Menu");
+          gameMenu.open();
+          menu = true;
+        }
         break;
     }
   }
 
-  // Audio Test
+  // shortcuts to open and close the inventory
+  document.addEventListener("keydown", hndKeypressForInventory);
+  async function hndKeypressForInventory(_event: KeyboardEvent): Promise<void> {
+    switch (_event.code) {
+      case ƒ.KEYBOARD_CODE.I:
+        console.log("Open Inventory");
+        await ƒS.Inventory.open();
+        break;
+      case ƒ.KEYBOARD_CODE.ESC:
+        console.log("Close Inventory");
+        await ƒS.Inventory.open();
+        ƒS.Inventory.close();
+        break;
+    }
+  }
+
+  // Animations available in all scenes
+  export function leftToRight(): ƒS.AnimationDefinition {
+    return {
+      start: { translation: ƒS.positions.bottomleft },
+      end: { translation: ƒS.positions.bottomright },
+      duration: 3,
+      playmode: ƒS.ANIMATION_PLAYMODE.PLAYONCE
+    };
+  }
+
+  export function rightToOutOfCanvas(): ƒS.AnimationDefinition {
+    return {
+      start: { translation: ƒS.positionPercent(30, 100) },
+      end: { translation: ƒS.positionPercent(120, 100) },
+      duration: 3,
+      playmode: ƒS.ANIMATION_PLAYMODE.PLAYONCE
+    };
+  }
+
+  export function midToOutOfCanvas(): ƒS.AnimationDefinition {
+    return {
+      start: { translation: ƒS.positionPercent(60, 100) },
+      end: { translation: ƒS.positionPercent(120, 100) },
+      duration: 3,
+      playmode: ƒS.ANIMATION_PLAYMODE.PLAYONCE
+    };
+  }
+
+
+
+  // horizontal and vertical Shaker 
+  
+  export async function horizontalShake(): Promise<void> {
+    let scene: HTMLElement = <HTMLElement>document.getElementsByTagName("scene")[0];
+
+    for (let i: number = 0; i < 15; i++) {
+      if (i % 2 == 0) {
+        scene.style.transform = `translateX(20px)`;
+      }
+      else {
+        scene.style.transform = `translateX(-20px)`;
+      }
+      await new Promise(resolve => setTimeout(resolve, 40));
+    }
+    scene.style.transform = `translateX(0px)`;
+  }
+
+
+  export async function verticalShake(): Promise<void> {
+    let scene: HTMLElement = <HTMLElement>document.getElementsByTagName("scene")[0];
+
+    for (let i: number = 0; i < 15; i++) {
+      if (i % 2 == 0) {
+        scene.style.transform = `translateY(20px)`;
+      }
+      else {
+        scene.style.transform = `translateY(-20px)`;
+      }
+      await new Promise(resolve => setTimeout(resolve, 40));
+    }
+    scene.style.transform = `translateY(0px)`;
+  }
+
+
+
+
+  function hndItem(_event: CustomEvent): void {
+    console.log(_event);
+  }
+
+
   window.addEventListener("load", start);
   function start(_event: Event): void {
-    // to close menu
-    // let gameMenu = 
-    ƒS.Menu.create(gameMenuOptions, saveNload, "gameMenu");
+    // MENU
+    gameMenu =
+      ƒS.Menu.create(inGameMenu, buttonFunctionalities, "gameMenu");
 
     // define the sequence of scenes, each scene as an object with a reference to the scene-function, a name and optionally an id and an id to continue the story with
     let scenes: ƒS.Scenes = [
       // { scene: HearingLoss, name: "Welcome to an almost muted world" },
-      // { scene: Friendship, name: "Estimate your value" },
+      { scene: StrangerWoman, name: "Estimate your value" },
       { scene: GraphInsertion, name: "Graph Insertion" },
       { scene: SpatialSoundScene, name: "Spatial Sound" }
+
     ];
 
 
+    let uiElement: HTMLElement = document.querySelector("[type=interface]");
+    dataForSave = ƒS.Progress.setData(dataForSave, uiElement);
+
+
     // start the sequence
-    ƒS.Progress.setData(dataForSave);
     ƒS.Progress.go(scenes);
   }
 }

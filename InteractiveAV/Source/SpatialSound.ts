@@ -227,14 +227,14 @@ namespace AV {
         // case ƒ.KEYBOARD_CODE.P:
 
         //   break;
-        case ƒ.KEYBOARD_CODE.ENTER:
-          //play Sound
-          console.log("Play Audio");
-          if (this.cmpAudio.isPlaying)
-            this.cmpAudio.play(false);
-          else
-            this.cmpAudio.play(true);
-          break;
+        // case ƒ.KEYBOARD_CODE.ENTER:
+        //   //play Sound
+        //   console.log("Play Audio");
+        //   if (this.cmpAudio.isPlaying)
+        //     this.cmpAudio.play(false);
+        //   else
+        //     this.cmpAudio.play(true);
+        //   break;
       }
     }
   }

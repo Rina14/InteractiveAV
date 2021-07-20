@@ -16,17 +16,33 @@ namespace AV {
         T0008: "<i>Allerdings meinte der Hörgeräteakustiker, dass ich diese erst einmal\
                 zwei bis drei Wochen testen könne.</i>",
         T0009: "<i>Ein etwas merkwürdiges, aber sehr befriedigendes Gefühl, wieder mehr hören zu können.</i>",
-        T0010: "<i>Ah, das ist Adelinde. Ist schon wieder eine Weile her, seit ich sie gesehen habe.</i>"
+        T0010: "<i>Ah, das ist Adelinde. Ist schon wieder eine Weile her, seit ich sie gesehen habe.</i>",
+        T0011: "<i>...und ich dachte mit Hörgeräten würde sich diese Unklarheit eigentlich erledigen, aber irgendwie scheint dem doch nicht so.</i>"
       },
       Protagonist: {
         T0000: "Wie bitte?",
         T0001: "Und das bedeutet?",
-        T0002: "Das geht doch wieder weg, nicht wahr? Ich habe schließlich\
-                nichts Großartiges gemacht, dass das passieren könnte.",
+        T0002: "Verstehe... aber dies ist nur kurzfristig, oder?",
         T0003: "Koch- was?",
-        T0004: "",
-        T0005: "",
-        T0006: ""
+        T0004: "Wie bitte?",
+        T0005: "Oh, sorry, ja, da gibt es tatsächlich etwas, was ich dir gerne erzählen würde.",
+        T0006: "Ehrlich gesagt bist du die Erste, die es erfährt... Naja abgesehen von meinen Eltern.",
+        T0007: "So spektakulär ist es eigentlich nicht, denke ich.",
+        T0008: "Ich trage nun Hörgeräte bzw. ich bin schwerhörig geworden.",
+        T0009: "Nein, keine Sorge. Ich...",
+        T0010: "Hm, klar. Ich habe sonst nicht wirklich etwas vor heute."
+      },
+      Adelinde: {
+        T0000: "Hey, ",
+        T0001: "Wie geht### dir ####? Irgendwelche ######?",
+        T0002: "Ich habe gefragt, ob irgendetwas Neues bei dir passiert ist.",
+        T0003: "Schieß los!",
+        T0004: "Uhh, ich fühle mich geehrt.",
+        T0005: "Also? Was möchtest du mir anv###?~",
+        T0006: "Ohh, hattest du etwa einen Unfall und ich weiß nichts davon??",
+        T0007: "Ahh, entschuldige, dass ich dich unterbreche, aber ich muss hier aussteigen.",
+        T0008: "Ich müsste noch schnell einkaufen. Möchtest du mitkommen? Danach könnten wir uns unterhalten, versprochen!",
+        T0009: "Super, danke!"
       },
       Doctor: {
         T0000: "Du hast eine hochgradige Schallempfindungsschwerhörigkeit.",
@@ -34,48 +50,57 @@ namespace AV {
                 Kurz gesagt, hast du einen vollständigen Hörverlust dieser.",
         T0002: "Nun, das ist nicht direkt 'heilbar', jedoch bis zu einem gewissen Grad kompensierbar.",
         T0003: "Du wirst lernen müssen, mit dieser Schwerhörigkeit umzugehen.",
-        T0004: "Aber keine Sorge, dafür gibt es Hörgeräte und notfalls Cochlea-Implantate.\
-                Es wird eine Weile dauern, bis du dich daran gewöhnt hast.",
+        T0004: "Aber keine Sorge, dafür gibt es Hörgeräte und notfalls \
+                Cochlea-Implantate. Es wird eine Weile dauern, bis du dich daran gewöhnt hast.",
         T0005: "Cochlea-Implantate. Die Cochlea ist die Hörschnecke, in der die feinen Haarzellen sitzen.\
                 Hier kann ein Implantat eingepflanzt werden, falls Hörgeräte nicht mehr die gewünschte Leistung erbringen.",
         T0006: ""
-      },
-      Adelinde: {
-        T0000: "Hey, ",
-        T0001: "Wie geht's dir denn? Irgendwelche Neuigkeiten?",
-        T0002: "",
-        T0003: "",
-        T0004: ""
       }
+
     };
 
-    ƒS.Speech.hide();
-    // dataForSave.started = true;
 
-    ƒS.Text.addClass("start");
-    await ƒS.Text.print("Willkommen!<br><br>Hier wird eine Einleitung stehen.\
-    <p>Viel Spaß beim Spielen.</p><br>\
-    <p><b>Save: F8</p><p><b>Load: F9</p>");
-    ƒS.Text.close();
-    ƒS.Speech.show();
+
+    // Hide dB-Meter with its text
+    document.getElementById("avg-level").hidden = true;
+    document.getElementById("avg-level-text").hidden = true;
+    document.getElementById("dB").hidden = true;
+
+    // for moments with individual delays
+    let signalDelay2: ƒS.Signal = ƒS.Progress.defineSignal([() => ƒS.Progress.delay(2)]);
+    let signalDelay1: ƒS.Signal = ƒS.Progress.defineSignal([() => ƒS.Progress.delay(1)]);
+    // let pressK: ƒS.Signal = ƒS.Progress.defineSignal([() => ƒS.getKeypress(ƒ.KEYBOARD_CODE.K)]);
+
+    // await pressK();
 
 
     // text speed in milliseconds, while paragraphs in seconds
     ƒS.Speech.setTickerDelays(20, 2);
 
-    // for moments with individual delays
-    let signalDelay2: ƒS.Signal = ƒS.Progress.defineSignal([() => ƒS.Progress.delay(2)]);
-    let signalDelay1: ƒS.Signal = ƒS.Progress.defineSignal([() => ƒS.Progress.delay(1)]);
+    ƒS.Speech.hide();
+    // dataForSave.started = true;
 
+    ƒS.Text.addClass("start");
+    await ƒS.Text.print("Herzlich Willkommen!<br><br>Hast du dich einmal gefragt, \
+    wie es wohl wäre, wenn du plötzlich schwerhörig wirst? Was würde sich für dich verändern?\
+    Welche neuen Herausforderungen kämen auf dich zu? \
+    Hier verschaffst du dir einen kleinen Einblick und tauchst in eine für dich fast stumme Welt ein.\
+    <p>Viel Spaß beim Spielen.</p><br>\
+    <p><b>Speichern: F8</p><p><b>Laden: F9</p><p><b>Weiter mit: Leertaste, LMC</p>");
+    ƒS.Text.close();
+    ƒS.Speech.show();
+
+
+    // GEMU STARTO
     // Duration in seconds
-    ƒS.Sound.play(sound.again, 0.1);
-    ƒS.Sound.fade(sound.again, 1, 4, true);
+    ƒS.Sound.play(sound.again, 0.05, true);
+    ƒS.Sound.fade(sound.again, 0.2, 4);
 
 
     // Start the Scene!
 
     ƒS.Speech.hide();
-    await ƒS.Location.show(locations.trainOld);
+    await ƒS.Location.show(locations.trainBeach);
     await ƒS.update(transitions.wet.duration, transitions.wet.alpha, transitions.wet.edge);
     await ƒS.Speech.tell(null, text.Narrator.T0000);
     await ƒS.Speech.tell(null, text.Narrator.T0001);
@@ -83,7 +108,7 @@ namespace AV {
     await ƒS.Speech.tell(null, text.Narrator.T0003);
     await ƒS.Speech.tell(null, text.Narrator.T0004);
     await ƒS.Speech.tell(null, text.Narrator.T0005);
-    await ƒS.Speech.hide();
+    ƒS.Speech.hide();
 
     await ƒS.Location.show(locations.hospital);
     await ƒS.update(transitions.flash.duration, transitions.flash.alpha, transitions.flash.edge);
@@ -93,17 +118,14 @@ namespace AV {
     await ƒS.Speech.tell(null, "<i>Er hat wohl meinen Namen vergessen.</i>");
 
     // Name field - Player can type his name in here
-
     dataForSave.Protagonist.name = await ƒS.Speech.getInput();
     console.log(dataForSave.Protagonist.name);
-
 
     // Punkte verteilen
     // dataForSave.score += 10;
 
-
     await ƒS.Speech.tell(characters.Doctor, "Hallo, " + dataForSave.Protagonist.name + ".");
-    await ƒS.Speech.tell(characters.Doctor, "Du hast eine Sc....empf....keit.");
+    await ƒS.Speech.tell(characters.Doctor, "Du hast eine Sc###empf####keit.");
     await ƒS.Speech.tell(dataForSave.Protagonist, text.Protagonist.T0000, true, "Player");
     await ƒS.Speech.tell(characters.Doctor, text.Doctor.T0000);
     await ƒS.Speech.tell(dataForSave.Protagonist, text.Protagonist.T0001, true, "Player");
@@ -116,9 +138,9 @@ namespace AV {
     await ƒS.Speech.tell(characters.Doctor, text.Doctor.T0005);
     await ƒS.Speech.tell(null, text.Narrator.T0006);
     await ƒS.Character.hide(characters.Doctor);
-    await ƒS.Speech.hide();
+    ƒS.Speech.hide();
     await ƒS.update(1);
-    await ƒS.Location.show(locations.trainOld);
+    await ƒS.Location.show(locations.trainBeach);
     // await ƒS.update(transitions.flash.duration, transitions.flash.alpha, transitions.flash.edge);
     await ƒS.update(0.5);
     await ƒS.Speech.tell(null, text.Narrator.T0007);
@@ -150,10 +172,11 @@ namespace AV {
         //continue writing on this path here
         await ƒS.Speech.tell(dataForSave.Protagonist, "Hi, Ade. Lange nicht gesehen, was?", true, "Player");
         await ƒS.Speech.tell(characters.Adelinde, "Was?! Wirklich?? Ich dachte wir-... Ahh tut mir leid.");
-        await ƒS.Speech.tell(null, "Typisch, Ade. Sie ist schon immer sehr leichtgläubig gewesen.");
+        await ƒS.Speech.tell(null, "<i>Typisch, Ade. Sie ist schon immer sehr leichtgläubig gewesen.</i>");
         await ƒS.Speech.tell(dataForSave.Protagonist, "Beruhige dich. Keine Sorge, ist nur eine Woche her, seit wir das letzte mal gesprochen haben.", true, "Player");
         await ƒS.Speech.tell(characters.Adelinde, "Ohh, ich dachte schon mein Gedächtnis lässt mich im Stich. Dann ist ja gut.");
         ƒS.Speech.clear();
+        ƒS.Speech.hide();
         await ƒS.update(1);
         break;
       case meetAdelinde.iIgnoreHer:
@@ -167,35 +190,91 @@ namespace AV {
         await ƒS.update(0.1);
         await ƒS.Speech.tell(characters.Adelinde, "Ich mache doch nur Witze, " + dataForSave.Protagonist.name + ".");
         await ƒS.Speech.tell(characters.Adelinde, "Du kennst mich doch.");
-        ƒS.Character.hide(characters.Adelinde);
+        await ƒS.Character.hide(characters.Adelinde);
         await ƒS.Character.show(characters.Adelinde, characters.Adelinde.pose.shytalk, ƒS.positions.bottomcenter);
         await ƒS.update(0.1);
         ƒS.Speech.clear();
+        ƒS.Speech.hide();
         await ƒS.update(1);
         break;
       case meetAdelinde.iJustLookAtHer:
         ƒS.Sound.play(sound.click, 1);
-        await ƒS.Speech.tell(characters.Adelinde, "Haaa-lloooo.");
+        await ƒS.Speech.tell(characters.Adelinde, "Haaalloooo.");
         await ƒS.Speech.tell(characters.Adelinde, "Erdeee an " + dataForSave.Protagonist.name + "!");
         await ƒS.Speech.tell(dataForSave.Protagonist, "Angekommen.", true, "Player");
         await ƒS.Speech.tell(characters.Adelinde, "Gut, ich dachte ich verliere dich schon an die Aliens.");
         await ƒS.Speech.tell(dataForSave.Protagonist, "Keine Sorge, so schnell bist du mich nicht los.", true, "Player");
-        await ƒS.Speech.tell(characters.Adelinde, "Schad-.. Ich meine puh, ein Glück.");
+        await ƒS.Speech.tell(characters.Adelinde, "Schad-..");
+        // Adelinde laugh mit Augen zu anzeigen
+        // await ƒS.Character.show(characters.Adelinde, characters.Adelinde.pose.laugh, ƒS.positions.bottomcenter);
+        // await ƒS.update(0.1);
+        await ƒS.Speech.tell(characters.Adelinde, "..Ich meine puh, ein Glück.");
         await ƒS.Speech.tell(null, "<i>Adelinde, wie sie lebt und leibt.</i>");
+        await ƒS.Character.hide(characters.Adelinde);
+        await ƒS.Character.show(characters.Adelinde, characters.Adelinde.pose.shytalk, ƒS.positions.bottomcenter);
+        await ƒS.update(0.1);
         ƒS.Speech.clear();
+        ƒS.Speech.hide();
         await ƒS.update(1);
         break;
     }
 
 
 
+
+    // await ƒS.Character.show(characters.Adelinde, characters.Adelinde.pose.shytalk, ƒS.positions.bottomcenter);
+    // await ƒS.update(0.5);
     await ƒS.Speech.tell(characters.Adelinde, text.Adelinde.T0001);
+    await ƒS.Speech.tell(dataForSave.Protagonist, text.Protagonist.T0004, true, "Player");
+    // await ƒS.Character.show(characters.Adelinde, characters.Adelinde.pose.shytalk, ƒS.positions.bottomcenter);
+    // await ƒS.update(0.1);
+    await ƒS.Character.hide(characters.Adelinde);
+    await ƒS.Character.show(characters.Adelinde, characters.Adelinde.pose.smile, ƒS.positions.bottomcenter);
+    await ƒS.update(0.1);
+    await ƒS.Speech.tell(characters.Adelinde, text.Adelinde.T0002);
+    await ƒS.Speech.tell(dataForSave.Protagonist, text.Protagonist.T0005, true, "Player");
+    await ƒS.Character.hide(characters.Adelinde);
+    await ƒS.Location.show(locations.trainTunnel);
+    await ƒS.Character.show(characters.Adelinde, characters.Adelinde.pose.shytalk, ƒS.positions.bottomcenter);
+    await ƒS.update(0.1);
+    await ƒS.Speech.tell(characters.Adelinde, text.Adelinde.T0003);
+    await ƒS.Speech.tell(dataForSave.Protagonist, text.Protagonist.T0006, true, "Player");
+    await ƒS.Speech.tell(characters.Adelinde, text.Adelinde.T0004);
+    await ƒS.Speech.tell(dataForSave.Protagonist, text.Protagonist.T0007, true, "Player");
+    await ƒS.Speech.tell(characters.Adelinde, text.Adelinde.T0005);
+    await ƒS.Speech.tell(null, text.Narrator.T0011);
+    await ƒS.Speech.tell(dataForSave.Protagonist, text.Protagonist.T0008, true, "Player");
+    await ƒS.Speech.tell(characters.Adelinde, text.Adelinde.T0006);
+    await ƒS.Speech.tell(dataForSave.Protagonist, text.Protagonist.T0009, true, "Player");
+
+    ƒS.Speech.hide();
+    ƒS.Character.hide(characters.Adelinde);
+    await ƒS.update(0.2);
+    await ƒS.Location.show(locations.black);
+    await ƒS.update(0.5);
+    ƒS.Text.setClass("trainStation");
+    await ƒS.Text.print("<br><br><br><br>Nächster Halt: Marktgasse.<br>Ausstieg in Fahrtrichtung rechts.");
+    ƒS.Text.close();
+    await ƒS.update(1);
+
+    await ƒS.Character.show(characters.Adelinde, characters.Adelinde.pose.smile, ƒS.positions.bottomcenter);
+    await ƒS.Location.show(locations.trainTunnel);
+    await ƒS.update(0.1);
+    await ƒS.Speech.tell(characters.Adelinde, text.Adelinde.T0007);
+    await ƒS.Speech.tell(characters.Adelinde, text.Adelinde.T0008);
+    await ƒS.Speech.tell(dataForSave.Protagonist, text.Protagonist.T0010, true, "Player");
+    await ƒS.Speech.tell(characters.Adelinde, text.Adelinde.T0009);
 
 
+
+    ƒS.Character.hide(characters.Adelinde);
     ƒS.Speech.clear();
     ƒS.Speech.hide();
 
     // Musik ausblenden
     ƒS.Sound.fade(sound.again, 0, 1);
+
+    await signalDelay2();
+
   }
 }

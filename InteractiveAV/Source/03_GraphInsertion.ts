@@ -19,7 +19,6 @@ namespace AV {
     };
 
 
-    // Audio in 2D-Welt, Knoten hinter der 2D-Welt platzieren
 
     // ƒS.Sound.fade(sound.again, 0, 1);
 
@@ -41,6 +40,29 @@ namespace AV {
     await ƒS.Speech.tell(characters.Adelinde, "10");
 
     disableAudioTest();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

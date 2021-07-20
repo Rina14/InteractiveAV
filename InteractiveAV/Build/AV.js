@@ -17,17 +17,33 @@ var AV;
                 T0008: "<i>Allerdings meinte der Hörgeräteakustiker, dass ich diese erst einmal\
                 zwei bis drei Wochen testen könne.</i>",
                 T0009: "<i>Ein etwas merkwürdiges, aber sehr befriedigendes Gefühl, wieder mehr hören zu können.</i>",
-                T0010: "<i>Ah, das ist Adelinde. Ist schon wieder eine Weile her, seit ich sie gesehen habe.</i>"
+                T0010: "<i>Ah, das ist Adelinde. Ist schon wieder eine Weile her, seit ich sie gesehen habe.</i>",
+                T0011: "<i>...und ich dachte mit Hörgeräten würde sich diese Unklarheit eigentlich erledigen, aber irgendwie scheint dem doch nicht so.</i>"
             },
             Protagonist: {
                 T0000: "Wie bitte?",
                 T0001: "Und das bedeutet?",
-                T0002: "Das geht doch wieder weg, nicht wahr? Ich habe schließlich\
-                nichts Großartiges gemacht, dass das passieren könnte.",
+                T0002: "Verstehe... aber dies ist nur kurzfristig, oder?",
                 T0003: "Koch- was?",
-                T0004: "",
-                T0005: "",
-                T0006: ""
+                T0004: "Wie bitte?",
+                T0005: "Oh, sorry, ja, da gibt es tatsächlich etwas, was ich dir gerne erzählen würde.",
+                T0006: "Ehrlich gesagt bist du die Erste, die es erfährt... Naja abgesehen von meinen Eltern.",
+                T0007: "So spektakulär ist es eigentlich nicht, denke ich.",
+                T0008: "Ich trage nun Hörgeräte bzw. ich bin schwerhörig geworden.",
+                T0009: "Nein, keine Sorge. Ich...",
+                T0010: "Hm, klar. Ich habe sonst nicht wirklich etwas vor heute."
+            },
+            Adelinde: {
+                T0000: "Hey, ",
+                T0001: "Wie geht### dir ####? Irgendwelche ######?",
+                T0002: "Ich habe gefragt, ob irgendetwas Neues bei dir passiert ist.",
+                T0003: "Schieß los!",
+                T0004: "Uhh, ich fühle mich geehrt.",
+                T0005: "Also? Was möchtest du mir anv###?~",
+                T0006: "Ohh, hattest du etwa einen Unfall und ich weiß nichts davon??",
+                T0007: "Ahh, entschuldige, dass ich dich unterbreche, aber ich muss hier aussteigen.",
+                T0008: "Ich müsste noch schnell einkaufen. Möchtest du mitkommen? Danach könnten wir uns unterhalten, versprochen!",
+                T0009: "Super, danke!"
             },
             Doctor: {
                 T0000: "Du hast eine hochgradige Schallempfindungsschwerhörigkeit.",
@@ -35,39 +51,42 @@ var AV;
                 Kurz gesagt, hast du einen vollständigen Hörverlust dieser.",
                 T0002: "Nun, das ist nicht direkt 'heilbar', jedoch bis zu einem gewissen Grad kompensierbar.",
                 T0003: "Du wirst lernen müssen, mit dieser Schwerhörigkeit umzugehen.",
-                T0004: "Aber keine Sorge, dafür gibt es Hörgeräte und notfalls Cochlea-Implantate.\
-                Es wird eine Weile dauern, bis du dich daran gewöhnt hast.",
+                T0004: "Aber keine Sorge, dafür gibt es Hörgeräte und notfalls \
+                Cochlea-Implantate. Es wird eine Weile dauern, bis du dich daran gewöhnt hast.",
                 T0005: "Cochlea-Implantate. Die Cochlea ist die Hörschnecke, in der die feinen Haarzellen sitzen.\
                 Hier kann ein Implantat eingepflanzt werden, falls Hörgeräte nicht mehr die gewünschte Leistung erbringen.",
                 T0006: ""
-            },
-            Adelinde: {
-                T0000: "Hey, ",
-                T0001: "Wie geht's dir denn? Irgendwelche Neuigkeiten?",
-                T0002: "",
-                T0003: "",
-                T0004: ""
             }
         };
-        AV.ƒS.Speech.hide();
-        // dataForSave.started = true;
-        AV.ƒS.Text.addClass("start");
-        await AV.ƒS.Text.print("Willkommen!<br><br>Hier wird eine Einleitung stehen.\
-    <p>Viel Spaß beim Spielen.</p><br>\
-    <p><b>Save: F8</p><p><b>Load: F9</p>");
-        AV.ƒS.Text.close();
-        AV.ƒS.Speech.show();
-        // text speed in milliseconds, while paragraphs in seconds
-        AV.ƒS.Speech.setTickerDelays(20, 2);
+        // Hide dB-Meter with its text
+        document.getElementById("avg-level").hidden = true;
+        document.getElementById("avg-level-text").hidden = true;
+        document.getElementById("dB").hidden = true;
         // for moments with individual delays
         let signalDelay2 = AV.ƒS.Progress.defineSignal([() => AV.ƒS.Progress.delay(2)]);
         let signalDelay1 = AV.ƒS.Progress.defineSignal([() => AV.ƒS.Progress.delay(1)]);
+        // let pressK: ƒS.Signal = ƒS.Progress.defineSignal([() => ƒS.getKeypress(ƒ.KEYBOARD_CODE.K)]);
+        // await pressK();
+        // text speed in milliseconds, while paragraphs in seconds
+        AV.ƒS.Speech.setTickerDelays(20, 2);
+        AV.ƒS.Speech.hide();
+        // dataForSave.started = true;
+        AV.ƒS.Text.addClass("start");
+        await AV.ƒS.Text.print("Herzlich Willkommen!<br><br>Hast du dich einmal gefragt, \
+    wie es wohl wäre, wenn du plötzlich schwerhörig wirst? Was würde sich für dich verändern?\
+    Welche neuen Herausforderungen kämen auf dich zu? \
+    Hier verschaffst du dir einen kleinen Einblick und tauchst in eine für dich fast stumme Welt ein.\
+    <p>Viel Spaß beim Spielen.</p><br>\
+    <p><b>Speichern: F8</p><p><b>Laden: F9</p><p><b>Weiter mit: Leertaste, LMC</p>");
+        AV.ƒS.Text.close();
+        AV.ƒS.Speech.show();
+        // GEMU STARTO
         // Duration in seconds
-        AV.ƒS.Sound.play(AV.sound.again, 0.1);
-        AV.ƒS.Sound.fade(AV.sound.again, 1, 4, true);
+        AV.ƒS.Sound.play(AV.sound.again, 0.05, true);
+        AV.ƒS.Sound.fade(AV.sound.again, 0.2, 4);
         // Start the Scene!
         AV.ƒS.Speech.hide();
-        await AV.ƒS.Location.show(AV.locations.trainOld);
+        await AV.ƒS.Location.show(AV.locations.trainBeach);
         await AV.ƒS.update(AV.transitions.wet.duration, AV.transitions.wet.alpha, AV.transitions.wet.edge);
         await AV.ƒS.Speech.tell(null, text.Narrator.T0000);
         await AV.ƒS.Speech.tell(null, text.Narrator.T0001);
@@ -75,7 +94,7 @@ var AV;
         await AV.ƒS.Speech.tell(null, text.Narrator.T0003);
         await AV.ƒS.Speech.tell(null, text.Narrator.T0004);
         await AV.ƒS.Speech.tell(null, text.Narrator.T0005);
-        await AV.ƒS.Speech.hide();
+        AV.ƒS.Speech.hide();
         await AV.ƒS.Location.show(AV.locations.hospital);
         await AV.ƒS.update(AV.transitions.flash.duration, AV.transitions.flash.alpha, AV.transitions.flash.edge);
         await AV.ƒS.Character.show(AV.characters.Doctor, AV.characters.Doctor.pose.normal, AV.ƒS.positions.bottomcenter);
@@ -88,7 +107,7 @@ var AV;
         // Punkte verteilen
         // dataForSave.score += 10;
         await AV.ƒS.Speech.tell(AV.characters.Doctor, "Hallo, " + AV.dataForSave.Protagonist.name + ".");
-        await AV.ƒS.Speech.tell(AV.characters.Doctor, "Du hast eine Sc....empf....keit.");
+        await AV.ƒS.Speech.tell(AV.characters.Doctor, "Du hast eine Sc###empf####keit.");
         await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, text.Protagonist.T0000, true, "Player");
         await AV.ƒS.Speech.tell(AV.characters.Doctor, text.Doctor.T0000);
         await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, text.Protagonist.T0001, true, "Player");
@@ -101,9 +120,9 @@ var AV;
         await AV.ƒS.Speech.tell(AV.characters.Doctor, text.Doctor.T0005);
         await AV.ƒS.Speech.tell(null, text.Narrator.T0006);
         await AV.ƒS.Character.hide(AV.characters.Doctor);
-        await AV.ƒS.Speech.hide();
+        AV.ƒS.Speech.hide();
         await AV.ƒS.update(1);
-        await AV.ƒS.Location.show(AV.locations.trainOld);
+        await AV.ƒS.Location.show(AV.locations.trainBeach);
         // await ƒS.update(transitions.flash.duration, transitions.flash.alpha, transitions.flash.edge);
         await AV.ƒS.update(0.5);
         await AV.ƒS.Speech.tell(null, text.Narrator.T0007);
@@ -126,10 +145,11 @@ var AV;
                 //continue writing on this path here
                 await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, "Hi, Ade. Lange nicht gesehen, was?", true, "Player");
                 await AV.ƒS.Speech.tell(AV.characters.Adelinde, "Was?! Wirklich?? Ich dachte wir-... Ahh tut mir leid.");
-                await AV.ƒS.Speech.tell(null, "Typisch, Ade. Sie ist schon immer sehr leichtgläubig gewesen.");
+                await AV.ƒS.Speech.tell(null, "<i>Typisch, Ade. Sie ist schon immer sehr leichtgläubig gewesen.</i>");
                 await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, "Beruhige dich. Keine Sorge, ist nur eine Woche her, seit wir das letzte mal gesprochen haben.", true, "Player");
                 await AV.ƒS.Speech.tell(AV.characters.Adelinde, "Ohh, ich dachte schon mein Gedächtnis lässt mich im Stich. Dann ist ja gut.");
                 AV.ƒS.Speech.clear();
+                AV.ƒS.Speech.hide();
                 await AV.ƒS.update(1);
                 break;
             case meetAdelinde.iIgnoreHer:
@@ -143,77 +163,260 @@ var AV;
                 await AV.ƒS.update(0.1);
                 await AV.ƒS.Speech.tell(AV.characters.Adelinde, "Ich mache doch nur Witze, " + AV.dataForSave.Protagonist.name + ".");
                 await AV.ƒS.Speech.tell(AV.characters.Adelinde, "Du kennst mich doch.");
-                AV.ƒS.Character.hide(AV.characters.Adelinde);
+                await AV.ƒS.Character.hide(AV.characters.Adelinde);
                 await AV.ƒS.Character.show(AV.characters.Adelinde, AV.characters.Adelinde.pose.shytalk, AV.ƒS.positions.bottomcenter);
                 await AV.ƒS.update(0.1);
                 AV.ƒS.Speech.clear();
+                AV.ƒS.Speech.hide();
                 await AV.ƒS.update(1);
                 break;
             case meetAdelinde.iJustLookAtHer:
                 AV.ƒS.Sound.play(AV.sound.click, 1);
-                await AV.ƒS.Speech.tell(AV.characters.Adelinde, "Haaa-lloooo.");
+                await AV.ƒS.Speech.tell(AV.characters.Adelinde, "Haaalloooo.");
                 await AV.ƒS.Speech.tell(AV.characters.Adelinde, "Erdeee an " + AV.dataForSave.Protagonist.name + "!");
                 await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, "Angekommen.", true, "Player");
                 await AV.ƒS.Speech.tell(AV.characters.Adelinde, "Gut, ich dachte ich verliere dich schon an die Aliens.");
                 await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, "Keine Sorge, so schnell bist du mich nicht los.", true, "Player");
-                await AV.ƒS.Speech.tell(AV.characters.Adelinde, "Schad-.. Ich meine puh, ein Glück.");
+                await AV.ƒS.Speech.tell(AV.characters.Adelinde, "Schad-..");
+                // Adelinde laugh mit Augen zu anzeigen
+                // await ƒS.Character.show(characters.Adelinde, characters.Adelinde.pose.laugh, ƒS.positions.bottomcenter);
+                // await ƒS.update(0.1);
+                await AV.ƒS.Speech.tell(AV.characters.Adelinde, "..Ich meine puh, ein Glück.");
                 await AV.ƒS.Speech.tell(null, "<i>Adelinde, wie sie lebt und leibt.</i>");
+                await AV.ƒS.Character.hide(AV.characters.Adelinde);
+                await AV.ƒS.Character.show(AV.characters.Adelinde, AV.characters.Adelinde.pose.shytalk, AV.ƒS.positions.bottomcenter);
+                await AV.ƒS.update(0.1);
                 AV.ƒS.Speech.clear();
+                AV.ƒS.Speech.hide();
                 await AV.ƒS.update(1);
                 break;
         }
+        // await ƒS.Character.show(characters.Adelinde, characters.Adelinde.pose.shytalk, ƒS.positions.bottomcenter);
+        // await ƒS.update(0.5);
         await AV.ƒS.Speech.tell(AV.characters.Adelinde, text.Adelinde.T0001);
+        await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, text.Protagonist.T0004, true, "Player");
+        // await ƒS.Character.show(characters.Adelinde, characters.Adelinde.pose.shytalk, ƒS.positions.bottomcenter);
+        // await ƒS.update(0.1);
+        await AV.ƒS.Character.hide(AV.characters.Adelinde);
+        await AV.ƒS.Character.show(AV.characters.Adelinde, AV.characters.Adelinde.pose.smile, AV.ƒS.positions.bottomcenter);
+        await AV.ƒS.update(0.1);
+        await AV.ƒS.Speech.tell(AV.characters.Adelinde, text.Adelinde.T0002);
+        await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, text.Protagonist.T0005, true, "Player");
+        await AV.ƒS.Character.hide(AV.characters.Adelinde);
+        await AV.ƒS.Location.show(AV.locations.trainTunnel);
+        await AV.ƒS.Character.show(AV.characters.Adelinde, AV.characters.Adelinde.pose.shytalk, AV.ƒS.positions.bottomcenter);
+        await AV.ƒS.update(0.1);
+        await AV.ƒS.Speech.tell(AV.characters.Adelinde, text.Adelinde.T0003);
+        await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, text.Protagonist.T0006, true, "Player");
+        await AV.ƒS.Speech.tell(AV.characters.Adelinde, text.Adelinde.T0004);
+        await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, text.Protagonist.T0007, true, "Player");
+        await AV.ƒS.Speech.tell(AV.characters.Adelinde, text.Adelinde.T0005);
+        await AV.ƒS.Speech.tell(null, text.Narrator.T0011);
+        await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, text.Protagonist.T0008, true, "Player");
+        await AV.ƒS.Speech.tell(AV.characters.Adelinde, text.Adelinde.T0006);
+        await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, text.Protagonist.T0009, true, "Player");
+        AV.ƒS.Speech.hide();
+        AV.ƒS.Character.hide(AV.characters.Adelinde);
+        await AV.ƒS.update(0.2);
+        await AV.ƒS.Location.show(AV.locations.black);
+        await AV.ƒS.update(0.5);
+        AV.ƒS.Text.setClass("trainStation");
+        await AV.ƒS.Text.print("<br><br><br><br>Nächster Halt: Marktgasse.<br>Ausstieg in Fahrtrichtung rechts.");
+        AV.ƒS.Text.close();
+        await AV.ƒS.update(1);
+        await AV.ƒS.Character.show(AV.characters.Adelinde, AV.characters.Adelinde.pose.smile, AV.ƒS.positions.bottomcenter);
+        await AV.ƒS.Location.show(AV.locations.trainTunnel);
+        await AV.ƒS.update(0.1);
+        await AV.ƒS.Speech.tell(AV.characters.Adelinde, text.Adelinde.T0007);
+        await AV.ƒS.Speech.tell(AV.characters.Adelinde, text.Adelinde.T0008);
+        await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, text.Protagonist.T0010, true, "Player");
+        await AV.ƒS.Speech.tell(AV.characters.Adelinde, text.Adelinde.T0009);
+        AV.ƒS.Character.hide(AV.characters.Adelinde);
         AV.ƒS.Speech.clear();
         AV.ƒS.Speech.hide();
         // Musik ausblenden
         AV.ƒS.Sound.fade(AV.sound.again, 0, 1);
+        await signalDelay2();
     }
     AV.HearingLoss = HearingLoss;
 })(AV || (AV = {}));
 var AV;
 (function (AV) {
-    async function Friendship() {
-        console.log("Start Friendship");
+    async function StrangerWoman() {
+        console.log("Start StrangerWoman");
         let text = {
             Narrator: {
-                T0000: "<i></i>",
-                T0001: "<i></i>",
+                T0000: "<i>Dann mal r-...</i>",
+                T0001: "<i>Manchen ist der Begriff Höflichkeit wohl ein Fremdwort.</i>",
                 T0002: "<i> </i>"
             },
+            Protagonist: {
+                T0000: "Alles klar. Dann bis gleich, Ade.",
+                T0001: "Bis gleich.",
+                T0002: "Ja?"
+            },
             Adelinde: {
-                T0000: "Hey, "
+                T0000: "Auf geht's! Ich hole noch schnell einen Einkaufswagen, du kannst schon einmal reingehen.",
+                T0001: "Bis gleich."
+            },
+            StrangerWomen: {
+                T0000: "So ein Mist!",
+                T0001: "Ahh, hey du da.",
+                T0002: "Aus dem Weg, ich hab's eilig.",
+                T0003: ""
+            },
+            Elaine: {
+                T0000: "",
+                T0001: ""
             }
         };
-        // let animation: ƒS.AnimationDefinition = {
-        //   start: { translation: ƒS.positions.bottomleft, rotation: -20, scaling: new ƒS.Position(0.5, 1.5), color: ƒS.Color.CSS("blue", 0) },
-        //   end: { translation: ƒS.positions.bottomright, rotation: 20, scaling: new ƒS.Position(1.5, 0.5), color: ƒS.Color.CSS("red") },
-        //   duration: 1,
-        //   playmode: ƒS.ANIMATION_PLAYMODE.REVERSELOOP
-        // };
-        // let animation1: ƒS.AnimationDefinition = {
-        //   start: { translation: ƒS.positions.bottomleft, rotation: 20, scaling: new ƒS.Position(0.5, 1.5), color: ƒS.Color.CSS("blue", 0) },
-        //   end: { translation: ƒS.positions.bottomright, rotation: 40, scaling: new ƒS.Position(1.5, 0.5), color: ƒS.Color.CSS("red") },
-        //   duration: 1,
-        //   playmode: ƒS.ANIMATION_PLAYMODE.PLAYONCESTOPAFTER
-        // };
+        // Hide dB-Meter with its text
+        document.getElementById("avg-level").hidden = true;
+        document.getElementById("avg-level-text").hidden = true;
+        document.getElementById("dB").hidden = true;
+        // Zum Rumnavigieren zur/von Soundquelle
+        // let spatialSound: SpatialSound = new SpatialSound();
+        // spatialSound.start();
+        // for moments with individual delays
+        let signalDelay2 = AV.ƒS.Progress.defineSignal([() => AV.ƒS.Progress.delay(2)]);
+        // let signalDelay1: ƒS.Signal = ƒS.Progress.defineSignal([() => ƒS.Progress.delay(1)]);
+        // let pressK: ƒS.Signal = ƒS.Progress.defineSignal([() => ƒS.getKeypress(ƒ.KEYBOARD_CODE.K)]);
+        // await pressK();
         AV.ƒS.Speech.hide();
-        await AV.ƒS.Location.show(AV.locations.festivalC);
-        // await ƒS.Character.animate(characters.Aoi, characters.Aoi.pose.normal, animation);
-        // await ƒS.update(2);
-        // await ƒS.Speech.tell(characters.Aoi, "Welcome, welcome to FUDGE-Story~~");
-        // await ƒS.Speech.tell(characters.Aoi, "Hello " + dataForSave.Protagonist.name);
+        AV.ƒS.Sound.play(AV.sound.mission, 0.1, true);
+        AV.ƒS.Sound.fade(AV.sound.mission, 0.3, 4);
+        await AV.ƒS.Location.show(AV.locations.oldStreet);
         await AV.ƒS.Character.show(AV.characters.Adelinde, AV.characters.Adelinde.pose.shytalk, AV.ƒS.positionPercent(60, 100));
         await AV.ƒS.update(1);
-        await AV.ƒS.Speech.tell(AV.characters.Adelinde, text.Adelinde.T0000 + AV.dataForSave.Protagonist.name + "!");
-        await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, "Hey, Ade! So ein Zufall dich hier zu treffen.");
-        // await ƒS.Character.hide(characters.Aoi);
-        // let pose: ƒ.Node = await ƒS.Character.get(characters.Aoi).getPose("Images/Characters/placeholder_girl.png");
-        // pose.removeComponent(pose.getComponent(ƒ.ComponentAnimator));
-        // await ƒS.Character.animate(characters.Aoi, characters.Aoi.pose.normal, animation1);
-        // await ƒS.update(2);
-        AV.ƒS.Sound.fade(AV.sound.again, 0, 1);
+        await AV.ƒS.Speech.tell(AV.characters.Adelinde, text.Adelinde.T0000 + AV.dataForSave.Protagonist.name + ".");
+        await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, text.Protagonist.T0000, true, "Player");
+        await AV.ƒS.Speech.tell(AV.characters.Adelinde, text.Adelinde.T0001);
+        await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, text.Protagonist.T0001, true, "Player");
+        await AV.ƒS.Character.animate(AV.characters.Adelinde, AV.characters.Adelinde.pose.shytalk, AV.midToOutOfCanvas());
+        await AV.ƒS.update(2);
+        await AV.ƒS.Speech.tell(null, text.Narrator.T0000);
+        await AV.ƒS.Speech.tell(AV.characters.StrangerWoman, text.StrangerWomen.T0000);
+        //  OPTIONAL: Kamera wackeln lassen
+        await AV.horizontalShake();
+        await AV.ƒS.Character.show(AV.characters.Elaine, AV.characters.Elaine.pose.mad, AV.ƒS.positionPercent(30, 100));
+        await AV.ƒS.Speech.tell(AV.characters.StrangerWoman, text.StrangerWomen.T0001);
+        await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, text.Protagonist.T0002, true, "Player");
+        await AV.ƒS.Speech.tell(AV.characters.StrangerWoman, text.StrangerWomen.T0002);
+        await AV.ƒS.Speech.tell(null, text.Narrator.T0001);
+        await signalDelay2();
+        AV.ƒS.Sound.play(AV.sound.click, 1);
+        let meetElaine = {
+            iReplyIronically: "Ironisch antworten.",
+            iObey: "Der Frau aus dem Weg gehen.",
+            imBeingRude: "Im selben Ton antworten.",
+            iLookForHelp: "Verständnislos in die Gegend schauen."
+        };
+        let rudeStrangerWoman = await AV.ƒS.Menu.getInput(meetElaine, "choices");
+        switch (rudeStrangerWoman) {
+            case meetElaine.iReplyIronically:
+                AV.ƒS.Sound.play(AV.sound.click, 1);
+                //continue writing on this path here
+                await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, "Sie sind sicher, dass Sie mich meinen?", true, "Player");
+                await AV.ƒS.Speech.tell(AV.characters.Elaine, "Wie bitte?!");
+                await AV.ƒS.Speech.tell(null, "");
+                await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, "Sie haben mich schon richtig verstanden.", true, "Player");
+                await AV.ƒS.Speech.tell(AV.characters.Elaine, "#### von dir, wie ####### du?");
+                await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, "Was?", true, "Player");
+                await AV.ƒS.Speech.tell(null, "Mist.");
+                await AV.ƒS.Speech.tell(AV.characters.Elaine, "Hörst du schlecht?");
+                // a choice within a choice
+                let replyToElaine = {
+                    iSayYes: "Bejahen.",
+                    iSayNo: "Verneinen"
+                };
+                let talkBack = await AV.ƒS.Menu.getInput(meetElaine, "choices");
+                switch (talkBack) {
+                    case replyToElaine.iSayYes:
+                        AV.ƒS.Sound.play(AV.sound.click, 1);
+                        //continue writing on this path here
+                        await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, "Und wenn dem so wäre?", true, "Player");
+                        await AV.ƒS.Speech.tell(AV.characters.Elaine, "Hmm, dann hast du mich wohl nicht verstanden.");
+                        await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, "Habe ich tatsächlich nicht.", true, "Player");
+                        await AV.ƒS.Speech.tell(AV.characters.Elaine, "...");
+                        await AV.ƒS.Speech.tell(null, "Ob das ein Fehler war?");
+                        await AV.ƒS.Speech.tell(AV.characters.Elaine, "Verstehe.");
+                        await AV.ƒS.Speech.tell(AV.characters.Elaine, "Schon gut. Vergiss es.");
+                        AV.ƒS.Speech.clear();
+                        await AV.ƒS.update(1);
+                        break;
+                    case replyToElaine.iSayNo:
+                        AV.ƒS.Sound.play(AV.sound.click, 1);
+                        //continue writing on this path here
+                        await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, "Sie sind sicher, dass Sie mich meinen?", true, "Player");
+                        await AV.ƒS.Speech.tell(AV.characters.Elaine, "Wie bitte?!");
+                        await AV.ƒS.Speech.tell(null, "");
+                        AV.ƒS.Speech.clear();
+                        await AV.ƒS.update(1);
+                        break;
+                }
+                await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, "Sie haben mich schon richtig verstanden.", true, "Player");
+                AV.ƒS.Speech.clear();
+                await AV.ƒS.update(1);
+                break;
+            case meetElaine.iObey:
+                AV.ƒS.Sound.play(AV.sound.click, 1);
+                await AV.ƒS.Speech.tell(AV.characters.Adelinde, "Hallo?");
+                await AV.ƒS.Speech.tell(null, "<i>Vielleicht sollte ich doch-</i>");
+                await AV.ƒS.Speech.tell(AV.characters.Adelinde, "Ignorierst du mich etwa?");
+                await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, "Was? Nein ich-", true, "Player");
+                AV.ƒS.Character.hide(AV.characters.Adelinde);
+                await AV.ƒS.Character.show(AV.characters.Adelinde, AV.characters.Adelinde.pose.smile, AV.ƒS.positions.bottomcenter);
+                await AV.ƒS.update(0.1);
+                await AV.ƒS.Speech.tell(AV.characters.Adelinde, "Ich mache doch nur Witze, " + AV.dataForSave.Protagonist.name + ".");
+                await AV.ƒS.Speech.tell(AV.characters.Adelinde, "Du kennst mich doch.");
+                await AV.ƒS.Character.hide(AV.characters.Adelinde);
+                await AV.ƒS.Character.show(AV.characters.Adelinde, AV.characters.Adelinde.pose.shytalk, AV.ƒS.positions.bottomcenter);
+                await AV.ƒS.update(0.1);
+                AV.ƒS.Speech.clear();
+                await AV.ƒS.update(1);
+                break;
+            case meetElaine.imBeingRude:
+                AV.ƒS.Sound.play(AV.sound.click, 1);
+                await AV.ƒS.Speech.tell(AV.characters.Adelinde, "Haaalloooo.");
+                await AV.ƒS.Speech.tell(AV.characters.Adelinde, "Erdeee an " + AV.dataForSave.Protagonist.name + "!");
+                await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, "Angekommen.", true, "Player");
+                await AV.ƒS.Speech.tell(AV.characters.Adelinde, "Gut, ich dachte ich verliere dich schon an die Aliens.");
+                await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, "Keine Sorge, so schnell bist du mich nicht los.", true, "Player");
+                await AV.ƒS.Speech.tell(AV.characters.Adelinde, "Schad-..");
+                // Adelinde laugh mit Augen zu anzeigen
+                // await ƒS.Character.show(characters.Adelinde, characters.Adelinde.pose.laugh, ƒS.positions.bottomcenter);
+                // await ƒS.update(0.1);
+                await AV.ƒS.Speech.tell(AV.characters.Adelinde, "..Ich meine puh, ein Glück.");
+                await AV.ƒS.Speech.tell(null, "<i>Adelinde, wie sie lebt und leibt.</i>");
+                await AV.ƒS.Character.hide(AV.characters.Adelinde);
+                await AV.ƒS.Character.show(AV.characters.Adelinde, AV.characters.Adelinde.pose.shytalk, AV.ƒS.positions.bottomcenter);
+                await AV.ƒS.update(0.1);
+                AV.ƒS.Speech.clear();
+                await AV.ƒS.update(1);
+                break;
+            case meetElaine.iLookForHelp:
+                AV.ƒS.Sound.play(AV.sound.click, 1);
+                await AV.ƒS.Speech.tell(AV.characters.Adelinde, "Haaalloooo.");
+                await AV.ƒS.Speech.tell(AV.characters.Adelinde, "Erdeee an " + AV.dataForSave.Protagonist.name + "!");
+                await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, "Angekommen.", true, "Player");
+                await AV.ƒS.Speech.tell(AV.characters.Adelinde, "Gut, ich dachte ich verliere dich schon an die Aliens.");
+                await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, "Keine Sorge, so schnell bist du mich nicht los.", true, "Player");
+                await AV.ƒS.Speech.tell(AV.characters.Adelinde, "Schad-..");
+                // Adelinde laugh mit Augen zu anzeigen
+                // await ƒS.Character.show(characters.Adelinde, characters.Adelinde.pose.laugh, ƒS.positions.bottomcenter);
+                // await ƒS.update(0.1);
+                await AV.ƒS.Speech.tell(AV.characters.Adelinde, "..Ich meine puh, ein Glück.");
+                await AV.ƒS.Speech.tell(null, "<i>Adelinde, wie sie lebt und leibt.</i>");
+                await AV.ƒS.Character.hide(AV.characters.Adelinde);
+                await AV.ƒS.Character.show(AV.characters.Adelinde, AV.characters.Adelinde.pose.shytalk, AV.ƒS.positions.bottomcenter);
+                await AV.ƒS.update(0.1);
+                AV.ƒS.Speech.clear();
+                await AV.ƒS.update(1);
+                break;
+        }
+        AV.ƒS.Sound.fade(AV.sound.mission, 0, 1);
     }
-    AV.Friendship = Friendship;
+    AV.StrangerWoman = StrangerWoman;
 })(AV || (AV = {}));
 var AV;
 (function (AV) {
@@ -233,7 +436,6 @@ var AV;
                 T0000: "Test undso "
             }
         };
-        // Audio in 2D-Welt, Knoten hinter der 2D-Welt platzieren
         // ƒS.Sound.fade(sound.again, 0, 1);
         AV.ƒS.Speech.hide();
         await AV.ƒS.Location.show(AV.locations.festivalC);
@@ -538,6 +740,63 @@ var AV;
 })(AV || (AV = {}));
 var AV;
 (function (AV) {
+    // window.addEventListener("load", init);
+    function dezibelMeter() {
+        navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+            .then(function (stream) {
+            const context = new AudioContext();
+            let analyser = context.createAnalyser();
+            const source = context.createMediaStreamSource(stream);
+            source.connect(analyser);
+            // Damit man sich nicht selbst hört
+            // source.connect(context.destination);
+            // let audio: HTMLAudioElement = <HTMLAudioElement> document.getElementById("player");
+            // audio.srcObject = stream;
+            analyser.minDecibels = -120;
+            analyser.fftSize = 1024;
+            const sampleBuffer = new Float32Array(analyser.fftSize);
+            function loop() {
+                analyser.getFloatFrequencyData(sampleBuffer);
+                let average = 0;
+                for (let i = 0; i < sampleBuffer.length; i++) {
+                    average += sampleBuffer[i];
+                }
+                let finalAverage = average / sampleBuffer.length - analyser.minDecibels;
+                // Display value.
+                displayNumber("avg", finalAverage);
+                requestAnimationFrame(loop);
+            }
+            function displayNumber(id, value) {
+                const meter = document.getElementById(id + "-level");
+                const text = document.getElementById(id + "-level-text");
+                text.textContent = value.toFixed(2);
+                meter.value = isFinite(value) ? value : meter.min;
+            }
+            loop();
+        })
+            //@ts-ignore
+            .catch(function (err) {
+            //@ts-ignore
+        });
+    }
+    AV.dezibelMeter = dezibelMeter;
+})(AV || (AV = {}));
+var AV;
+(function (AV) {
+    async function EndingOne() {
+        console.log("Start Ending One");
+    }
+    AV.EndingOne = EndingOne;
+})(AV || (AV = {}));
+var AV;
+(function (AV) {
+    async function EndingTwo() {
+        console.log("Start Ending Two");
+    }
+    AV.EndingTwo = EndingTwo;
+})(AV || (AV = {}));
+var AV;
+(function (AV) {
     //zugriff auch innerhalb anderer dateien durch export; fudgecore ist extern nicht teil des programms deshalb muss es erst importiert werden
     AV.ƒ = FudgeCore;
     AV.ƒS = FudgeStory;
@@ -619,6 +878,10 @@ var AV;
             name: "BathroomFoggy",
             background: "Images/Backgrounds/Bathroom_Foggy.png"
         },
+        black: {
+            name: "BlackBG",
+            background: "Images/Backgrounds/bg_black.png"
+        },
         apartment: {
             name: "ApartmentExterior",
             background: "Images/Backgrounds/Apartment_Exterior.png"
@@ -650,6 +913,10 @@ var AV;
         hospital: {
             name: "Hospital",
             background: "Images/Backgrounds/Old_School.png"
+        },
+        oldStreet: {
+            name: "OldStreet",
+            background: "Images/Backgrounds/Old_Street.png"
         },
         smallApartmentKitchen: {
             name: "SmallApartmentKitchen",
@@ -709,6 +976,33 @@ var AV;
             pose: {
                 normal: "Images/Characters/Ryu_normal.png"
             }
+        },
+        StrangerWoman: {
+            name: "Stranger Woman",
+            origin: AV.ƒS.ORIGIN.BOTTOMCENTER,
+            pose: {
+                normal: "Images/Characters/Elaine_normal.png",
+                mad: "Images/Characters/Elaine_mad.png",
+                innocent: "Images/Characters/Elaine_innocent.png"
+            }
+        },
+        Elaine: {
+            name: "Elaine",
+            origin: AV.ƒS.ORIGIN.BOTTOMCENTER,
+            pose: {
+                normal: "Images/Characters/Elaine_normal.png",
+                mad: "Images/Characters/Elaine_mad.png",
+                innocent: "Images/Characters/Elaine_innocent.png"
+            }
+        }
+    };
+    AV.items = {
+        Fudge: {
+            name: "Fudge Item",
+            description: "A delicious cube of fudge, adds 10 to your health",
+            image: "Images/Characters/Ryu_normal.png",
+            static: true,
+            handler: hndItem
         }
     };
     // data I want to save
@@ -718,54 +1012,190 @@ var AV;
             name: "Player"
         }
     };
-    let gameMenuOptions = {
+    // MENU - AUDIO functions
+    let volume = 1.0;
+    function incrementSound() {
+        if (volume >= 100)
+            return;
+        volume += 0.5;
+        AV.ƒS.Sound.setMasterVolume(volume);
+    }
+    AV.incrementSound = incrementSound;
+    function decrementSound() {
+        if (volume <= 0)
+            return;
+        volume -= 0.5;
+        AV.ƒS.Sound.setMasterVolume(volume);
+    }
+    AV.decrementSound = decrementSound;
+    function showCredits() {
+        AV.ƒS.Text.addClass("credits");
+        AV.ƒS.Text.print("Hello Test Test");
+    }
+    AV.showCredits = showCredits;
+    function showAbout() {
+        AV.ƒS.Text.addClass("about");
+        AV.ƒS.Text.print("Save: F8,<br> Load: F9, <br>Close Game Menu: M");
+    }
+    AV.showAbout = showAbout;
+    // MENU - create Menu with Buttons
+    let inGameMenu = {
         save: "Save",
-        load: "Load"
-        // close: "Aus"
+        load: "Load",
+        // close: "Close",
+        turnUpVolume: "🔊",
+        turndownVolume: "🔈",
+        credits: "Credits",
+        about: "About",
+        // open: "Open"
     };
-    // Variable nur zum Löschen für GameMenu
-    // let gameMenu: ƒS.Menu;
-    async function saveNload(_option) {
+    async function buttonFunctionalities(_option) {
         console.log(_option);
-        if (_option == gameMenuOptions.load) {
-            await AV.ƒS.Progress.load();
-        }
-        else if (_option == gameMenuOptions.save) {
+        if (_option == inGameMenu.save) {
             await AV.ƒS.Progress.save();
         }
-        // if (_option == gameMenuOptions.close)
+        else if (_option == inGameMenu.load) {
+            await AV.ƒS.Progress.load();
+        }
+        else if (_option == inGameMenu.turnUpVolume) {
+            incrementSound();
+        }
+        else if (_option == inGameMenu.turndownVolume) {
+            decrementSound();
+        }
+        // if (_option == inGameMenu.close) {
         //   gameMenu.close();
+        // }
+        // if (_option == inGameMenu.open) {
+        //   gameMenu.open();
+        // }
+        if (_option == inGameMenu.credits) {
+            showCredits();
+        }
+        if (_option == inGameMenu.about) {
+            showAbout();
+        }
     }
+    // true heißt hier offen und false geschlossen
+    AV.menu = true;
     // SAVE N LOAD function
+    // shortcuts to save and load game progress
     document.addEventListener("keydown", hndKeypress);
     async function hndKeypress(_event) {
         switch (_event.code) {
             case AV.ƒ.KEYBOARD_CODE.F8:
-                console.log("Save");
+                console.log("Save Game Progress");
                 await AV.ƒS.Progress.save();
                 break;
             case AV.ƒ.KEYBOARD_CODE.F9:
-                console.log("Load");
+                console.log("Load Game Progress");
                 await AV.ƒS.Progress.load();
-                // dataForSave.Protagonist.name = dataForSave.namePlayer;
+                break;
+            // Englische Tastatur beachten, Öffnen und Schließen des Inventars mit derselben Taste
+            case AV.ƒ.KEYBOARD_CODE.M:
+                if (AV.menu) {
+                    console.log("Close Game Menu");
+                    AV.gameMenu.close();
+                    AV.menu = false;
+                }
+                else {
+                    console.log("Open Game Menu");
+                    AV.gameMenu.open();
+                    AV.menu = true;
+                }
                 break;
         }
     }
-    // Audio Test
+    // shortcuts to open and close the inventory
+    document.addEventListener("keydown", hndKeypressForInventory);
+    async function hndKeypressForInventory(_event) {
+        switch (_event.code) {
+            case AV.ƒ.KEYBOARD_CODE.I:
+                console.log("Open Inventory");
+                await AV.ƒS.Inventory.open();
+                break;
+            case AV.ƒ.KEYBOARD_CODE.ESC:
+                console.log("Close Inventory");
+                await AV.ƒS.Inventory.open();
+                AV.ƒS.Inventory.close();
+                break;
+        }
+    }
+    // Animations available in all scenes
+    function leftToRight() {
+        return {
+            start: { translation: AV.ƒS.positions.bottomleft },
+            end: { translation: AV.ƒS.positions.bottomright },
+            duration: 3,
+            playmode: AV.ƒS.ANIMATION_PLAYMODE.PLAYONCE
+        };
+    }
+    AV.leftToRight = leftToRight;
+    function rightToOutOfCanvas() {
+        return {
+            start: { translation: AV.ƒS.positionPercent(30, 100) },
+            end: { translation: AV.ƒS.positionPercent(120, 100) },
+            duration: 3,
+            playmode: AV.ƒS.ANIMATION_PLAYMODE.PLAYONCE
+        };
+    }
+    AV.rightToOutOfCanvas = rightToOutOfCanvas;
+    function midToOutOfCanvas() {
+        return {
+            start: { translation: AV.ƒS.positionPercent(60, 100) },
+            end: { translation: AV.ƒS.positionPercent(120, 100) },
+            duration: 3,
+            playmode: AV.ƒS.ANIMATION_PLAYMODE.PLAYONCE
+        };
+    }
+    AV.midToOutOfCanvas = midToOutOfCanvas;
+    // horizontal and vertical Shaker 
+    async function horizontalShake() {
+        let scene = document.getElementsByTagName("scene")[0];
+        for (let i = 0; i < 15; i++) {
+            if (i % 2 == 0) {
+                scene.style.transform = `translateX(20px)`;
+            }
+            else {
+                scene.style.transform = `translateX(-20px)`;
+            }
+            await new Promise(resolve => setTimeout(resolve, 40));
+        }
+        scene.style.transform = `translateX(0px)`;
+    }
+    AV.horizontalShake = horizontalShake;
+    async function verticalShake() {
+        let scene = document.getElementsByTagName("scene")[0];
+        for (let i = 0; i < 15; i++) {
+            if (i % 2 == 0) {
+                scene.style.transform = `translateY(20px)`;
+            }
+            else {
+                scene.style.transform = `translateY(-20px)`;
+            }
+            await new Promise(resolve => setTimeout(resolve, 40));
+        }
+        scene.style.transform = `translateY(0px)`;
+    }
+    AV.verticalShake = verticalShake;
+    function hndItem(_event) {
+        console.log(_event);
+    }
     window.addEventListener("load", start);
     function start(_event) {
-        // to close menu
-        // let gameMenu = 
-        AV.ƒS.Menu.create(gameMenuOptions, saveNload, "gameMenu");
+        // MENU
+        AV.gameMenu =
+            AV.ƒS.Menu.create(inGameMenu, buttonFunctionalities, "gameMenu");
         // define the sequence of scenes, each scene as an object with a reference to the scene-function, a name and optionally an id and an id to continue the story with
         let scenes = [
             // { scene: HearingLoss, name: "Welcome to an almost muted world" },
-            // { scene: Friendship, name: "Estimate your value" },
+            { scene: AV.StrangerWoman, name: "Estimate your value" },
             { scene: AV.GraphInsertion, name: "Graph Insertion" },
             { scene: AV.SpatialSoundScene, name: "Spatial Sound" }
         ];
+        let uiElement = document.querySelector("[type=interface]");
+        AV.dataForSave = AV.ƒS.Progress.setData(AV.dataForSave, uiElement);
         // start the sequence
-        AV.ƒS.Progress.setData(AV.dataForSave);
         AV.ƒS.Progress.go(scenes);
     }
 })(AV || (AV = {}));
@@ -886,14 +1316,14 @@ var AV;
                     //   break;
                     // case ƒ.KEYBOARD_CODE.P:
                     //   break;
-                    case AV.ƒ.KEYBOARD_CODE.ENTER:
-                        //play Sound
-                        console.log("Play Audio");
-                        if (this.cmpAudio.isPlaying)
-                            this.cmpAudio.play(false);
-                        else
-                            this.cmpAudio.play(true);
-                        break;
+                    // case ƒ.KEYBOARD_CODE.ENTER:
+                    //   //play Sound
+                    //   console.log("Play Audio");
+                    //   if (this.cmpAudio.isPlaying)
+                    //     this.cmpAudio.play(false);
+                    //   else
+                    //     this.cmpAudio.play(true);
+                    //   break;
                 }
             };
         }
