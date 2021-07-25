@@ -4,13 +4,10 @@
     "sourceFiles": [
       "../Source/01_HearingLoss.ts",
       "../Source/02_StrangerWoman.ts",
-      "../Source/03_GraphInsertion.ts",
-      "../Source/04_SpatialSoundScene.ts",
-      "../Source/05_Meeting.ts",
-      "../Source/06_End.ts",
-      "../Source/Dezibel.ts",
-      "../Source/EndingOne.ts",
-      "../Source/EndingTwo.ts",
+      "../Source/03_Home.ts",
+      "../Source/04_Premiere.ts",
+      "../Source/Dezibel_Function.ts",
+      "../Source/End.ts",
       "../Source/Main.ts",
       "../Source/SpatialSound.ts"
     ],
@@ -24,7 +21,7 @@
         },
         {
           "pos": 15,
-          "end": 70085,
+          "end": 100397,
           "kind": "text"
         }
       ],
@@ -58,7 +55,7 @@
         },
         {
           "pos": 52,
-          "end": 6648,
+          "end": 7524,
           "kind": "text"
         }
       ]

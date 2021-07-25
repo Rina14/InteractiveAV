@@ -815,8 +815,13 @@ var FudgeStory;
         /**
          * Set the overall volume for the sound mix
          */
+        // public static setMasterVolume(_volume: number): void {
+        //      ƒ.AudioManager.default.volume = _volume;
+        // }
         static setMasterVolume(_volume) {
-            ƒ.AudioManager.default.volume = _volume;
+            for (let [info, sound] of this.sounds) {
+                sound.cmpAudio.volume = Math.max(_volume * sound.cmpAudio.volume, 0.01);
+            }
         }
         /**
          * Changes the volume of the sound defined by the url linearly of the given duration to the define volume.

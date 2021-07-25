@@ -2,6 +2,11 @@ namespace AV {
   export async function HearingLoss(): ƒS.SceneReturn {
     console.log("Start Hearing Loss");
 
+    let cmpAudio: ƒ.ComponentAudio;
+    let distortion: WaveShaperNode = ƒ.AudioManager.default.createWaveShaper();
+    let audioCutie: ƒ.Audio;
+    let audioDrop: ƒ.Audio;
+
     let text = {
       Narrator: {
         T0000: "<i>...</i>",
@@ -67,6 +72,7 @@ namespace AV {
     document.getElementById("dB").hidden = true;
 
     // for moments with individual delays
+    let signalDelay40: ƒS.Signal = ƒS.Progress.defineSignal([() => ƒS.Progress.delay(40)]);
     let signalDelay2: ƒS.Signal = ƒS.Progress.defineSignal([() => ƒS.Progress.delay(2)]);
     let signalDelay1: ƒS.Signal = ƒS.Progress.defineSignal([() => ƒS.Progress.delay(1)]);
     // let pressK: ƒS.Signal = ƒS.Progress.defineSignal([() => ƒS.getKeypress(ƒ.KEYBOARD_CODE.K)]);
@@ -98,7 +104,6 @@ namespace AV {
 
 
     // Start the Scene!
-
     ƒS.Speech.hide();
     await ƒS.Location.show(locations.trainBeach);
     await ƒS.update(transitions.wet.duration, transitions.wet.alpha, transitions.wet.edge);
@@ -121,9 +126,6 @@ namespace AV {
     dataForSave.Protagonist.name = await ƒS.Speech.getInput();
     console.log(dataForSave.Protagonist.name);
 
-    // Punkte verteilen
-    // dataForSave.score += 10;
-
     await ƒS.Speech.tell(characters.Doctor, "Hallo, " + dataForSave.Protagonist.name + ".");
     await ƒS.Speech.tell(characters.Doctor, "Du hast eine Sc###empf####keit.");
     await ƒS.Speech.tell(dataForSave.Protagonist, text.Protagonist.T0000, true, "Player");
@@ -137,9 +139,40 @@ namespace AV {
     await ƒS.Speech.tell(dataForSave.Protagonist, text.Protagonist.T0003, true, "Player");
     await ƒS.Speech.tell(characters.Doctor, text.Doctor.T0005);
     await ƒS.Speech.tell(null, text.Narrator.T0006);
+    await ƒS.Speech.tell(characters.Doctor, "Außerdem möchte ich dir noch ein neu entwickeltes Gerät mitgeben.\
+    Damit kannst du verschiedene Töne abspielen und anschließend bewerten, wie gut du diese hörst.");
+    await ƒS.Speech.tell(characters.Doctor, "Dafür wirst du noch genug Zeit haben. Probiere es einfach mal aus.\
+    Denn du solltest dich nun häufiger damit beschäftigen, wie du deinen Alltag meistern möchtest.");
+    await ƒS.Speech.tell(characters.Doctor, "Vor allen Dingen dein Studium.");
+    await ƒS.Speech.tell(characters.Doctor, "Es könnte gut sein, dass es hier zu Schwierigkeiten kommt.");
+    await ƒS.Speech.tell(characters.Doctor, "Auch hierfür gibt es spezielle Geräte wie eine FM-Anlage, \
+    die dir das Hören vereinfachen soll.");
+    await ƒS.Speech.tell(dataForSave.Protagonist, "Was mache ich aber nun bei Sprachprüfungen?", true, "Player");
+    await ƒS.Speech.tell(characters.Doctor, "Da du ein relativ niedriges Sprachverständnis besitzt, gibt es auch hierfür Rechte für Schwerhörige.\
+    Nicht nur, dass du bei einem Grad der Behinderung (GdB) ab 50 einen Schwerbehindertenausweis beantragen kannst...");
+    await ƒS.Speech.tell(characters.Doctor, "Sondern, dass du auch ein Recht auf Prüfungszeitverlängerung hast.");
+    await ƒS.Speech.tell(dataForSave.Protagonist, "Das klingt theoretisch sehr fair. Ich bin aber irgendwie sicher, dass ich hier noch auf großes Unverständnis treffen werden, wenn ich an ganz bestimmte Lehrende denke...", true, "Player");
+    await ƒS.Speech.tell(characters.Doctor, "Dies ist dein gutes Recht und da hat dir auch niemand reinzureden. \
+    Diese können es außerdem ganz und gar nicht nachvollziehen, wie es ist, schwerhörig zu sein.");
+    await ƒS.Speech.tell(characters.Doctor, "Jedoch solltest du das mit deiner Hochschule klären. \
+    In der Regel schlägt diese dir dann einen Zeitrahmen vor und entsprechende Maßnahmen für z.B. Hörverständnis-Aufgaben oder Ähnliches.");
+    await ƒS.Speech.tell(dataForSave.Protagonist, "Alles klar. Vielen Dank Doktor Ryu!", true, "Player");
+
+    // Text print für Audio GraphInsertion
+    await ƒS.Text.print("Teste das Gerät, das dir der Doktor mitgegeben hat. \
+    <br>Benutze hierfür jeweils eine beliebige Pfeiltaste und anschließend Enter.<br>Dann ertönen verschiedene Sounds und du kannst schauen, wie gut du diese hörst.\
+    In der Regel sollte ein Mensch ohne Hörprobleme diese klar und deutlich wahrnehmen. Bei Hörgeschädigten kann es sein, dass diese gar nicht wahrgenommen werden.");
+    // Audio Funktion GraphInsertion
+    ƒS.Sound.fade(sound.again, 0, 2);
+    enableAudioTest();
     await ƒS.Character.hide(characters.Doctor);
     ƒS.Speech.hide();
     await ƒS.update(1);
+    await signalDelay40();
+    disableAudioTest();
+    ƒS.Sound.play(sound.again, 0.05, true);
+    ƒS.Sound.fade(sound.again, 0.2, 4);
+
     await ƒS.Location.show(locations.trainBeach);
     // await ƒS.update(transitions.flash.duration, transitions.flash.alpha, transitions.flash.edge);
     await ƒS.update(0.5);
@@ -247,12 +280,13 @@ namespace AV {
     await ƒS.Speech.tell(characters.Adelinde, text.Adelinde.T0006);
     await ƒS.Speech.tell(dataForSave.Protagonist, text.Protagonist.T0009, true, "Player");
 
+    //  BLACK
     ƒS.Speech.hide();
     ƒS.Character.hide(characters.Adelinde);
     await ƒS.update(0.2);
     await ƒS.Location.show(locations.black);
     await ƒS.update(0.5);
-    ƒS.Text.setClass("trainStation");
+    ƒS.Text.setClass("black");
     await ƒS.Text.print("<br><br><br><br>Nächster Halt: Marktgasse.<br>Ausstieg in Fahrtrichtung rechts.");
     ƒS.Text.close();
     await ƒS.update(1);
@@ -276,5 +310,74 @@ namespace AV {
 
     await signalDelay2();
 
+
+
+
+
+
+    // enableAudioTest();
+
+    // disableAudioTest();
+
+
+
+    // Audio test function
+
+    async function enableAudioTest(): Promise<void> {
+      window.addEventListener("keydown", handleKeydownForAudio);
+      audioCutie = new ƒ.Audio(sound.cutie);
+      // await audioBeep.asyncLoad("Sound/Beep.mp3")
+      audioDrop = new ƒ.Audio(sound.drop);
+      // await audioUfo.asyncLoad("Sound/Beat.mp3")
+      cmpAudio = new ƒ.ComponentAudio(audioCutie, false, false);
+      cmpAudio.connect(true);
+      cmpAudio.volume = 30;
+
+      function makeDistortionCurve(amount: number = 50): Float32Array {
+        let samples: number = 44100;
+        let curve: Float32Array = new Float32Array(samples);
+        let deg: number = Math.PI / 180;
+        let x: number;
+        for (let i: number = 0; i < samples; ++i) {
+          x = i * 2 / samples - 1;
+          curve[i] = (3 + amount) * x * 20 * deg / (Math.PI + amount * Math.abs(x));
+        }
+        return curve;
+      }
+
+      distortion.curve = makeDistortionCurve(400);
+      distortion.oversample = "4x";
+    }
+
+    // document.addEventListener("keydown", handleKeydownForAudio);
+    function handleKeydownForAudio(_event: KeyboardEvent): void {
+      switch (_event.code) {
+        case ƒ.KEYBOARD_CODE.ENTER:
+          ƒ.Debug.log("Play");
+          cmpAudio.play(true);
+          break;
+        case ƒ.KEYBOARD_CODE.ARROW_UP:
+          ƒ.Debug.log("Insert");
+          cmpAudio.insertAudioNodes(distortion, distortion);
+          break;
+        case ƒ.KEYBOARD_CODE.ARROW_DOWN:
+          ƒ.Debug.log("Remove");
+          cmpAudio.insertAudioNodes(null, null);
+          break;
+        case ƒ.KEYBOARD_CODE.ARROW_LEFT:
+          ƒ.Debug.log("Cutie");
+          cmpAudio.setAudio(audioCutie);
+          break;
+        case ƒ.KEYBOARD_CODE.ARROW_RIGHT:
+          ƒ.Debug.log("Drop");
+          cmpAudio.setAudio(audioDrop);
+          break;
+      }
+    }
+
+    function disableAudioTest(): void {
+      window.removeEventListener("keydown", handleKeydownForAudio);
+      console.log("Audio Test disabled");
+    }
   }
 }

@@ -48,15 +48,16 @@ namespace AV {
     surveillance: "Audio/Themes/Surveillance.ogg",
     truth: "Audio/Themes/Truth.mp3",
     vengeance: "Audio/Themes/Vengeance.mp3",
+    dancerTheme: "Audio/Themes/dancerTheme.wav",
 
     // Sound
     click: "Audio/Sound/click.mp3",
-    Beep: "./Audio/Sound/Beep.mp3",
     Beat: "./Audio/Sound/Beat.mp3",
-    hypnotic: "Audio/Sound/hypnotic.mp3",
-    Ufo: "Audio/Sound/Ufo.mp3",
     cutie: "Audio/Sound/cutie.mp3",
     pinch: "Audio/Sound/pinch.flac",
+    punch: "Audio/Sound/punch.mp3",
+    shower: "Audio/Sound/shower.wav",
+    drop: "Audio/Sound/drop31.wav",
 
     // Voice
     hahaha: "Audio/Voice/Ha_ha_ha.wav",
@@ -199,31 +200,80 @@ namespace AV {
         innocent: "Images/Characters/Elaine_innocent.png"
       }
     },
-    Elaine: {
-      name: "Elaine",
+    Anastasia: {
+      name: "Anastasia",
       origin: ƒS.ORIGIN.BOTTOMCENTER,
       pose: {
-        normal: "Images/Characters/Elaine_normal.png",
-        mad: "Images/Characters/Elaine_mad.png",
-        innocent: "Images/Characters/Elaine_innocent.png"
+        normal: "Images/Characters/Anastasia_normal.png",
+        smile: "Images/Characters/Anastasia_smile.png",
+        innocent: "Images/Characters/Anastasia_innocent.png",
+        unsure: "Images/Characters/Anastasia_unsure.png"
+      }
+    },
+    Mama: {
+      name: "Mama",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        normal: "Images/Characters/Anastasia_normal.png",
+        smile: "Images/Characters/Anastasia_smile.png",
+        innocent: "Images/Characters/Anastasia_innocent.png",
+        unsure: "Images/Characters/Anastasia_unsure.png"
+      }
+    },
+    Twins: {
+      name: "Zwillinge",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        normal: "Images/Characters/Twins_normal.png",
+        shocked: "Images/Characters/Twins_shocked.png",
+        smile: "Images/Characters/Twins_smile.png",
+        surprised: "Images/Characters/Twins_surprised.png"
+      }
+    },
+    Ned: {
+      name: "Ned",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        normal: "Images/Characters/Ned_normal.png"
+      }
+    },
+    Sed: {
+      name: "Sed",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        normal: "Images/Characters/Sed_normal.png"
+      }
+    },
+    Dancer: {
+      name: "Tänzerin",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        normal: "Images/Characters/dancer.png"
       }
     }
   };
 
-  export let items = {
-    Fudge: {
-      name: "Fudge Item",
-      description: "A delicious cube of fudge, adds 10 to your health",
-      image: "Images/Characters/Ryu_normal.png",
-      static: true,
-      handler: hndItem
-    }
-  };
+
+  // export let items = {
+  //   Chips: {
+  //     name: "Chips",
+  //     description: "Tasty crisps",
+  //     image: "Images/Items/ChipsPackung.png",
+  //     static: false,
+  //     handler: hndItem
+  //   },
+  //   Lollipops: {
+  //     name: "Lollipops",
+  //     description: "Yummy Lollis",
+  //     image: "Images/Items/Lollipops.png",
+  //     static: false,
+  //     handler: hndItem
+  //   }
+  // };
 
 
   // data I want to save
   export let dataForSave = {
-    score: 0,
     Protagonist: {
       name: "Player"
     }
@@ -237,25 +287,27 @@ namespace AV {
     if (volume >= 100)
       return;
     volume += 0.5;
-    ƒS.Sound.setMasterVolume(volume);
+    ƒS.Sound.setMasterVolume(1.3);
   }
 
   export function decrementSound(): void {
     if (volume <= 0)
       return;
     volume -= 0.5;
-    ƒS.Sound.setMasterVolume(volume);
+    ƒS.Sound.setMasterVolume(0.7);
   }
 
 
   export function showCredits(): void {
     ƒS.Text.addClass("credits");
-    ƒS.Text.print("Hello Test Test");
+    ƒS.Text.print("- Background Credits to Noraneko Games, on Twitter @NoranekoGames /  Noranekokgames.itch.io<br>\
+    - Music Credits to Tim Beek, on Twitter @timbeekmusic, Homepage http://www.timbeek.com<br>\
+    - Character and Dancer Background Credits to Riem Yasin");
   }
 
-  export function showAbout(): void {
-    ƒS.Text.addClass("about");
-    ƒS.Text.print("Save: F8,<br> Load: F9, <br>Close Game Menu: M");
+  export function showHelp(): void {
+    ƒS.Text.addClass("help");
+    ƒS.Text.print("<h3>Shortcuts</h3>Inventory: I<br>Save: F8 <br> Load: F9 <br>Close Game Menu: M <br>Continue Visual Novel with Space or LMC");
   }
 
 
@@ -264,12 +316,10 @@ namespace AV {
   let inGameMenu = {
     save: "Save",
     load: "Load",
-    // close: "Close",
     turnUpVolume: "🔊",
     turndownVolume: "🔈",
     credits: "Credits",
-    about: "About",
-    // open: "Open"
+    help: "Help"
   };
 
 
@@ -300,8 +350,8 @@ namespace AV {
     if (_option == inGameMenu.credits) {
       showCredits();
     }
-    if (_option == inGameMenu.about) {
-      showAbout();
+    if (_option == inGameMenu.help) {
+      showHelp();
     }
   }
 
@@ -364,6 +414,15 @@ namespace AV {
     };
   }
 
+  export function midToLeft(): ƒS.AnimationDefinition {
+    return {
+      start: { translation: ƒS.positions.bottomcenter },
+      end: { translation: ƒS.positionPercent(30, 100) },
+      duration: 3,
+      playmode: ƒS.ANIMATION_PLAYMODE.PLAYONCE
+    };
+  }
+
   export function rightToOutOfCanvas(): ƒS.AnimationDefinition {
     return {
       start: { translation: ƒS.positionPercent(30, 100) },
@@ -382,10 +441,28 @@ namespace AV {
     };
   }
 
+  export function outOfCanvasToMid(): ƒS.AnimationDefinition {
+    return {
+      start: { translation: ƒS.positionPercent(120, 100) },
+      end: { translation: ƒS.positionPercent(60, 100) },
+      duration: 3,
+      playmode: ƒS.ANIMATION_PLAYMODE.PLAYONCE
+    };
+  }
+
+  export function outOfCanvasToLeft(): ƒS.AnimationDefinition {
+    return {
+      start: { translation: ƒS.positionPercent(120, 100) },
+      end: { translation: ƒS.positions.bottomleft },
+      duration: 3,
+      playmode: ƒS.ANIMATION_PLAYMODE.PLAYONCE
+    };
+  }
+
 
 
   // horizontal and vertical Shaker 
-  
+
   export async function horizontalShake(): Promise<void> {
     let scene: HTMLElement = <HTMLElement>document.getElementsByTagName("scene")[0];
 
@@ -420,9 +497,9 @@ namespace AV {
 
 
 
-  function hndItem(_event: CustomEvent): void {
-    console.log(_event);
-  }
+  // function hndItem(_event: CustomEvent): void {
+  //   console.log(_event);
+  // }
 
 
   window.addEventListener("load", start);
@@ -434,10 +511,10 @@ namespace AV {
     // define the sequence of scenes, each scene as an object with a reference to the scene-function, a name and optionally an id and an id to continue the story with
     let scenes: ƒS.Scenes = [
       // { scene: HearingLoss, name: "Welcome to an almost muted world" },
-      { scene: StrangerWoman, name: "Estimate your value" },
-      { scene: GraphInsertion, name: "Graph Insertion" },
-      { scene: SpatialSoundScene, name: "Spatial Sound" }
-
+      // { scene: StrangerWoman, name: "Confronting a stranger with hardness of hearing" },
+      // { scene: Home, name: "Arriving at home" },
+      { scene: Premiere, name: "Meeting with friends" },
+      { scene: End, name: "The End" }
     ];
 
 

@@ -60,7 +60,7 @@ namespace AV {
 
 
       // audio setup
-      const audio: ƒ.Audio = new ƒ.Audio(sound.nightclub);
+      const audio: ƒ.Audio = new ƒ.Audio(sound.dancerTheme);
       this.cmpAudio = new ƒ.ComponentAudio(audio, true);
       speaker.addComponent(this.cmpAudio);
       this.cmpAudio.setPanner(ƒ.AUDIO_PANNER.CONE_OUTER_ANGLE, 180);
@@ -227,14 +227,14 @@ namespace AV {
         // case ƒ.KEYBOARD_CODE.P:
 
         //   break;
-        // case ƒ.KEYBOARD_CODE.ENTER:
-        //   //play Sound
-        //   console.log("Play Audio");
-        //   if (this.cmpAudio.isPlaying)
-        //     this.cmpAudio.play(false);
-        //   else
-        //     this.cmpAudio.play(true);
-        //   break;
+        case ƒ.KEYBOARD_CODE.ENTER:
+          //play Sound
+          console.log("Play Audio");
+          if (this.cmpAudio.isPlaying)
+            this.cmpAudio.play(false);
+          else
+            this.cmpAudio.play(true);
+          break;
       }
     }
   }

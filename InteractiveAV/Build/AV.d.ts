@@ -6,25 +6,27 @@ declare namespace AV {
     function StrangerWoman(): ƒS.SceneReturn;
 }
 declare namespace AV {
-    function GraphInsertion(): ƒS.SceneReturn;
+    function Home(): ƒS.SceneReturn;
 }
 declare namespace AV {
-    function SpatialSoundScene(): ƒS.SceneReturn;
+    function Premiere(): ƒS.SceneReturn;
 }
 declare namespace AV {
-    function dezibelMeter(): void;
+    class DezibelMeter {
+        static isOn: boolean;
+        static activateDecibelMeter(): void;
+        static deactivateDecibelMeter(): void;
+        static dezibelMeter(): void;
+    }
 }
 declare namespace AV {
-    function EndingOne(): ƒS.SceneReturn;
-}
-declare namespace AV {
-    function EndingTwo(): ƒS.SceneReturn;
+    function End(): ƒS.SceneReturn;
 }
 declare namespace AV {
     export import ƒ = FudgeCore;
     export import ƒS = FudgeStory;
     export import ƒAid = FudgeAid;
-    export let transitions: {
+    let transitions: {
         clock: {
             duration: number;
             alpha: string;
@@ -46,7 +48,7 @@ declare namespace AV {
             edge: number;
         };
     };
-    export let sound: {
+    let sound: {
         energy: string;
         extremeaction: string;
         again: string;
@@ -59,13 +61,14 @@ declare namespace AV {
         surveillance: string;
         truth: string;
         vengeance: string;
+        dancerTheme: string;
         click: string;
-        Beep: string;
         Beat: string;
-        hypnotic: string;
-        Ufo: string;
         cutie: string;
         pinch: string;
+        punch: string;
+        shower: string;
+        drop: string;
         hahaha: string;
         ha_haa: string;
         hmmOne: string;
@@ -79,7 +82,7 @@ declare namespace AV {
         uhHuhQuestionable: string;
         ummOne: string;
     };
-    export let locations: {
+    let locations: {
         city: {
             name: string;
             background: string;
@@ -153,7 +156,7 @@ declare namespace AV {
             background: string;
         };
     };
-    export let characters: {
+    let characters: {
         Narrator: {
             name: string;
         };
@@ -196,44 +199,77 @@ declare namespace AV {
                 innocent: string;
             };
         };
-        Elaine: {
+        Anastasia: {
             name: string;
             origin: ƒ.ORIGIN2D;
             pose: {
                 normal: string;
-                mad: string;
+                smile: string;
                 innocent: string;
+                unsure: string;
+            };
+        };
+        Mama: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                normal: string;
+                smile: string;
+                innocent: string;
+                unsure: string;
+            };
+        };
+        Twins: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                normal: string;
+                shocked: string;
+                smile: string;
+                surprised: string;
+            };
+        };
+        Ned: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                normal: string;
+            };
+        };
+        Sed: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                normal: string;
+            };
+        };
+        Dancer: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                normal: string;
             };
         };
     };
-    export let items: {
-        Fudge: {
-            name: string;
-            description: string;
-            image: string;
-            static: boolean;
-            handler: typeof hndItem;
-        };
-    };
-    export let dataForSave: {
-        score: number;
+    let dataForSave: {
         Protagonist: {
             name: string;
         };
     };
-    export function incrementSound(): void;
-    export function decrementSound(): void;
-    export function showCredits(): void;
-    export function showAbout(): void;
-    export let gameMenu: ƒS.Menu;
-    export let menu: boolean;
-    export function leftToRight(): ƒS.AnimationDefinition;
-    export function rightToOutOfCanvas(): ƒS.AnimationDefinition;
-    export function midToOutOfCanvas(): ƒS.AnimationDefinition;
-    export function horizontalShake(): Promise<void>;
-    export function verticalShake(): Promise<void>;
-    function hndItem(_event: CustomEvent): void;
-    export {};
+    function incrementSound(): void;
+    function decrementSound(): void;
+    function showCredits(): void;
+    function showHelp(): void;
+    let gameMenu: ƒS.Menu;
+    let menu: boolean;
+    function leftToRight(): ƒS.AnimationDefinition;
+    function midToLeft(): ƒS.AnimationDefinition;
+    function rightToOutOfCanvas(): ƒS.AnimationDefinition;
+    function midToOutOfCanvas(): ƒS.AnimationDefinition;
+    function outOfCanvasToMid(): ƒS.AnimationDefinition;
+    function outOfCanvasToLeft(): ƒS.AnimationDefinition;
+    function horizontalShake(): Promise<void>;
+    function verticalShake(): Promise<void>;
 }
 declare namespace AV {
     class SpatialSound {
