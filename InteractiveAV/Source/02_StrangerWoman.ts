@@ -16,7 +16,7 @@ namespace AV {
         T0004: "Ach, schon gut. Die hat wohl eigene Probleme."
       },
       Adelinde: {
-        T0000: "Auf geht's! Ich hole noch schnell einen Einkaufswagen, du kannst schon einmal reingehen.",
+        T0000: "Auf geht's! Ich hole noch schnell einen Einkaufswagen, du kannst schon einmal reingehen, ",
         T0001: "Bis gleich.",
         T0002: "Da bin ich wieder.",
         T0003: "Entschuldige, das hat etwas länger gedauert. Ich habe eine Bekannte getroffen und mich noch etwas unterhalten.",
@@ -30,10 +30,6 @@ namespace AV {
         T0001: "Ahh, hey du da. Pass doch auf!",
         T0002: "Aus dem Weg, ich hab's eilig.",
         T0003: ""
-      },
-      Elaine: {
-        T0000: "",
-        T0001: ""
       }
     };
 
@@ -46,10 +42,6 @@ namespace AV {
 
 
 
-    // Zum Rumnavigieren zur/von Soundquelle
-    // let spatialSound: SpatialSound = new SpatialSound();
-    // spatialSound.start();
-    // for moments with individual delays
     let signalDelay2: ƒS.Signal = ƒS.Progress.defineSignal([() => ƒS.Progress.delay(2)]);
     let signalDelay1: ƒS.Signal = ƒS.Progress.defineSignal([() => ƒS.Progress.delay(1)]);
     // let pressK: ƒS.Signal = ƒS.Progress.defineSignal([() => ƒS.getKeypress(ƒ.KEYBOARD_CODE.K)]);
@@ -70,12 +62,11 @@ namespace AV {
     await ƒS.Speech.tell(characters.Adelinde, text.Adelinde.T0000 + dataForSave.Protagonist.name + ".");
     await ƒS.Speech.tell(dataForSave.Protagonist, text.Protagonist.T0000, true, "Player");
     await ƒS.Speech.tell(characters.Adelinde, text.Adelinde.T0001);
-    await ƒS.Speech.tell(dataForSave.Protagonist, text.Protagonist.T0001, true, "Player");
+    ƒS.Speech.hide();
     await ƒS.Character.animate(characters.Adelinde, characters.Adelinde.pose.shytalk, midToOutOfCanvas());
     await ƒS.update(2);
     await ƒS.Speech.tell(null, text.Narrator.T0000);
     await ƒS.Speech.tell(characters.StrangerWoman, text.StrangerWomen.T0000);
-    //  OPTIONAL: Kamera wackeln lassen
     ƒS.Sound.play(sound.punch, 1);
     await horizontalShake();
     await ƒS.Character.show(characters.StrangerWoman, characters.StrangerWoman.pose.mad, ƒS.positionPercent(30, 100));
@@ -135,7 +126,7 @@ namespace AV {
             await ƒS.Character.show(characters.StrangerWoman, characters.StrangerWoman.pose.normal, ƒS.positionPercent(30, 100));
             await ƒS.update(0.1);
             await ƒS.Speech.tell(characters.StrangerWoman, "Wobei...");
-            await ƒS.Speech.tell(characters.StrangerWoman, "Entschuldige bitte, für eben. Ich habe mich nur verlaufen und finde einfach diese ####straße nicht.");
+            await ƒS.Speech.tell(characters.StrangerWoman, "Entschuldige bitte wegen eben. Ich habe mich nur verlaufen und finde einfach diese ####straße nicht.");
             await ƒS.Speech.tell(null, "<i>Hmm.. naja, was soll's.</i>");
             await ƒS.Speech.tell(dataForSave.Protagonist, "Könnten Sie das bitte wiederholen?", true, "Player");
             await ƒS.Speech.tell(characters.StrangerWoman, "Ähh, ####straße. Weißt du wo das ist?");
@@ -168,7 +159,7 @@ namespace AV {
         await ƒS.Speech.tell(characters.StrangerWoman, "Na, toll.. Wo muss ich nur hin?");
         await ƒS.Character.hide(characters.StrangerWoman);
         await ƒS.update(0.2);
-        await ƒS.Speech.tell(null, "<i>Und da geht sie einfach weg. Cool.</i>");
+        await ƒS.Speech.tell(null, "<i>Und da geht sie einfach weg.<p>Super.</i>");
         await ƒS.Speech.tell(null, "<i>Oh man. Zum Glück sind nicht alle so drauf.</i>");
         await ƒS.Speech.tell(null, "<i>Allerdings ist das trotzdem ein blödes Gefühl..</i>");
         ƒS.Speech.clear();

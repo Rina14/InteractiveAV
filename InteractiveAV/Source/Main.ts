@@ -1,19 +1,15 @@
 namespace AV {
-  //zugriff auch innerhalb anderer dateien durch export; fudgecore ist extern nicht teil des programms deshalb muss es erst importiert werden
   export import ƒ = FudgeCore;
   export import ƒS = FudgeStory;
   export import ƒAid = FudgeAid;
 
 
-  //damit man weiß, dass das Programm läuft
   console.log("Start");
 
-  //Objekte, man kann auf die entsprechenden Daten zugreifen
-  // define transitions
   export let transitions = {
     clock: {
-      duration: 3,
-      alpha: "./Transitions/circlewipe-ccw.jpg",
+      duration: 2,
+      alpha: "./Transitions/WipesAndOther/circlewipe-ccw.jpg",
       edge: 1
     },
     jigsaw: {
@@ -21,7 +17,7 @@ namespace AV {
       alpha: "./Transitions/jigsaw 08.png",
       edge: 0.4
     },
-    flash: {
+    mosaik: {
       duration: 2,
       alpha: "./Transitions/Others/040.jpg",
       edge: 0.4
@@ -30,10 +26,14 @@ namespace AV {
       duration: 3,
       alpha: "./Transitions/Others/wet.jpg",
       edge: 0.4
+    },
+    swirl: {
+      duration: 3,
+      alpha: "./Transitions/Others/swirl.png",
+      edge: 1
     }
   };
 
-  // define sounds as key-string-pairs with the url of the soundfile
   export let sound = {
     // Music
     energy: "Audio/Themes/energy.mp3",
@@ -75,8 +75,6 @@ namespace AV {
   };
 
 
-
-  // define locations as key-object-pairs, the objects with the properties name, background and an optional foreground
   export let locations = {
     city: {
       name: "CloudyCity",
@@ -153,27 +151,9 @@ namespace AV {
   };
 
 
-  // define characters as key-object-pairs, the objects with the properties name, origin and an array if poses, each again with a unique key
   export let characters = {
     Narrator: {
       name: ""
-    },
-    // Protagonist: {
-    //   name: "Player"
-    // },
-    Aoi: {
-      name: "Aoi",
-      origin: ƒS.ORIGIN.BOTTOMCENTER,
-      pose: {
-        normal: "Images/Characters/placeholder_girl.png"
-      }
-    },
-    Ryu: {
-      name: "Ryu",
-      origin: ƒS.ORIGIN.BOTTOMCENTER,
-      pose: {
-        normal: "Images/Characters/Ryu_normal.png"
-      }
     },
     Adelinde: {
       name: "Adelinde",
@@ -272,7 +252,7 @@ namespace AV {
   // };
 
 
-  // data I want to save
+  // data which should be saved so it won't get lost in case game progress is being saved and loaded by the player
   export let dataForSave = {
     Protagonist: {
       name: "Player"
@@ -302,7 +282,8 @@ namespace AV {
     ƒS.Text.addClass("credits");
     ƒS.Text.print("- Background Credits to Noraneko Games, on Twitter @NoranekoGames /  Noranekokgames.itch.io<br>\
     - Music Credits to Tim Beek, on Twitter @timbeekmusic, Homepage http://www.timbeek.com<br>\
-    - Character and Dancer Background Credits to Riem Yasin");
+    - Character and Dancer Background Credits to Riem Yasin\
+    - Transition Credits to Kia Azad");
   }
 
   export function showHelp(): void {
@@ -311,8 +292,7 @@ namespace AV {
   }
 
 
-  // MENU - create Menu with Buttons
-
+  // MENU - create Menu with buttons
   let inGameMenu = {
     save: "Save",
     load: "Load",
@@ -462,7 +442,6 @@ namespace AV {
 
 
   // horizontal and vertical Shaker 
-
   export async function horizontalShake(): Promise<void> {
     let scene: HTMLElement = <HTMLElement>document.getElementsByTagName("scene")[0];
 
@@ -495,8 +474,6 @@ namespace AV {
   }
 
 
-
-
   // function hndItem(_event: CustomEvent): void {
   //   console.log(_event);
   // }
@@ -507,8 +484,6 @@ namespace AV {
     // MENU
     gameMenu =
       ƒS.Menu.create(inGameMenu, buttonFunctionalities, "gameMenu");
-
-    // define the sequence of scenes, each scene as an object with a reference to the scene-function, a name and optionally an id and an id to continue the story with
     let scenes: ƒS.Scenes = [
       { scene: HearingLoss, name: "Welcome to an almost muted world" },
       { scene: StrangerWoman, name: "Confronting a stranger with hardness of hearing" },
@@ -522,7 +497,6 @@ namespace AV {
     dataForSave = ƒS.Progress.setData(dataForSave, uiElement);
 
 
-    // start the sequence
     ƒS.Progress.go(scenes);
   }
 }

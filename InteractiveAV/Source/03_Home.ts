@@ -35,7 +35,7 @@ namespace AV {
         T0015: "Gute Nacht, ich dich auch.",
         T0016: "Warte-..."
       },
-      Anastasia: {
+      Mama: {
         T0000: "Alles ### ####?",
         T0001: "Schätzchen?",
         T0002: "Hey, du. Alles ok?",
@@ -73,13 +73,13 @@ namespace AV {
 
     ƒS.Speech.hide();
     await ƒS.Location.show(locations.livingRoom);
-    // await ƒS.Character.show(characters.Adelinde, characters.Adelinde.pose.shytalk, ƒS.positionPercent(60, 100));
-    await ƒS.update(1);
+    await ƒS.update(transitions.clock.duration, transitions.clock.alpha, transitions.clock.edge);
     await ƒS.Speech.tell(null, text.Narrator.T0000);
     await ƒS.Speech.tell(null, text.Narrator.T0001);
     await ƒS.Location.show(locations.bathroom);
-    await ƒS.update(1);
+    await ƒS.update(transitions.wet.duration, transitions.wet.alpha, transitions.wet.edge);
     await ƒS.Speech.tell(null, text.Narrator.T0002);
+    ƒS.Speech.hide();
     await signalDelay2();
     ƒS.Sound.fade(sound.shower, 1, 1, true);
     await ƒS.Location.show(locations.bathroomFoggy);
@@ -89,9 +89,9 @@ namespace AV {
     await ƒS.Speech.tell(null, text.Narrator.T0004);
     await ƒS.Speech.tell(dataForSave.Protagonist, text.Protagonist.T0001, true, "Player");
     await ƒS.Speech.tell(dataForSave.Protagonist, text.Protagonist.T0002, true, "Player");
-    await ƒS.Speech.tell(characters.Mama, text.Anastasia.T0000);
+    await ƒS.Speech.tell(characters.Mama, text.Mama.T0000);
     await ƒS.Speech.tell(dataForSave.Protagonist, text.Protagonist.T0000, true, "Player");
-    await ƒS.Speech.tell(characters.Mama, text.Anastasia.T0001);
+    await ƒS.Speech.tell(characters.Mama, text.Mama.T0001);
     await signalDelay2();
     ƒS.Sound.fade(sound.shower, 0, 1);
     await ƒS.Speech.tell(dataForSave.Protagonist, text.Protagonist.T0003, true, "Player");
@@ -101,12 +101,12 @@ namespace AV {
     await ƒS.Character.show(characters.Anastasia, characters.Anastasia.pose.unsure, ƒS.positions.bottomcenter);
     await ƒS.update(1);
     await ƒS.Speech.tell(null, text.Narrator.T0005);
-    await ƒS.Speech.tell(characters.Mama, text.Anastasia.T0002);
+    await ƒS.Speech.tell(characters.Mama, text.Mama.T0002);
     await ƒS.Speech.tell(dataForSave.Protagonist, text.Protagonist.T0004, true, "Player");
-    await ƒS.Speech.tell(characters.Mama, text.Anastasia.T0003);
+    await ƒS.Speech.tell(characters.Mama, text.Mama.T0003);
     await ƒS.Speech.tell(dataForSave.Protagonist, text.Protagonist.T0005, true, "Player");
     await ƒS.Speech.tell(dataForSave.Protagonist, text.Protagonist.T0006, true, "Player");
-    await ƒS.Speech.tell(characters.Mama, text.Anastasia.T0004);
+    await ƒS.Speech.tell(characters.Mama, text.Mama.T0004);
     await ƒS.Speech.tell(null, text.Narrator.T0006);
     await ƒS.Speech.tell(dataForSave.Protagonist, text.Protagonist.T0007, true, "Player");
 
@@ -154,7 +154,7 @@ namespace AV {
 
     await ƒS.Character.show(characters.Anastasia, characters.Anastasia.pose.normal, ƒS.positions.bottomcenter);
     await ƒS.update(0.2);
-    await ƒS.Speech.tell(characters.Mama, text.Anastasia.T0005);
+    await ƒS.Speech.tell(characters.Mama, text.Mama.T0005);
     // Warum sprichst du eigentlich so laut? / Ich habe dir etwas mitgebracht -> Töne ausprobieren
     // await ƒS.Speech.tell(characters.Unknown, text.Anastasia.T0006);
     await ƒS.Speech.tell(dataForSave.Protagonist, text.Protagonist.T0008, true, "Player");
@@ -164,32 +164,33 @@ namespace AV {
     ƒS.Character.hide(characters.Anastasia);
     await ƒS.Character.animate(characters.Anastasia, characters.Anastasia.pose.innocent, midToLeft());
     await ƒS.update(0.2);
-    await ƒS.Speech.tell(characters.Mama, text.Anastasia.T0006);
+    await ƒS.Speech.tell(characters.Mama, text.Mama.T0006);
     await ƒS.Speech.tell(dataForSave.Protagonist, text.Protagonist.T0010, true, "Player");
     await ƒS.Speech.tell(null, text.Narrator.T0007);
     await ƒS.Speech.tell(dataForSave.Protagonist, text.Protagonist.T0011, true, "Player");
-    await ƒS.Speech.tell(characters.Mama, text.Anastasia.T0007);
+    await ƒS.Speech.tell(characters.Mama, text.Mama.T0007);
     await ƒS.Speech.tell(dataForSave.Protagonist, text.Protagonist.T0012, true, "Player");
-    await ƒS.Speech.tell(characters.Mama, text.Anastasia.T0008);
+    await ƒS.Speech.tell(characters.Mama, text.Mama.T0008);
     await ƒS.Speech.tell(dataForSave.Protagonist, text.Protagonist.T0013, true, "Player");
     await ƒS.Speech.tell(characters.Mama, "Das werden wir!");
     await ƒS.Speech.tell(null, "<i>Dafür liebe ich meine Mutter.</i>");
     await ƒS.Location.show(locations.livingRoom);
     await ƒS.update(1);
-    await ƒS.Speech.tell(characters.Mama, text.Anastasia.T0009);
+    await ƒS.Speech.tell(characters.Mama, text.Mama.T0009);
     await ƒS.Speech.tell(dataForSave.Protagonist, text.Protagonist.T0014, true, "Player");
-    await ƒS.Speech.tell(characters.Mama, text.Anastasia.T0010);
-    await ƒS.Speech.tell(characters.Mama, text.Anastasia.T0011);
-    await ƒS.Speech.tell(characters.Mama, text.Anastasia.T0012);
+    await ƒS.Speech.tell(characters.Mama, text.Mama.T0010);
+    await ƒS.Speech.tell(characters.Mama, text.Mama.T0011);
+    await ƒS.Speech.tell(characters.Mama, text.Mama.T0012);
     await ƒS.Speech.tell(null, text.Narrator.T0008);
+    ƒS.Text.setClass("black");
     await ƒS.Text.print("Bitte lasse für diese Funktion den Zugriff auf dein Mikrofon zu.");
     ƒS.Text.close();
     await ƒS.update(1);
     // Anzeige dB-Meter
     DezibelMeter.activateDecibelMeter();
     await signalDelay15();
-    await ƒS.Speech.tell(characters.Mama, text.Anastasia.T0013);
-    await ƒS.Speech.tell(characters.Mama, text.Anastasia.T0014);
+    await ƒS.Speech.tell(characters.Mama, text.Mama.T0013);
+    await ƒS.Speech.tell(characters.Mama, text.Mama.T0014);
     await ƒS.Speech.tell(dataForSave.Protagonist, text.Protagonist.T0015, true, "Player");
     ƒS.Character.hide(characters.Anastasia);
     await ƒS.update(1);

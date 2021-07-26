@@ -9,7 +9,7 @@ namespace AV {
         T0000: "<i>Wenn man vom Teufel spricht...</i>",
         T0001: "<i>Naja egal, mehr oder weniger habe ich die beiden verstanden, glaube ich.</i>",
         T0002: "<i>Es geht jetzt aber endlich los!</i>",
-        T0003: "<i>Ich verstehe zwar kein Wort von den anderen, aber genieße dann einfach trotzdem mal stumm die Show. Die Tänzerin ist wunderschön.</i>",
+        T0003: "<i>Ich verstehe zwar kein Wort von den anderen, aber genieße dann einfach trotzdem mal stumm die Show.</i>",
         T0004: "<i>Ich muss aber gestehen, dass das wirklich blöd ist, dass ich ab jetzt kaum mehr mitreden kann. Vor allem in solchen Situationen</i>",
         T0005: "<i>Ich werde nachher mal mit ihnen reden und das klären. Hoffentlich akzeptieren sie es.</i>",
         T0006: "<i>Sollten sie aber nicht damit zurechtkommen, wird das wohl schwierig weiterhin befreundet zu bleiben.</i>"
@@ -94,6 +94,7 @@ namespace AV {
     // ƒS.Sound.play(sound.dancerTheme, 0.05, true);
     // ƒS.Sound.fade(sound.dancerTheme, 1, 3);
     spatialSound.start();
+    ƒS.Text.setClass("black");
     await ƒS.Text.print("Starte den Sound mit Enter und navigiere nun mit deinen Pfeiltasten, bis du etwas hörst.\
     <br>Du kannst dich aber auch von der Soundquelle vollständig entfernen, wenn du deine Ruhe haben möchtest, damit du dein Hörvermögen schonst.");
     await signalDelay10();

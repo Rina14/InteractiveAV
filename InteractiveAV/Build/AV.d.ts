@@ -37,12 +37,17 @@ declare namespace AV {
             alpha: string;
             edge: number;
         };
-        flash: {
+        mosaik: {
             duration: number;
             alpha: string;
             edge: number;
         };
         wet: {
+            duration: number;
+            alpha: string;
+            edge: number;
+        };
+        swirl: {
             duration: number;
             alpha: string;
             edge: number;
@@ -159,20 +164,6 @@ declare namespace AV {
     let characters: {
         Narrator: {
             name: string;
-        };
-        Aoi: {
-            name: string;
-            origin: ƒ.ORIGIN2D;
-            pose: {
-                normal: string;
-            };
-        };
-        Ryu: {
-            name: string;
-            origin: ƒ.ORIGIN2D;
-            pose: {
-                normal: string;
-            };
         };
         Adelinde: {
             name: string;
