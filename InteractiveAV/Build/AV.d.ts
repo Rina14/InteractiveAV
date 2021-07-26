@@ -68,7 +68,6 @@ declare namespace AV {
         vengeance: string;
         dancerTheme: string;
         click: string;
-        Beat: string;
         cutie: string;
         pinch: string;
         punch: string;

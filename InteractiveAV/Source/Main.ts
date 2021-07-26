@@ -52,7 +52,6 @@ namespace AV {
 
     // Sound
     click: "Audio/Sound/click.mp3",
-    Beat: "./Audio/Sound/Beat.mp3",
     cutie: "Audio/Sound/cutie.mp3",
     pinch: "Audio/Sound/pinch.flac",
     punch: "Audio/Sound/punch.mp3",
