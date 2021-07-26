@@ -111,9 +111,6 @@ namespace AV {
         await ƒS.Speech.tell(dataForSave.Protagonist, "Was?", true, "Player");
         await ƒS.Speech.tell(null, "<i>Mist.</i>");
         await ƒS.Speech.tell(characters.StrangerWoman, "Hörst du schlecht?");
-
-
-
         // A choice within a choice to reply to Elaine
         let replyToElaine = {
           iSayYes: "Bejahen.",

@@ -510,9 +510,9 @@ namespace AV {
 
     // define the sequence of scenes, each scene as an object with a reference to the scene-function, a name and optionally an id and an id to continue the story with
     let scenes: ƒS.Scenes = [
-      // { scene: HearingLoss, name: "Welcome to an almost muted world" },
-      // { scene: StrangerWoman, name: "Confronting a stranger with hardness of hearing" },
-      // { scene: Home, name: "Arriving at home" },
+      { scene: HearingLoss, name: "Welcome to an almost muted world" },
+      { scene: StrangerWoman, name: "Confronting a stranger with hardness of hearing" },
+      { scene: Home, name: "Arriving at home" },
       { scene: Premiere, name: "Meeting with friends" },
       { scene: End, name: "The End" }
     ];
