@@ -64,6 +64,7 @@ namespace AV {
     await ƒS.Speech.tell(characters.Adelinde, text.Adelinde.T0001);
     ƒS.Speech.hide();
     await ƒS.Character.animate(characters.Adelinde, characters.Adelinde.pose.shytalk, midToOutOfCanvas());
+    ƒS.Character.hide(characters.Adelinde);
     await ƒS.update(2);
     await ƒS.Speech.tell(null, text.Narrator.T0000);
     await ƒS.Speech.tell(characters.StrangerWoman, text.StrangerWomen.T0000);
@@ -71,6 +72,7 @@ namespace AV {
     await horizontalShake();
     await ƒS.Character.show(characters.StrangerWoman, characters.StrangerWoman.pose.mad, ƒS.positionPercent(30, 100));
     await ƒS.Speech.tell(characters.StrangerWoman, text.StrangerWomen.T0001);
+    await ƒS.update(0.5);
     await ƒS.Speech.tell(dataForSave.Protagonist, text.Protagonist.T0002, true, "Player");
     await ƒS.Speech.tell(characters.StrangerWoman, text.StrangerWomen.T0002);
     await ƒS.Speech.tell(null, text.Narrator.T0001);

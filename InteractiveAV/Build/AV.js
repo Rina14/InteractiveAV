@@ -378,6 +378,7 @@ var AV;
         await AV.ƒS.Speech.tell(AV.characters.Adelinde, text.Adelinde.T0001);
         AV.ƒS.Speech.hide();
         await AV.ƒS.Character.animate(AV.characters.Adelinde, AV.characters.Adelinde.pose.shytalk, AV.midToOutOfCanvas());
+        AV.ƒS.Character.hide(AV.characters.Adelinde);
         await AV.ƒS.update(2);
         await AV.ƒS.Speech.tell(null, text.Narrator.T0000);
         await AV.ƒS.Speech.tell(AV.characters.StrangerWoman, text.StrangerWomen.T0000);
@@ -385,6 +386,7 @@ var AV;
         await AV.horizontalShake();
         await AV.ƒS.Character.show(AV.characters.StrangerWoman, AV.characters.StrangerWoman.pose.mad, AV.ƒS.positionPercent(30, 100));
         await AV.ƒS.Speech.tell(AV.characters.StrangerWoman, text.StrangerWomen.T0001);
+        await AV.ƒS.update(0.5);
         await AV.ƒS.Speech.tell(AV.dataForSave.Protagonist, text.Protagonist.T0002, true, "Player");
         await AV.ƒS.Speech.tell(AV.characters.StrangerWoman, text.StrangerWomen.T0002);
         await AV.ƒS.Speech.tell(null, text.Narrator.T0001);
@@ -1594,7 +1596,7 @@ var AV;
         AV.gameMenu =
             AV.ƒS.Menu.create(inGameMenu, buttonFunctionalities, "gameMenu");
         let scenes = [
-            { scene: AV.HearingLoss, name: "Welcome to an almost muted world" },
+            // { scene: HearingLoss, name: "Welcome to an almost muted world" },
             { scene: AV.StrangerWoman, name: "Confronting a stranger with hardness of hearing" },
             { scene: AV.Home, name: "Arriving at home" },
             { scene: AV.Premiere, name: "Meeting with friends" },

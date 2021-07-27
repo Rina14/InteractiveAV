@@ -282,24 +282,14 @@ dialog[class="choices"] button {
   background-color: black;
   text-align: center;
   position: absolute;
-  top: 60%;
-  /* transition: 1s; */
+  padding-top: 45%;
   color: white;
   border: none;
+  background-image: none;
 }
 
-/* button {
-  font-size: 2vw;
-  line-height: 150%;
-  color:rgba(43, 127, 167, 0.9);
-  background-color: rgba(0, 21, 31, 0.9);
-  margin: 10px;
-  border: none;
-  border-radius: 10px;
-} */
 
 /* STYLED DIALOG & SAVE N LOAD-BUTTONS */
-
 button {
   /* left: 20%; */
   text-align: center;
@@ -374,6 +364,11 @@ button::after {
   background-image: url("./Images/Backgrounds/bg_options_new4.png");
 } */
 
+dialog {
+  background-image: url("Images/Backgrounds/bg_dancer.png");
+  background-size: cover;
+}
+
 dialog::backdrop {
   backdrop-filter: blur(2px);
 }
@@ -393,6 +388,7 @@ dialog.gameMenu {
   display: flex;
   /* box-shadow: none; */
   background-color: rgba(39, 39, 39, 0);
+  background-image: none;
 }
 
 dialog.gameMenu>button {
@@ -421,6 +417,7 @@ dialog.gameMenu>button:hover {
   display: hidden;
   bottom: 5%;
   left: 12%;
+  background-image: none;
 }
 
 meter[id="avg-level"]::-webkit-meter-optimum-value {
@@ -434,4 +431,5 @@ meter[id="avg-level"]::-webkit-meter-optimum-value {
   border-radius: 10px;
   line-height: 150%;
   background-color: rgb(223, 255, 255);
+  background-image: none;
 }
