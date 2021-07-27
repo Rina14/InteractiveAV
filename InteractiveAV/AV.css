@@ -427,36 +427,11 @@ meter[id="avg-level"]::-webkit-meter-optimum-value {
   background-color: #c44e4e;
 }
 
-/* #avg-level {
-  position: absolute;
-  display: hidden;
+
+.credits {
+  font-size: 2vmin;
+  border-color: rgb(83, 115, 156);
+  border-radius: 10px;
+  line-height: 150%;
+  background-color: rgb(223, 255, 255);
 }
-
-#avg-level-text {
-  position: absolute;
-  display: hidden;
-  left: 10%;
-} */
-
-/* 
-dialog>button#load {
-  color: white ;
-  background-color: rgba(52, 83, 122, 0.5);
-  box-shadow: none;
-  border-radius:  10px;
-}
-
-dialog>button#load:hover {
- background-color: rgba(89, 145, 214, 0.5);
-}
-
-dialog>button#save {
-  color: white;
-  background-color: rgba(52, 83, 122, 0.5);
-  box-shadow: none;
-  border-radius:  10px;
-}
-
-dialog>button#save:hover {
-  background-color: rgba(89, 145, 214, 0.5);
- } */

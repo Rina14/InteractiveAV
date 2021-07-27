@@ -53,7 +53,6 @@ namespace AV {
     // Sound
     click: "Audio/Sound/click.mp3",
     cutie: "Audio/Sound/cutie.mp3",
-    pinch: "Audio/Sound/pinch.flac",
     punch: "Audio/Sound/punch.mp3",
     shower: "Audio/Sound/shower.wav",
     drop: "Audio/Sound/drop31.wav",
@@ -281,8 +280,9 @@ namespace AV {
     ƒS.Text.addClass("credits");
     ƒS.Text.print("- Background Credits to Noraneko Games, on Twitter @NoranekoGames /  Noranekokgames.itch.io<br>\
     - Music Credits to Tim Beek, on Twitter @timbeekmusic, Homepage http://www.timbeek.com<br>\
-    - Character and Dancer Background Credits to Riem Yasin\
-    - Transition Credits to Kia Azad");
+    - Characters, modified background as Titlepage, dancer-background Credits to Riem Yasin<br>\
+    - Transition Credits to Kia Azad<br>\
+    - SpatialSound und GraphInsertion von Prof. Jirka Dell'Oro-Friedl übernommen");
   }
 
   export function showHelp(): void {
