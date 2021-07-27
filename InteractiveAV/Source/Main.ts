@@ -484,7 +484,7 @@ namespace AV {
     gameMenu =
       ƒS.Menu.create(inGameMenu, buttonFunctionalities, "gameMenu");
     let scenes: ƒS.Scenes = [
-      // { scene: HearingLoss, name: "Welcome to an almost muted world" },
+      { scene: HearingLoss, name: "Welcome to an almost muted world" },
       { scene: StrangerWoman, name: "Confronting a stranger with hardness of hearing" },
       { scene: Home, name: "Arriving at home" },
       { scene: Premiere, name: "Meeting with friends" },

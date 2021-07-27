@@ -1596,7 +1596,7 @@ var AV;
         AV.gameMenu =
             AV.ƒS.Menu.create(inGameMenu, buttonFunctionalities, "gameMenu");
         let scenes = [
-            // { scene: HearingLoss, name: "Welcome to an almost muted world" },
+            { scene: AV.HearingLoss, name: "Welcome to an almost muted world" },
             { scene: AV.StrangerWoman, name: "Confronting a stranger with hardness of hearing" },
             { scene: AV.Home, name: "Arriving at home" },
             { scene: AV.Premiere, name: "Meeting with friends" },
