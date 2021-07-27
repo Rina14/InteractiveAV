@@ -79,7 +79,7 @@ var AV;
         await AV.ƒS.Text.print("Herzlich Willkommen!<br><br>Hast du dich einmal gefragt, \
     wie es wohl wäre, wenn du plötzlich schwerhörig wirst? Was würde sich für dich verändern?\
     Welche neuen Herausforderungen kämen auf dich zu? \
-    Hier verschaffst du dir einen kleinen Einblick in der Welt einer schwerhörigen Person.\
+    Hier verschaffst du dir einen kleinen Einblick in die Welt einer schwerhörigen Person.\
     <p>Viel Spaß beim Spielen!</p><br>\
     <p><b>Speichern: F8</p><p><b>Laden: F9</p><p><b>Weiter mit Leertaste oder LMC</p>");
         AV.ƒS.Text.close();
