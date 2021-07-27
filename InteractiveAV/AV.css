@@ -141,7 +141,8 @@ content {
 
 speech[class=""] content {
   /* left: 22%; */
-  color: rgb(198, 251, 255);
+  color: rgb(211, 228, 241);
+  text-shadow: rgb(141, 181, 218);
   /* font-family: 'Gill Sans', 'Gill Sans MT', sans-serif; */
 }
 
@@ -161,11 +162,12 @@ speech[class="Doktor Ryu"] name {
 }
 
 speech[class="Player"] name {
-  color: rgb(139, 176, 243);
+  color: rgb(25, 39, 58);
+  background-color: rgba(133, 144, 177, 0.8);
 }
 
 speech[class="Player"] content {
-  color: rgb(221, 243, 255);
+  color: rgb(255, 255, 255);
 }
 
 /* speech.dataForSave.Protagonist name {
@@ -181,17 +183,6 @@ speech[class="Player"] content {
   color: rgb(12, 49, 56)
 } */
 
-/* speech.Doktor name {
-  color: rgb(27, 51, 95); */
-
-/* border-bottom: 1px solid rgb(80, 181, 228); */
-
-/* background-color: rgba(220, 241, 255, 0.8);
-  border-radius: 10px 10px 10px 10px;
-  background-image: linear-gradient(#f1f1f1, #81BEF7, #0431B4, #0B173B); */
-
-/* } */
-
 [class="Doktor Ryu"] content {
   color: rgb(180, 206, 255);
 }
@@ -206,25 +197,19 @@ speech.Adelinde content {
   color: rgb(255, 180, 211);
 }
 
-speech.Aoi name {
-  color: aqua;
-  background-color: rgba(51, 74, 138, 0.8);
-  box-shadow: 0px 0px 5px 5px rgba(57, 87, 121, 0.5);
+speech.Mama name {
+  color: rgb(235, 229, 151);
+  background-color: rgba(63, 141, 146, 0.8);
+  box-shadow: 0px 0px 5px 5px rgba(194, 253, 255, 0.5);
 }
 
-speech.Aoi content {
-  color: rgb(159, 220, 255);
-}
-
-speech.Elaine name {
-  color: rgb(95, 23, 47);
-  background-color: rgba(138, 51, 63, 0.8);
-  box-shadow: 0px 0px 5px 5px rgba(255, 154, 176, 0.5);
+speech.Mama content {
+  color: rgb(137, 238, 230);
 }
 
 speech[class="Stranger Woman"] name {
-  color: rgb(95, 23, 47);
-  background-color: rgba(255, 157, 170, 0.8);
+  color: rgb(150, 25, 66);
+  background-color: rgba(66, 14, 21, 0.8);
   box-shadow: 0px 0px 5px 5px rgba(255, 154, 176, 0.5);
 }
 
@@ -234,14 +219,11 @@ speech[class="Stranger Woman"] name {
 
 
 /* Splashscreen modifications */
-
 dialog>p {
-  /* font-family: 'Times New Roman', Times, serif; */
   color: white;
 }
 
 /* "Novel Page" in the beginning; Introduction */
-
 dialog[class="start"] {
   height: 30em;
   width: 40em;
