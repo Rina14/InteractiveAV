@@ -3,7 +3,7 @@
 # Anleitung
 
 ## Voraussetzungen
-Um die Novel zu starten ist es notwendig, einen Webbrowser zu benutzen, der das Dialogelement unterstützt. Geeignet hierfür wäre zum Beispiel Google Chrome.
+Um die Novel zu starten ist es notwendig einen Webbrowser zu benutzen, der das Dialogelement unterstützt. Geeignet hierfür wäre zum Beispiel Google Chrome.
 Falls Darkmode eingeschaltet ist, bitte ausschalten. Dies könnte sonst zu Anzeigefehlern führen.
 
 
